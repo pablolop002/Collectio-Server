@@ -1,0 +1,47 @@
+<nav class="navbar navbar-dark navbar-expand-md primary-bg">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/images/favicon.png">Collectio
+        </a>
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
+        <div
+                class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/"><%= __('index') %></a></li>
+                <% if (locals.session) { %>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/collections"><%= __('collections') %></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/friends"><%= __('friends') %></a>
+                    </li>
+                <% } %>
+                <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                                                 aria-expanded="false" href="#"><%= __('more') %></a>
+                    <div class="dropdown-menu"><a class="dropdown-item" href="/about"><%= __('about') %></a>
+                        <a class="dropdown-item" href="/terms"><%= __('terms') %></a>
+                        <a class="dropdown-item" href="/privacy-policy"><%= __('privacyPolicy') %></a>
+                    </div>
+                </li>
+            </ul>
+            <span class="navbar-text actions">
+                <% if (locals.session) { %>
+                    <a href="/profile">
+                        <img class="profile-image" src="/profiles/<%= locals.session.User.Image %>" alt="<%= __('profileImage') %>">
+                    </a>
+                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/logout">
+                        <i class="fas fa-sign-out-alt"></i> <%= __('signOut') %>
+                    </a>
+                <% } else { %>
+                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/login">
+                        <i class="fab fa-apple"></i> <%= __('signInApple') %>
+                    </a>
+                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/login">
+                        <i class="fab fa-google"></i> <%= __('signInGoogle') %>
+                    </a>
+                <% } %>
+            </span>
+        </div>
+    </div>
+</nav>
