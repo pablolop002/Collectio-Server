@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const expressSession = require('express-session');
 const fs = require('fs');
-const i18n = require('i18n')
+const i18n = require('i18n');
 const multer = require('multer');
 const path = require('path');
 
@@ -52,6 +52,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function (request, response, next) {
+    if (request.user) {
+        response.locals.user = request.user;
+    }
+    next();
+});
+
 // Static pages
 app.get('/', upload.none(), function (request, response, next) {
     response.render('index', {});
@@ -87,7 +94,7 @@ app.use(function (error, request, response, next) {
     fs.writeFile(route, doc, function (err) {
         response.status(500);
         if (err)
-            response.render('error', {errorCode: 500, file: 'No se ha podido guardar el error.'});
+            response.render('error', {errorCode: 500, file: i18n.__('noErrorFile')});
         else
             response.render('error', {errorCode: 500, file: route});
     });
