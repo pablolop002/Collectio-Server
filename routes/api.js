@@ -3,7 +3,6 @@
 // Load modules
 const express = require('express');
 const multer = require('multer');
-//const mysql = require('mysql');
 
 // Config
 const conf = require('../config/conf');
