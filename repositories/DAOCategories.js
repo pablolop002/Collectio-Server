@@ -1,7 +1,5 @@
 "use strict";
 
-const mysql = require("mysql");
-
 class DAOCategories {
     pool;
 
@@ -12,12 +10,12 @@ class DAOCategories {
     listCategories(callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
+                callback(err);
             } else {
                 connection.query("SELECT Id as ServerId, Spanish, English, Catalan, Basque FROM Categories", function (err, data) {
                     connection.release();
                     if (err) {
-                        callback(new Error("Error de acceso a la base de datos"));
+                        callback(err);
                     } else {
                         callback(null, data);
                     }
@@ -26,16 +24,33 @@ class DAOCategories {
         });
     }
 
-    addGroup(group, callback) {
+    listSubcategories(callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
+                callback(err);
+            } else {
+                connection.query("SELECT Id as ServerId, Spanish, English, Catalan, Basque FROM Subcategories", function (err, data) {
+                    connection.release();
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, data);
+                    }
+                });
+            }
+        });
+    }
+
+    addCategory(category, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(err);
             } else {
                 connection.query("INSERT INTO Categories(Spanish, English, Catalan, Basque) VALUES (?, ?, ?, ?)",
-                    ["", "", "", ""], function (err, data) {
+                    [category.Spanish, category.English, category.Catalan, category.Basque], function (err, data) {
                         connection.release();
                         if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
+                            callback(err);
                         } else {
                             callback(null, data);
                         }
@@ -44,16 +59,16 @@ class DAOCategories {
         });
     }
 
-    deleteGroup(groupId, callback) {
+    deleteCategory(categoryId, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
+                callback(err);
             } else {
                 connection.query("DELETE FROM Categories WHERE Id = ?",
-                    [groupId], function (err, data) {
+                    [categoryId], function (err, data) {
                         connection.release();
                         if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
+                            callback(err);
                          } else {
                             callback(null, data);
                         }
