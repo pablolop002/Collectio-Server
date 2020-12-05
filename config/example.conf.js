@@ -11,9 +11,11 @@ module.exports = {
     'googleClientSecret': '',
     'appleClientId': '',
     'appleTeamId': '',
-    'appleCKeyId': '',
+    'appleKeyId': '',
+    'applePrivateKeyName': '',
     'mailHost': '',
     'mailUser': '',
     'mailPassword': '',
     'mailFrom': '',
+    'authApi': ''
 };
