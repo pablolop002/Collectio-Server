@@ -1,7 +1,5 @@
 "use strict";
 
-const mysql = require("mysql");
-
 class DAOItems {
     pool;
 

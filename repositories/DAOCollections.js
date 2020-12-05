@@ -1,7 +1,5 @@
 "use strict";
 
-const mysql = require("mysql");
-
 class DAOCollections {
     pool;
 
@@ -123,3 +121,5 @@ class DAOCollections {
         });
     }
 }
+
+module.exports = DAOCollections;

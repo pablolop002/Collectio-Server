@@ -77,17 +77,17 @@ class DAOCategories {
         });
     }
 
-    /*updateGroup(group, callback) {
+    /*updateCategory(group, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
+                callback(err);
             } else {
                 connection.query("INSERT Categories(spanish, english, catalan, basque) VALUES (?,?,?,?)",
                     ["","","",""],
                     function (err, data) {
                         connection.release();
                         if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
+                            callback(err);
                         } else {
                             callback(null, data);
                         }
