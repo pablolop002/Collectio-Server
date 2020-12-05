@@ -9,7 +9,7 @@
                 class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="/"><%= __('index') %></a></li>
-                <% if (locals.session) { %>
+                <% if (locals.user) { %>
                     <li class="nav-item">
                         <a class="nav-link active" href="/collections"><%= __('collections') %></a>
                     </li>
@@ -26,18 +26,18 @@
                 </li>
             </ul>
             <span class="navbar-text actions">
-                <% if (locals.session) { %>
+                <% if (locals.user) { %>
                     <a href="/profile">
-                        <img class="profile-image" src="/profiles/<%= locals.session.User.Image %>" alt="<%= __('profileImage') %>">
+                        <img class="profile-image" src="/profiles/<%= locals.user.Image %>" alt="<%= __('profileImage') %>">
                     </a>
                     <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/logout">
                         <i class="fas fa-sign-out-alt"></i> <%= __('signOut') %>
                     </a>
                 <% } else { %>
-                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/login">
+                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/login/apple">
                         <i class="fab fa-apple"></i> <%= __('signInApple') %>
                     </a>
-                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/login">
+                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/login/google">
                         <i class="fab fa-google"></i> <%= __('signInGoogle') %>
                     </a>
                 <% } %>
