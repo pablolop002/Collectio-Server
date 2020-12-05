@@ -19,5 +19,9 @@
 		"one": "%s dog",
 		"other": "%s dog"
 	},
-	"profileImage": "profileImage"
+	"profileImage": "Imagen de perfil",
+	"noToken": "No hay token de sesión o no es válido. Primero inicia sesión",
+	"noApiAuth": "Autentificación incorrecta",
+	"collections": "Colecciones",
+	"friends": "Amigos"
 }
