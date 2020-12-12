@@ -19,7 +19,7 @@ const locales = require('./config/locales');
 const upload = multer();
 
 // Routers
-const webRouter = require('./routes/portal');
+const webRouter = require('./routes/collectio');
 const apiRouter = require('./routes/api');
 
 // ExpressJS Server creation
@@ -61,29 +61,61 @@ app.use(function (request, response, next) {
 
 // Static pages
 app.get('/', upload.none(), function (request, response, next) {
-    response.render('index', {});
+    response.render('index', {'current': 'index'});
 });
 
 app.get('/about', upload.none(), function (request, response, next) {
-    response.render('about', {});
+    response.render('about', {'current': 'about'});
 });
 
 app.get('/privacy-policy', upload.none(), function (request, response, next) {
-    response.render('privacy-policy', {});
+    response.render('privacy-policy', {'current': 'privacy'});
 });
 
 app.get('/terms', upload.none(), function (request, response, next) {
-    response.render('terms', {});
+    response.render('terms', {'current': 'terms'});
+});
+
+app.get('/legal-notice', upload.none(), function (request, response, next) {
+    response.render('legal-notice', {'current': 'legal'});
+});
+
+app.get('/cookies', upload.none(), function (request, response, next) {
+    response.render('cookies', {'current': 'cookies'});
+});
+
+app.get('/login/google', passport.authenticate('Google',
+    {
+        scope: ['https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email']
+    }));
+
+app.get('/login/google/callback', passport.authenticate('Google'), function (request, response) {
+    response.redirect('/');
+});
+
+// Apple API Auth
+app.get("/login/apple", passport.authenticate('Apple'));
+
+app.post("/login/apple/callback", function (request, response, next) {
+    passport.authenticate('Apple', function (err, user, info) {
+        response.redirect('/');
+    })(request, response, next);
+});
+
+app.get('/logout', upload.none(), function (request, response, next) {
+    request.session.destroy();
+    response.redirect('/');
 });
 
 // Routes
 app.use('/api', apiRouter);
-app.use('/portal', webRouter);
+//app.use('/portal', webRouter);
 
 // Error 404
 app.use(function (request, response, next) {
     response.status(404);
-    response.render('error', {errorCode: 400});
+    response.render('error', {'current': 'error', 'errorCode': 404});
 });
 
 // Error 500
@@ -94,9 +126,9 @@ app.use(function (error, request, response, next) {
     fs.writeFile(route, doc, function (err) {
         response.status(500);
         if (err)
-            response.render('error', {errorCode: 500, file: i18n.__('noErrorFile')});
+            response.render('error', {'current': 'error', 'errorCode': 500, 'file': i18n.__('noErrorFile')});
         else
-            response.render('error', {errorCode: 500, file: route});
+            response.render('error', {'current': 'error', 'errorCode': 500, 'file': route});
     });
 });
 

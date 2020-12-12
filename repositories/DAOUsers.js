@@ -153,7 +153,7 @@ class DAOUsers {
         });
     }
 
-    createApikey(userId, callback){
+    createApikey(userId, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(err);
@@ -172,7 +172,51 @@ class DAOUsers {
         });
     }
 
-    existApikey(apikey, callback){
+    updateApikey(session, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(err);
+            } else {
+                connection.query("UPDATE MobileSessions SET Device = ?, UserDeviceName = ? WHERE Token = ?",
+                    [session.Device, session.UserDeviceName, session.Token], function (err, updateData) {
+                        if (err) {
+                            connection.release();
+                            callback(err);
+                        } else {
+                            connection.query("SELECT * FROM MobileSessions WHERE Token = ?",
+                                [session.Token], function (err, data) {
+                                    connection.release();
+                                    if (err) {
+                                        callback(err);
+                                    } else {
+                                        callback(null, data);
+                                    }
+                                });
+                        }
+                    });
+            }
+        });
+    }
+
+    deleteApikey(token, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(err);
+            } else {
+                connection.query("DELETE FROM MobileSessions WHERE Token = ?",
+                    [token], function (err, data) {
+                        connection.release();
+                        if (err) {
+                            callback(err);
+                        } else {
+                            callback(null, data);
+                        }
+                    });
+            }
+        });
+    }
+
+    existApikey(apikey, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(err);

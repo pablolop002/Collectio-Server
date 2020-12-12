@@ -86,14 +86,14 @@ class DAOCollections {
     updateCollection(collection, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
+                callback(err);
             } else {
                 connection.query("UPDATE Collections SET Name = ?, Description = ?, Image = ?, Private = ? WHERE Id = ?",
                     [collection.Name, collection.Description, collection.Image, collection.Private, collection.ServerId],
                     function (err, data) {
                         connection.release();
                         if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
+                            callback(err);
                         } else {
                             callback(null, data);
                         }
@@ -105,14 +105,14 @@ class DAOCollections {
     deleteCollection(collection, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
+                callback(err);
             } else {
                 connection.query("DELETE FROM Collections WHERE Id = ?",
-                    [collection.Name, collection.Description, collection.Image, collection.Private, collection.ServerId],
+                    [collection.ServerId],
                     function (err, data) {
                         connection.release();
                         if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
+                            callback(err);
                         } else {
                             callback(null, data);
                         }

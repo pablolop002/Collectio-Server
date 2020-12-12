@@ -63,10 +63,17 @@ api.post('/login/apple/callback', function (request, response, next) {
 
 // Check Authorization
 api.use(function (request, response, next) {
-    let token = request.header('Authorization');
+    let token = request.header('Authorization'),
+        lang = request.header('lang');
 
     if (!token || token !== conf.authApi) {
         next(new Error(i18n.__('noApiAuth')));
+    }
+
+    request.mobileAuth = true;
+
+    if (lang) {
+        i18n.setLocale(lang);
     }
 
     next();
@@ -77,7 +84,7 @@ api.get('/categories', function (request, response, next) {
         if (err) {
             response.json({
                 'status': 'ko',
-                'code': 1,
+                'code': 500,
                 'message': JSON.stringify(err)
             });
         } else {
@@ -85,7 +92,7 @@ api.get('/categories', function (request, response, next) {
                 'status': 'ok',
                 'code': 0,
                 'data': JSON.stringify(categories)
-            })
+            });
         }
     })
 });
@@ -95,7 +102,7 @@ api.get('/subcategories', function (request, response, next) {
         if (err) {
             response.json({
                 'status': 'ko',
-                'code': 1,
+                'code': 500,
                 'message': JSON.stringify(err)
             });
         } else {
@@ -103,21 +110,25 @@ api.get('/subcategories', function (request, response, next) {
                 'status': 'ok',
                 'code': 0,
                 'data': JSON.stringify(subcategories)
-            })
+            });
         }
     })
 });
 
 // Check Session
-api.use(function (req, res, next) {
-    let apikey = req.header('apikey');
+api.use(function (request, response, next) {
+    let apikey = request.header('apikey');
     if (apikey != null) {
         daoUsers.existApikey(apikey, function (err, user) {
             if (err) {
-                next(err);
+                response.json({
+                    'status': 'ko',
+                    'code': 500,
+                    'message': JSON.stringify(err)
+                });
             } else {
                 if (user != null) {
-                    req.user = user;
+                    request.user = user;
                     next();
                 } else {
                     next(new Error(i18n.__('userNotFound')));
@@ -134,13 +145,26 @@ api.use(function (req, res, next) {
 //api.use('/collections', apiUserRouter);
 //api.use('/user', apiUserRouter);
 
-// Error 403
-api.use(function (error, request, response, next) {
+// Error 404
+api.use(function (request, response, next) {
     response.json({
         'status': 'ko',
-        'code': 403,
-        'message': error
+        'code': 404
     });
+});
+
+// Error 403
+api.use(function (error, request, response, next) {
+    if (request.mobileAuth) {
+        response.json({
+            'status': 'ko',
+            'code': 403,
+            'message': error
+        });
+    } else {
+        response.status(403);
+        response.render('error', {'current': 'error', 'errorCode': 403});
+    }
 });
 
 module.exports = api;

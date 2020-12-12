@@ -15,17 +15,15 @@
 <!-- Begin Content -->
 <div class="section">
     <div class="container">
-        <h1 class="text-center"> <%= __('error') %> <%= errorCode %> </h1>
-        <% if(errorCode === 404) { %>
-            <p>Parece que lo que estas buscando no existe.</p>
+        <h1 class="text-center"><%= __('error') %> <%= errorCode %></h1>
+        <% if (errorCode === 404) { %>
+            <p><%= __('error404') %></p>
         <% } else if (errorCode === 403) { %>
-            <p>Parece que lo que estas buscando no existe.</p>
+            <p><%= __('error403') %></p>
         <% } else if (errorCode === 500) { %>
-            <p>Hemos tenido un problema y nuestros duendes están en ello. Si los ves, por favor, indica la siguiente
-                ruta
-                del archivo que contiene el error: </p>
+            <p><%= __('error500') %></p>
             <div class="error">
-                <p> Archivo de error: <%= file %></p>
+                <p><%= __('error500File') %><%= file %></p>
             </div>
         <% } %>
     </div>

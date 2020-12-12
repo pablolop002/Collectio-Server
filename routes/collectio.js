@@ -14,7 +14,6 @@ portal.get("/login", upload.none(), function (request, response, next) {
   if (request.session && request.session.User) {
     response.redirect("/");
   } else {
-    response.status(200);
     response.render("login", {error: null});
   }
 });
