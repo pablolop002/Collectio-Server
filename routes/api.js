@@ -2,26 +2,25 @@
 
 // Load modules
 const express = require('express');
-const multer = require('multer');
+const i18n = require("i18n");
+const path = require('path');
 
 // Config
 const conf = require('../config/conf');
 const database = require('../config/databases');
 const passport = require('../config/auth');
-const upload = multer();
+
+// SubRoutes
+const apiUserRouter = require('./api/user');
+const apiCollectionsRouter = require('./api/collections');
 
 // Function includes
 const DAOUsers = require('../repositories/DAOUsers');
 const DAOCategories = require('../repositories/DAOCategories');
-const DAOCollections = require('../repositories/DAOCollections');
-const DAOItems = require('../repositories/DAOItems');
-const i18n = require("i18n");
 
 // Function instances
 const daoUsers = new DAOUsers(database.pool);
 const daoCategories = new DAOCategories(database.pool);
-const daoCollections = new DAOCollections(database.pool);
-const daoItems = new DAOItems(database.pool);
 
 // Router
 const api = express.Router();
@@ -37,7 +36,7 @@ api.get('/login/google/callback', passport.authenticate('GoogleMobile'), functio
         if (err) {
             response.redirect('collectioapp://#?err=' + err);
         } else {
-            response.redirect('collectioapp://#?token=' + token.token);
+            response.redirect('collectioapp://#?access_token=' + token);
         }
     });
 });
@@ -48,13 +47,13 @@ api.get('/login/apple', passport.authenticate('AppleMobile'));
 api.post('/login/apple/callback', function (request, response, next) {
     passport.authenticate('AppleMobile', function (err, user, info) {
         if (err) {
-            response.redirect('collectioapp://#?err=' + err);
+            response.redirect('collectio://#?err=' + err);
         } else {
             daoUsers.createApikey(user.Id, function (err, token) {
                 if (err) {
-                    response.redirect('collectioapp://#?err=' + err);
+                    response.redirect('collectio://#?err=' + err);
                 } else {
-                    response.redirect('collectioapp://#?token=' + token.token);
+                    response.redirect('collectio://#?access_token=' + token);
                 }
             });
         }
@@ -67,7 +66,8 @@ api.use(function (request, response, next) {
         lang = request.header('lang');
 
     if (!token || token !== conf.authApi) {
-        next(new Error(i18n.__('noApiAuth')));
+        response.status(403);
+        response.render('error', {'current': 'error', 'errorCode': 403});
     }
 
     request.mobileAuth = true;
@@ -128,7 +128,7 @@ api.use(function (request, response, next) {
                 });
             } else {
                 if (user != null) {
-                    request.user = user;
+                    request.user = user[0];
                     next();
                 } else {
                     next(new Error(i18n.__('userNotFound')));
@@ -140,16 +140,19 @@ api.use(function (request, response, next) {
     }
 });
 
+// Static Content
+api.use('/images', express.static(path.join(__basedir, 'storage', 'user-data')));
+
 // Routes
-//api.use('/user', apiUserRouter);
-//api.use('/collections', apiUserRouter);
-//api.use('/user', apiUserRouter);
+api.use('/user', apiUserRouter);
+api.use('/collections', apiCollectionsRouter);
 
 // Error 404
 api.use(function (request, response, next) {
     response.json({
         'status': 'ko',
-        'code': 404
+        'code': 404,
+        'message': JSON.stringify(i18n.__('error404'))
     });
 });
 
@@ -159,7 +162,7 @@ api.use(function (error, request, response, next) {
         response.json({
             'status': 'ko',
             'code': 403,
-            'message': error
+            'message': JSON.stringify(error)
         });
     } else {
         response.status(403);

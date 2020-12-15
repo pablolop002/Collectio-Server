@@ -7,59 +7,88 @@ class DAOCollections {
         this.pool = pl;
     }
 
-    getAllCollectionsByCategory(user, Category, callback) {
+    getCollections(user, category, collection, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                connection.query("SELECT Id as ServerId, Name, Description, Image, Private FROM Collections WHERE UserId = ? AND CategoryId = ?",
-                    [user, Category],
-                    function (err, data) {
-                        connection.release();
-                        if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
-                        } else {
-                            callback(null, data);
-                        }
-                    });
+                let query = "SELECT Id as ServerId, UserId, Name, Description, Image, Private, CategoryId FROM Collections WHERE true";
+                let orderBy = " ORDER BY UserId, ServerId";
+                let values = [];
+
+                if (user) {
+                    query += " AND UserId = ?";
+                    values.push(user);
+                } else {
+                    query += " AND Private = false";
+                }
+
+                if (category) {
+                    query += " AND CategoryId = ?";
+                    values.push(category);
+                }
+
+                if (collection) {
+                    query += " AND Id = ?";
+                    values.push(collection);
+                }
+
+                query += orderBy;
+
+                connection.query(query, values, function (err, data) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"));
+                    } else {
+                        callback(null, data);
+                    }
+                });
             }
         });
     }
 
-    getAllCollections(user, callback) {
+    getCollectionsWithChildren(user, category, collection, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                connection.query("SELECT Id as ServerId, Name, Description, Image, Private, CategoryId FROM Collections WHERE UserId = ? ORDER BY CategoryId",
-                    [user],
-                    function (err, data) {
-                        connection.release();
-                        if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
-                        } else {
-                            callback(null, data);
-                        }
-                    });
-            }
-        });
-    }
+                let query = "SELECT c.Id as ServerCollectionId, c.CategoryId, c.UserId, c.Name as CategoryName," +
+                    " c.Description as CategoryDescription, c.Image as CategoryImage, c.Private as CategoryPrivate," +
+                    " c.CreatedAt as CategoryCreatedAt, c.UpdatedAt as CategoryUpdatedAt," +
+                    " i.Id as ServerItemId, i.SubcategoryId, i.Name as ItemName, i.Description as ItemDescription," +
+                    " i.CreatedAt as ItemCreatedAt, i.UpdatedAt as ItemUpdatedAt, i.Private as ItemPrivate," +
+                    " ii.Id as ServerItemImageId, ii.Image as ItemImage" +
+                    " FROM Collections c LEFT JOIN Items i ON i.CollectionId = c.Id LEFT JOIN ItemImages ii on i.Id = ii.ItemId WHERE true";
+                let orderBy = " ORDER BY c.UserId, c.CategoryId, c.Id";
+                let values = [];
 
-    getCollection(collection, callback) {
-        this.pool.getConnection(function (err, connection) {
-            if (err) {
-                callback(new Error("Error de conexión a la base de datos"));
-            } else {
-                connection.query("SELECT Id as ServerId, Name, Description, Image, Private, CategoryId FROM Collections WHERE Id = ?",
-                    [collection],
-                    function (err, data) {
-                        connection.release();
-                        if (err) {
-                            callback(new Error("Error de acceso a la base de datos"));
-                        } else {
-                            callback(null, data);
-                        }
-                    });
+                if (user) {
+                    query += " AND c.UserId = ?";
+                    values.push(user);
+                } else {
+                    query += " AND c.Private = false AND i.Private = false";
+                }
+
+                if (category) {
+                    query += " AND c.CategoryId = ?";
+                    values.push(category);
+                }
+
+                if (collection) {
+                    query += " AND c.Id = ?";
+                    values.push(collection);
+                }
+
+                query += orderBy;
+
+                connection.query(query, values, function (err, data) {
+                    connection.release();
+                    if (err) {
+                        callback(new Error("Error de acceso a la base de datos"));
+                    } else {
+                        callback(null, data);
+                    }
+                });
             }
         });
     }

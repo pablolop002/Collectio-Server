@@ -2,24 +2,35 @@
 
 // Load modules
 const express = require('express');
-const multer = require('multer');
 const fs = require('fs-extra');
+const i18n = require('i18n');
+const multer = require('multer');
 
 // Config
-const conf = require('../../config/conf');
 const database = require('../../config/databases');
-const passport = require('../../config/auth');
 const profiles = multer({
-    dest: (request, file, callback) => {
-        let path = "../../storage/user-data/user" + request.user.Id;
-        fs.mkdirsSync(path);
-        callback(null, path);
-    }
+    storage: multer.diskStorage({
+        destination: (request, file, callback) => {
+            let path = __basedir + "/storage/user-data/user" + request.user.Id;
+            fs.mkdirsSync(path);
+            callback(null, path);
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
+        },
+        fileFilter: (req, file, cb) => {
+            if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
+                cb(null, true);
+            } else {
+                cb(null, false);
+                return cb(new Error(i18n.__('fileFormatNotValid')));
+            }
+        }
+    })
 });
 
 // Function includes
 const DAOUsers = require('../../repositories/DAOUsers');
-const i18n = require("i18n");
 
 // Function instances
 const daoUsers = new DAOUsers(database.pool);
@@ -27,33 +38,31 @@ const daoUsers = new DAOUsers(database.pool);
 // Router
 const usersApi = express.Router();
 
-usersApi.get('/user', profiles.none(), function (request, response, next) {
+usersApi.get('/', profiles.none(), function (request, response, next) {
     response.json({
         'status': 'ok',
         'code': 0,
         'data': {
             'Nickname': request.user.Nickname,
             'Mail': request.user.Mail,
-            'Image': request.user.Image,
-            'Apple': request.user.Apple ? true : false,
-            'Google': request.user.Google ? true : false
+            'Image': request.user.Image ? "/images/user" + request.user.Id + "/" + request.user.Image : "/images/default_profile.png",
+            'Apple': !!request.user.AppleId,
+            'Google': !!request.user.GoogleId
         }
     });
 });
 
-usersApi.post('/user', profiles.single('image'), function (request, response, next) {
-    let user = {
-        'Id': request.user.Id
-    };
+usersApi.post('/', profiles.single('Image'), function (request, response, next) {
+    let user = request.user;
 
-    if (request.body.nickname) {
-        user.Nickname = request.body.nickname;
+    if (request.body.Nickname) {
+        user.Nickname = request.body.Nickname;
     } else {
         user.Nickname = request.user.Nickname;
     }
 
-    if (request.body.mail) {
-        user.Mail = request.body.mail;
+    if (request.body.Mail) {
+        user.Mail = request.body.Mail;
     } else {
         user.Mail = request.user.Mail;
     }
@@ -75,6 +84,81 @@ usersApi.post('/user', profiles.single('image'), function (request, response, ne
                     'status': 'ok',
                     'code': 1,
                     'message': i18n.__('userUpdateCorrect')
+                });
+            }
+        }
+    );
+});
+
+usersApi.get('/api-keys', function (request, response, next) {
+    daoUsers.listApiKeys(request.user.Id, function (err, data) {
+        if (err) {
+            response.json({
+                'status': 'ko',
+                'code': 500,
+                'message': JSON.stringify(err)
+            });
+        } else {
+            response.json({
+                'status': 'ok',
+                'code': 1,
+                'data': JSON.stringify(data)
+            });
+        }
+    });
+});
+
+usersApi.post('/apikey-update', profiles.none(), function (request, response, next) {
+    let apikey = {
+        'UserId': request.user.Id
+    };
+
+    apikey.Token = request.body.Token;
+
+    if (request.body.Device) {
+        apikey.Device = request.body.Device;
+    }
+
+    if (request.body.FriendlyName) {
+        apikey.UserDeviceName = request.body.FriendlyName;
+    }
+
+    daoUsers.updateApikey(apikey, function (err, data) {
+            if (err) {
+                response.json({
+                    'status': 'ko',
+                    'code': 500,
+                    'message': JSON.stringify(err)
+                });
+            } else {
+                response.json({
+                    'status': 'ok',
+                    'code': 1,
+                    'message': i18n.__('apikeyUpdateCorrect')
+                });
+            }
+        }
+    );
+});
+
+usersApi.post('/apikey-delete', profiles.none(), function (request, response, next) {
+    let apikey = {
+        'UserId': request.user.Id,
+        'Token': request.body.Token
+    };
+
+    daoUsers.deleteApikey(apikey, function (err, data) {
+            if (err) {
+                response.json({
+                    'status': 'ko',
+                    'code': 500,
+                    'message': JSON.stringify(err)
+                });
+            } else {
+                response.json({
+                    'status': 'ok',
+                    'code': 1,
+                    'message': i18n.__('apikeyDeleteCorrect')
                 });
             }
         }

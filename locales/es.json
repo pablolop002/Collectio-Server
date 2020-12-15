@@ -33,5 +33,6 @@
 	"error404": "Parece que la página que estas buscando no existe.",
 	"error403": "Ups, no tienes permiso para acceder a eso.",
 	"error500": "Hemos tenido un problema y nuestros duendes están en ello. Si los ves, por favor, indica la siguiente ruta del archivo que contiene el error:",
-	"error500File": "Archivo de error: "
+	"error500File": "Archivo de error: ",
+	"userUpdateCorrect": "userUpdateCorrect"
 }

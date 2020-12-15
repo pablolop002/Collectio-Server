@@ -123,7 +123,7 @@ class DAOUsers {
                 callback(err);
             } else {
                 connection.query("UPDATE Users SET Nickname = ?, Mail = ?, Image = ? WHERE (Id = ?)",
-                    [user.Nickname, user.Mail, user.Image], function (err, data) {
+                    [user.Nickname, user.Mail, user.Image, user.Id], function (err, data) {
                         connection.release();
                         if (err) {
                             callback(err);
@@ -177,34 +177,60 @@ class DAOUsers {
             if (err) {
                 callback(err);
             } else {
-                connection.query("UPDATE MobileSessions SET Device = ?, UserDeviceName = ? WHERE Token = ?",
-                    [session.Device, session.UserDeviceName, session.Token], function (err, updateData) {
+                let query = "UPDATE MobileSessions SET";
+                let values = [];
+
+                if (session.Device) {
+                    query += " Device = ?";
+                    if (session.UserDeviceName) query += ",";
+                    values.push(session.Device);
+                }
+
+                if (session.UserDeviceName) {
+                    query += " UserDeviceName = ?";
+                    values.push(session.UserDeviceName);
+                }
+
+                query += " WHERE Token = ? AND UserId = ?";
+                values.push([session.Token, session.UserId]);
+
+                connection.query(query, values, function (err, updateData) {
+                    if (err) {
+                        connection.release();
+                        callback(err);
+                    } else {
+                        callback(null, updateData);
+                    }
+                });
+            }
+        });
+    }
+
+    deleteApikey(apikey, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(err);
+            } else {
+                connection.query("DELETE FROM MobileSessions WHERE Token = ? AND UserId = ?",
+                    [apikey.Token, apikey.UserId], function (err, data) {
+                        connection.release();
                         if (err) {
-                            connection.release();
                             callback(err);
                         } else {
-                            connection.query("SELECT * FROM MobileSessions WHERE Token = ?",
-                                [session.Token], function (err, data) {
-                                    connection.release();
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, data);
-                                    }
-                                });
+                            callback(null, data);
                         }
                     });
             }
         });
     }
 
-    deleteApikey(token, callback) {
+    listApiKeys(userId, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(err);
             } else {
-                connection.query("DELETE FROM MobileSessions WHERE Token = ?",
-                    [token], function (err, data) {
+                connection.query("SELECT Token, CreatedAt, UsedAt, Device, UserDeviceName FROM MobileSessions WHERE UserId = ?",
+                    [userId], function (err, data) {
                         connection.release();
                         if (err) {
                             callback(err);
