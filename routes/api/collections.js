@@ -5,15 +5,16 @@ const express = require('express');
 const fs = require('fs-extra');
 const i18n = require('i18n');
 const multer = require('multer');
+const path = require('path');
 
 // Config
 const database = require('../../config/databases');
 const collectionImages = multer({
     storage: multer.diskStorage({
         destination: (request, file, callback) => {
-            let path = __basedir + "/storage/user-data/temp/user" + request.user.Id;
-            fs.mkdirsSync(path);
-            callback(null, path);
+            let dest = path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "temp");
+            fs.mkdirsSync(dest);
+            callback(null, dest);
         },
         filename: function (req, file, cb) {
             cb(null, file.originalname);
@@ -153,8 +154,70 @@ collectionsApi.get('/', function (request, response, next) {
     }
 });
 
-collectionsApi.post('/', function (request, response, necxt){
-    
+collectionsApi.post('/', collectionImages.single('Image'), function (request, response, next) {
+    let collection = {
+        'CategoryId': request.body.CategoryId,
+        'UserId': request.user.Id,
+        'Name': request.body.Name,
+        'Desription': request.body.Description,
+        'Image': request.file != null ? request.file.filename : null,
+        'Private': request.body.Private,
+    };
+
+    daoCollections.insertCollection(collection, function (err, collectionId) {
+        if (err) {
+            response.json({
+                'status': 'ko',
+                'code': 500,
+                'message': JSON.stringify(err)
+            });
+        } else {
+            let finalPath = path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "collection" + collectionId);
+            fs.mkdirsSync(finalPath);
+            fs.moveSync(request.file.path, path.join(finalPath, request.file.filename));
+            response.json({
+                'status': 'ok',
+                'code': 1,
+                'data': collectionId
+            });
+        }
+    });
+});
+
+collectionsApi.post('/edit', collectionImages.single('Image'), function (request, response, next) {
+    let collection = {
+        'Id': request.body.ServerId,
+        'UserId': request.user.Id
+    };
+
+    if (request.body.Name) collection.Name = request.body.Name;
+    if (request.body.Desription) collection.Desription = request.body.Desription;
+    if (request.body.Private) collection.Private = request.body.Private;
+    if (request.file) {
+        collection.Image = request.body.file.filename;
+        let finalPath = path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "collection" + collectionId);
+        fs.mkdirsSync(finalPath);
+        fs.moveSync(request.file.path, path.join(finalPath, request.file.filename));
+    }
+
+    daoCollections.updateCollection(collection, function (err, oldImage) {
+        if (err) {
+            response.json({
+                'status': 'ko',
+                'code': 500,
+                'message': JSON.stringify(err)
+            });
+        } else {
+            if (oldImage != null) {
+                fs.removeSync(path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "collection" + collectionId, oldImage));
+            }
+            response.json({
+                'status': 'ok',
+                'code': 1,
+                'data': collectionId
+            });
+        }
+    });
 });
 
 module.exports = collectionsApi;

@@ -117,16 +117,52 @@ class DAOCollections {
             if (err) {
                 callback(err);
             } else {
-                connection.query("UPDATE Collections SET Name = ?, Description = ?, Image = ?, Private = ? WHERE Id = ?",
-                    [collection.Name, collection.Description, collection.Image, collection.Private, collection.ServerId],
-                    function (err, data) {
-                        connection.release();
-                        if (err) {
-                            callback(err);
-                        } else {
-                            callback(null, data);
+                connection.query("SELECT * FROM Collections WHERE Id = ? AND UserId = ?", [collection.Id, collection.UserId], function (err, oldCollection) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        let query = "UPDATE Collections SET";
+                        let values = [];
+
+                        if (collection.Name) {
+                            query += " Name = ?";
+                            if (collection.Description || collection.Image || collection.Private)
+                                query += ",";
+                            values.push(collection.Name);
                         }
-                    });
+
+                        if (collection.Description) {
+                            query += " Description = ?";
+                            if (collection.Image || collection.Private)
+                                query += ",";
+                            values.push(collection.Description);
+                        }
+
+                        if (collection.Image) {
+                            query += " Image = ?";
+                            if (collection.Private)
+                                query += ",";
+                            values.push(collection.Image);
+                        }
+
+                        if (collection.Private) {
+                            query += " Private = ?";
+                            values.push(collection.Private);
+                        }
+
+                        query += " WHERE Id = ? AND UserId = ?";
+                        values.push([collection.Id, collection.UserId]);
+
+                        connection.query(query, values, function (err, data) {
+                            connection.release();
+                            if (err) {
+                                callback(err);
+                            } else {
+                                callback(null, oldCollection[0].Image);
+                            }
+                        });
+                    }
+                });
             }
         });
     }
