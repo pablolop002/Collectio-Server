@@ -5,15 +5,16 @@ const express = require('express');
 const fs = require('fs-extra');
 const i18n = require('i18n');
 const multer = require('multer');
+const path = require('path');
 
 // Config
 const database = require('../../config/databases');
 const profiles = multer({
     storage: multer.diskStorage({
         destination: (request, file, callback) => {
-            let path = __basedir + "/storage/user-data/user" + request.user.Id;
-            fs.mkdirsSync(path);
-            callback(null, path);
+            let dest = path.join(__basedir, "storage", "user-data", "user" + request.user.Id);
+            fs.mkdirsSync(dest);
+            callback(null, dest);
         },
         filename: function (req, file, cb) {
             cb(null, file.originalname);
@@ -57,14 +58,10 @@ usersApi.post('/', profiles.single('Image'), function (request, response, next) 
 
     if (request.body.Nickname) {
         user.Nickname = request.body.Nickname;
-    } else {
-        user.Nickname = request.user.Nickname;
     }
 
     if (request.body.Mail) {
         user.Mail = request.body.Mail;
-    } else {
-        user.Mail = request.user.Mail;
     }
 
     if (request.file != null) {
@@ -79,6 +76,9 @@ usersApi.post('/', profiles.single('Image'), function (request, response, next) 
                     'message': JSON.stringify(err)
                 });
             } else {
+                if (request.file != null && request.user.Image) {
+                    fs.removeSync(path.join(__basedir, "storage", "user-data", "user" + request.user.Id, request.user.Image));
+                }
 
                 response.json({
                     'status': 'ok',
