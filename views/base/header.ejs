@@ -46,8 +46,13 @@
             <div class="ms-md-auto navbar-text actions">
                 <% if (locals.user) { %>
                     <a href="/profile">
-                        <img class="profile-image" src="/profiles/<%= locals.user.Image %>"
+                        <% if (locals.user.Image) { %>
+                        <img class="profile-image" src="/images/user<%= locals.user.Id %>/<%= locals.user.Image %>"
                              alt="<%= __('profileImage') %>">
+                        <% } else { %>
+                                <img class="profile-image" src="/images/default-profile.png"
+                                     alt="<%= __('profileImage') %>">
+                        <% } %>
                     </a>
                     <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/logout">
                         <i class="fas fa-sign-out-alt"></i> <%= __('signOut') %>
