@@ -7,7 +7,7 @@ const path = require('path');
 
 //
 const users = require('./webApp/user');
-const collections = require('./webApp/collections');
+//const collections = require('./webApp/collections');
 
 // Router
 const webApp = express.Router();
@@ -34,8 +34,7 @@ webApp.post("/login/Apple/callback", function (request, response, next) {
 
 // Redirect if not logged
 webApp.use(function (request, response, next) {
-    if (request.session && request.session.User) {
-        response.locals.User = request.session.User;
+    if (request.user) {
         next();
     } else {
         response.redirect("/");

@@ -86,7 +86,7 @@ app.get('/cookies', upload.none(), function (request, response) {
 
 // Routes
 app.use('/api/v1', apiRouter);
-app.use(webAppRouter);
+app.use('/', webAppRouter);
 
 // Error 404
 app.use(function (request, response) {
