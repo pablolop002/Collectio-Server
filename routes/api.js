@@ -85,13 +85,13 @@ api.get('/categories', function (request, response, next) {
             response.json({
                 'status': 'ko',
                 'code': 500,
-                'message': JSON.stringify(err)
+                'message': err
             });
         } else {
             response.json({
                 'status': 'ok',
                 'code': 0,
-                'data': JSON.stringify(categories)
+                'data': categories
             });
         }
     })
@@ -103,13 +103,13 @@ api.get('/subcategories', function (request, response, next) {
             response.json({
                 'status': 'ko',
                 'code': 500,
-                'message': JSON.stringify(err)
+                'message': err
             });
         } else {
             response.json({
                 'status': 'ok',
                 'code': 0,
-                'data': JSON.stringify(subcategories)
+                'data': subcategories
             });
         }
     })
@@ -124,7 +124,7 @@ api.use(function (request, response, next) {
                 response.json({
                     'status': 'ko',
                     'code': 500,
-                    'message': JSON.stringify(err)
+                    'message': err
                 });
             } else {
                 if (user != null) {
@@ -141,7 +141,7 @@ api.use(function (request, response, next) {
 });
 
 // Static Content
-api.use('/images', express.static(path.join(__basedir, 'storage', 'user-data')));
+api.use('/images', express.static(path.join(__basedir, 'storage', 'images')));
 
 // Routes
 api.use('/user', apiUserRouter);
@@ -152,7 +152,7 @@ api.use(function (request, response, next) {
     response.json({
         'status': 'ko',
         'code': 404,
-        'message': JSON.stringify(i18n.__('error404'))
+        'message': i18n.__('error404')
     });
 });
 
@@ -162,7 +162,7 @@ api.use(function (error, request, response, next) {
         response.json({
             'status': 'ko',
             'code': 403,
-            'message': JSON.stringify(error)
+            'message': error.message
         });
     } else {
         response.status(403);

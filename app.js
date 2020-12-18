@@ -7,7 +7,7 @@ global.__basedir = __dirname;
 const bodyParser = require('body-parser');
 const express = require('express');
 const expressSession = require('express-session');
-const fs = require('fs');
+const fs = require('fs-extra');
 const i18n = require('i18n');
 const multer = require('multer');
 const path = require('path');
@@ -19,7 +19,7 @@ const locales = require('./config/locales');
 const upload = multer();
 
 // Routers
-const webRouter = require('./routes/collectio');
+const webAppRouter = require('./routes/webApp');
 const apiRouter = require('./routes/api');
 
 // ExpressJS Server creation
@@ -31,7 +31,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serve static resources
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/categories', express.static(path.join(__dirname, 'storage', 'categories')));
 
 // Lang Service
 i18n.configure(locales.lang);
@@ -52,6 +51,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Locals Session
 app.use(function (request, response, next) {
     if (request.user) {
         response.locals.user = request.user;
@@ -60,76 +60,48 @@ app.use(function (request, response, next) {
 });
 
 // Static pages
-app.get('/', upload.none(), function (request, response, next) {
+app.get('/', upload.none(), function (request, response) {
     response.render('index', {'current': 'index'});
 });
 
-app.get('/about', upload.none(), function (request, response, next) {
+app.get('/about', upload.none(), function (request, response) {
     response.render('about', {'current': 'about'});
 });
 
-app.get('/privacy-policy', upload.none(), function (request, response, next) {
+app.get('/privacy-policy', upload.none(), function (request, response) {
     response.render('privacy-policy', {'current': 'privacy'});
 });
 
-app.get('/terms', upload.none(), function (request, response, next) {
+app.get('/terms', upload.none(), function (request, response) {
     response.render('terms', {'current': 'terms'});
 });
 
-app.get('/legal-notice', upload.none(), function (request, response, next) {
+app.get('/legal-notice', upload.none(), function (request, response) {
     response.render('legal-notice', {'current': 'legal'});
 });
 
-app.get('/cookies', upload.none(), function (request, response, next) {
+app.get('/cookies', upload.none(), function (request, response) {
     response.render('cookies', {'current': 'cookies'});
-});
-
-app.get('/login/google', passport.authenticate('Google',
-    {
-        scope: ['https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email']
-    }));
-
-app.get('/login/google/callback', passport.authenticate('Google'), function (request, response) {
-    response.redirect('/');
-});
-
-// Apple API Auth
-app.get("/login/apple", passport.authenticate('Apple'));
-
-app.post("/login/apple/callback", function (request, response, next) {
-    passport.authenticate('Apple', function (err, user, info) {
-        response.redirect('/');
-    })(request, response, next);
-});
-
-app.get('/logout', upload.none(), function (request, response, next) {
-    request.session.destroy();
-    response.redirect('/');
 });
 
 // Routes
 app.use('/api/v1', apiRouter);
-//app.use('/portal', webRouter);
+app.use(webAppRouter);
 
 // Error 404
-app.use(function (request, response, next) {
+app.use(function (request, response) {
     response.status(404);
     response.render('error', {'current': 'error', 'errorCode': 404});
 });
 
 // Error 500
-app.use(function (error, request, response, next) {
-    let route = path.join('storage', 'logs', Date.now().toString() + '.log');
+app.use(function (error, request, response) {
+    let file = path.join(__basedir, 'storage', 'logs', (new Date()).toString() + '.log');
     let doc = error.message + '\n' + error.stack;
 
-    fs.writeFile(route, doc, function (err) {
-        response.status(500);
-        if (err)
-            response.render('error', {'current': 'error', 'errorCode': 500, 'file': i18n.__('noErrorFile')});
-        else
-            response.render('error', {'current': 'error', 'errorCode': 500, 'file': route});
-    });
+    fs.outputFileSync(file, doc);
+
+    response.render('error', {'current': 'error', 'errorCode': 500, 'file': file});
 });
 
 module.exports = app;

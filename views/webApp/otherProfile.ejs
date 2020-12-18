@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="<%= __('lang') %>">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Collectio - <%= __('otherProfile') %></title>
+    <%- include('base/styles') %>
+</head>
+
+<body>
+<!-- Begin Header -->
+<%- include('base/header'); %>
+<!-- End Header -->
+
+<!-- Begin Content -->
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-lg-0">
+                <% if(userInfo.Image != null) { %>
+                    <img src="/images/user<%= userInfo.Id %>/<%= userInfo.Image %>" alt="<%= __('profileImage') %>" />
+                <% } else { %>
+                    <img src="/profiles/default-profile.png" alt="<%= __('profileImage') %>" />
+                <% } %>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- User Data -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Content -->
+
+<!-- Begin Footer -->
+<%- include('base/footer'); %>
+<!-- End Footer -->
+
+<!-- Begin Scripts -->
+<%- include('base/scripts') %>
+<!-- End Scripts -->
+</body>
+
+</html>

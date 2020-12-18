@@ -12,7 +12,7 @@ const database = require('../../config/databases');
 const profiles = multer({
     storage: multer.diskStorage({
         destination: (request, file, callback) => {
-            let dest = path.join(__basedir, "storage", "user-data", "user" + request.user.Id);
+            let dest = path.join(__basedir, "storage", "images", "user" + request.user.Id);
             fs.mkdirsSync(dest);
             callback(null, dest);
         },
@@ -73,11 +73,11 @@ usersApi.post('/', profiles.single('Image'), function (request, response, next) 
                 response.json({
                     'status': 'ko',
                     'code': 500,
-                    'message': JSON.stringify(err)
+                    'message': err.message
                 });
             } else {
                 if (request.file != null && request.user.Image) {
-                    fs.removeSync(path.join(__basedir, "storage", "user-data", "user" + request.user.Id, request.user.Image));
+                    fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, request.user.Image));
                 }
 
                 response.json({
@@ -96,7 +96,7 @@ usersApi.get('/api-keys', function (request, response, next) {
             response.json({
                 'status': 'ko',
                 'code': 500,
-                'message': JSON.stringify(err)
+                'message': err.message
             });
         } else {
             response.json({
@@ -128,7 +128,7 @@ usersApi.post('/apikey-update', profiles.none(), function (request, response, ne
                 response.json({
                     'status': 'ko',
                     'code': 500,
-                    'message': JSON.stringify(err)
+                    'message': err.message
                 });
             } else {
                 response.json({
@@ -152,7 +152,7 @@ usersApi.post('/apikey-delete', profiles.none(), function (request, response, ne
                 response.json({
                     'status': 'ko',
                     'code': 500,
-                    'message': JSON.stringify(err)
+                    'message': err.message
                 });
             } else {
                 response.json({

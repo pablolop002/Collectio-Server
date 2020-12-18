@@ -17,7 +17,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-lg-0">
-                <img src="/profiles/<%= locals.User.Image %>" alt="<%= __('profileImage') %>" />
+                <% if(locals.user.Image != null) { %>
+                <img src="/images/user<%= locals.User.Id %>/<%= locals.User.Image %>" alt="<%= __('profileImage') %>" />
+                <% } else { %>
+                        <img src="/profiles/default-profile.png" alt="<%= __('profileImage') %>" />
+                <% } %>
             </div>
             <div class="col-md-6">
                 <div class="row">

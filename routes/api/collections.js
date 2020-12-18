@@ -12,7 +12,7 @@ const database = require('../../config/databases');
 const collectionImages = multer({
     storage: multer.diskStorage({
         destination: (request, file, callback) => {
-            let dest = path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "temp");
+            let dest = path.join(__basedir, "storage", "images", "user" + request.user.Id, "temp");
             fs.mkdirsSync(dest);
             callback(null, dest);
         },
@@ -51,13 +51,13 @@ collectionsApi.get('/', function (request, response, next) {
                 response.json({
                     'status': 'ko',
                     'code': 500,
-                    'message': JSON.stringify(err)
+                    'message': err.message
                 });
             } else {
                 response.json({
                     'status': 'ok',
                     'code': 1,
-                    'message': JSON.stringify(data)
+                    'message': data
                 });
             }
         });
@@ -67,7 +67,7 @@ collectionsApi.get('/', function (request, response, next) {
                 response.json({
                     'status': 'ko',
                     'code': 500,
-                    'message': JSON.stringify(err)
+                    'message': err.message
                 });
             } else {
                 data = data.reduce((accumulator, current) => {
@@ -169,10 +169,10 @@ collectionsApi.post('/', collectionImages.single('Image'), function (request, re
             response.json({
                 'status': 'ko',
                 'code': 500,
-                'message': JSON.stringify(err)
+                'message': err.message
             });
         } else {
-            let finalPath = path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "collection" + collectionId);
+            let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collectionId);
             fs.mkdirsSync(finalPath);
             fs.moveSync(request.file.path, path.join(finalPath, request.file.filename));
             response.json({
@@ -195,7 +195,7 @@ collectionsApi.post('/edit', collectionImages.single('Image'), function (request
     if (request.body.Private) collection.Private = request.body.Private;
     if (request.file) {
         collection.Image = request.body.file.filename;
-        let finalPath = path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "collection" + collectionId);
+        let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collectionId);
         fs.mkdirsSync(finalPath);
         fs.moveSync(request.file.path, path.join(finalPath, request.file.filename));
     }
@@ -205,11 +205,11 @@ collectionsApi.post('/edit', collectionImages.single('Image'), function (request
             response.json({
                 'status': 'ko',
                 'code': 500,
-                'message': JSON.stringify(err)
+                'message': err.message
             });
         } else {
             if (oldImage != null) {
-                fs.removeSync(path.join(__basedir, "storage", "user-data", "user" + request.user.Id, "collection" + collectionId, oldImage));
+                fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collectionId, oldImage));
             }
             response.json({
                 'status': 'ok',
@@ -218,6 +218,10 @@ collectionsApi.post('/edit', collectionImages.single('Image'), function (request
             });
         }
     });
+});
+
+collectionsApi.post('/delete', collectionImages.none(), function (request, response, next) {
+
 });
 
 module.exports = collectionsApi;
