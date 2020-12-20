@@ -39,7 +39,7 @@ const daoUsers = new DAOUsers(database.pool);
 // Router
 const usersApp = express.Router();
 
-usersApp.get('/{:id}', function (request, response, next) {
+usersApp.get('/:id*?', function (request, response, next) {
     if (!request.params.id || request.params.id === request.user.Id) {
         daoUsers.listApiKeys(request.user.Id, function (err, apiKeys) {
             if (err) {
