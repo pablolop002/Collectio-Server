@@ -4,6 +4,7 @@ body {
 
 a, a:hover {
     color: #008B8B;
+    text-decoration: none;
 }
 
 .primary-bg {
