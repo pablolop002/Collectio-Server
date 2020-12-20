@@ -12,7 +12,7 @@ class DAOCollections {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                let query = "SELECT Id as ServerId, UserId, Name, Description, Image, Private, CategoryId FROM Collections WHERE true";
+                let query = "SELECT Id as ServerId, UserId, Name, Description, Image, Private, CategoryId, CreatedAt, UpdatedAt FROM Collections WHERE true";
                 let orderBy = " ORDER BY UserId, ServerId";
                 let values = [];
 
@@ -98,8 +98,8 @@ class DAOCollections {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
             } else {
-                connection.query("INSERT INTO Collections(UserId, CategoryId, Name, Description, Image, Private) VALUES (?, ?, ?, ?, ?, ?)",
-                    [collection.UserId, collection.CategoryId, collection.Name, collection.Description, collection.Image, collection.Private],
+                connection.query("INSERT INTO Collections(UserId, CategoryId, Name, Description, Image, Private, CreatedAt, UpdatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    [collection.UserId, collection.CategoryId, collection.Name, collection.Description, collection.Image, collection.Private, new Date(), new Date()],
                     function (err, data) {
                         connection.release();
                         if (err) {
@@ -121,32 +121,27 @@ class DAOCollections {
                     if (err) {
                         callback(err);
                     } else {
-                        let query = "UPDATE Collections SET";
+                        let query = "UPDATE Collections SET UpdatedAt = ?";
                         let values = [];
+                        values.push(new Date());
 
                         if (collection.Name) {
-                            query += " Name = ?";
-                            if (collection.Description || collection.Image || collection.Private)
-                                query += ",";
+                            query += ", Name = ?";
                             values.push(collection.Name);
                         }
 
                         if (collection.Description) {
-                            query += " Description = ?";
-                            if (collection.Image || collection.Private)
-                                query += ",";
+                            query += ", Description = ?";
                             values.push(collection.Description);
                         }
 
                         if (collection.Image) {
-                            query += " Image = ?";
-                            if (collection.Private)
-                                query += ",";
+                            query += ", Image = ?";
                             values.push(collection.Image);
                         }
 
                         if (collection.Private) {
-                            query += " Private = ?";
+                            query += ", Private = ?";
                             values.push(collection.Private);
                         }
 
@@ -167,13 +162,13 @@ class DAOCollections {
         });
     }
 
-    deleteCollection(collection, callback) {
+    deleteCollection(collection, userId, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(err);
             } else {
-                connection.query("DELETE FROM Collections WHERE Id = ?",
-                    [collection.ServerId],
+                connection.query("DELETE FROM Collections WHERE Id = ? AND UserId = ?",
+                    [collection, userId],
                     function (err, data) {
                         connection.release();
                         if (err) {
