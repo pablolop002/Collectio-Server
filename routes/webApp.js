@@ -42,7 +42,7 @@ webApp.use(function (request, response, next) {
 });
 
 // Static user resources
-webApp.use('/images', express.static(path.join(__dirname, 'storage', 'images')));
+webApp.use('/images', express.static(path.join(__basedir, 'storage', 'images')));
 
 // SignOut
 webApp.get('/logout', function (request, response, next) {
