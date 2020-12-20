@@ -195,7 +195,7 @@ collectionsApi.post('/edit', collectionImages.single('Image'), function (request
     if (request.body.Private) collection.Private = request.body.Private;
     if (request.file) {
         collection.Image = request.body.file.filename;
-        let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collectionId);
+        let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collection.Id);
         fs.mkdirsSync(finalPath);
         fs.moveSync(request.file.path, path.join(finalPath, request.file.filename));
     }
@@ -209,19 +209,31 @@ collectionsApi.post('/edit', collectionImages.single('Image'), function (request
             });
         } else {
             if (oldImage != null) {
-                fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collectionId, oldImage));
+                fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collection.Id, oldImage));
             }
             response.json({
                 'status': 'ok',
                 'code': 1,
-                'data': collectionId
+                'data': collection.Id
             });
         }
     });
 });
 
 collectionsApi.post('/delete', collectionImages.none(), function (request, response, next) {
-
+    if (request.body.CollectionId) {
+        daoCollections.deleteCollection(request.body.CollectionId, request.user.Id, function (err, data) {
+            if (err) {
+                next(err);
+            } else {
+                response.json({
+                    'status': 'ok',
+                    'code': 1,
+                    'message': i18n.__('collectionDeleted')
+                });
+            }
+        });
+    }
 });
 
 module.exports = collectionsApi;
