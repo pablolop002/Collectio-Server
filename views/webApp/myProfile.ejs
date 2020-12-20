@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Collectio - <%= __('profile') %></title>
-    <%- include('base/styles') %>
+    <%- include('../base/styles') %>
 </head>
 
 <body>
 <!-- Begin Header -->
-<%- include('base/header'); %>
+<%- include('../base/header') %>
 <!-- End Header -->
 
 <!-- Begin Content -->
@@ -18,9 +18,10 @@
         <div class="row">
             <div class="col-md-6 offset-lg-0">
                 <% if(locals.user.Image != null) { %>
-                <img src="/images/user<%= locals.User.Id %>/<%= locals.User.Image %>" alt="<%= __('profileImage') %>" />
+                    <img src="/images/user<%= locals.User.Id %>/<%= locals.User.Image %>"
+                         alt="<%= __('profileImage') %>"/>
                 <% } else { %>
-                        <img src="/profiles/default-profile.png" alt="<%= __('profileImage') %>" />
+                    <img src="/images/profiles/default-profile.png" alt="<%= __('profileImage') %>"/>
                 <% } %>
             </div>
             <div class="col-md-6">
@@ -44,11 +45,11 @@
 <!-- End Content -->
 
 <!-- Begin Footer -->
-<%- include('base/footer'); %>
+<%- include('../base/footer') %>
 <!-- End Footer -->
 
 <!-- Begin Scripts -->
-<%- include('base/scripts') %>
+<%- include('../base/scripts') %>
 <!-- End Scripts -->
 </body>
 
