@@ -82,11 +82,7 @@ api.use(function (request, response, next) {
 api.get('/categories', function (request, response, next) {
     daoCategories.listCategories(function (err, categories) {
         if (err) {
-            response.json({
-                'status': 'ko',
-                'code': 500,
-                'message': err
-            });
+            next(err);
         } else {
             response.json({
                 'status': 'ok',
@@ -100,11 +96,7 @@ api.get('/categories', function (request, response, next) {
 api.get('/subcategories', function (request, response, next) {
     daoCategories.listSubcategories(function (err, subcategories) {
         if (err) {
-            response.json({
-                'status': 'ko',
-                'code': 500,
-                'message': err
-            });
+            next(err);
         } else {
             response.json({
                 'status': 'ok',
@@ -121,22 +113,26 @@ api.use(function (request, response, next) {
     if (apikey != null) {
         daoUsers.existApikey(apikey, function (err, user) {
             if (err) {
-                response.json({
-                    'status': 'ko',
-                    'code': 500,
-                    'message': err
-                });
+                next(err);
             } else {
                 if (user != null) {
                     request.user = user[0];
                     next();
                 } else {
-                    next(new Error(i18n.__('userNotFound')));
+                    response.json({
+                        'status': 'ko',
+                        'code': 403,
+                        'message': i18n.__('userNotFound')
+                    });
                 }
             }
         });
     } else {
-        next(new Error(i18n.__('noApiKey')));
+        response.json({
+            'status': 'ko',
+            'code': 403,
+            'message': i18n.__('noApiKey')
+        });
     }
 });
 
@@ -156,18 +152,13 @@ api.use(function (request, response, next) {
     });
 });
 
-// Error 403
+// Error 500
 api.use(function (error, request, response, next) {
-    if (request.mobileAuth) {
-        response.json({
-            'status': 'ko',
-            'code': 403,
-            'message': error.message
-        });
-    } else {
-        response.status(403);
-        response.render('error', {'current': 'error', 'errorCode': 403});
-    }
+    response.json({
+        'status': 'ko',
+        'code': 500,
+        'message': error.message
+    });
 });
 
 module.exports = api;

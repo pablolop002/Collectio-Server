@@ -70,11 +70,7 @@ usersApi.post('/', profiles.single('Image'), function (request, response, next) 
 
     daoUsers.updateUser(user, function (err, data) {
             if (err) {
-                response.json({
-                    'status': 'ko',
-                    'code': 500,
-                    'message': err.message
-                });
+                next(err);
             } else {
                 if (request.file != null && request.user.Image) {
                     fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, request.user.Image));
@@ -93,11 +89,7 @@ usersApi.post('/', profiles.single('Image'), function (request, response, next) 
 usersApi.get('/api-keys', function (request, response, next) {
     daoUsers.listApiKeys(request.user.Id, function (err, data) {
         if (err) {
-            response.json({
-                'status': 'ko',
-                'code': 500,
-                'message': err.message
-            });
+            next(err);
         } else {
             response.json({
                 'status': 'ok',
@@ -125,11 +117,7 @@ usersApi.post('/apikey-update', profiles.none(), function (request, response, ne
 
     daoUsers.updateApikey(apikey, function (err, data) {
             if (err) {
-                response.json({
-                    'status': 'ko',
-                    'code': 500,
-                    'message': err.message
-                });
+                next(err);
             } else {
                 response.json({
                     'status': 'ok',
@@ -149,11 +137,7 @@ usersApi.post('/apikey-delete', profiles.none(), function (request, response, ne
 
     daoUsers.deleteApikey(apikey, function (err, data) {
             if (err) {
-                response.json({
-                    'status': 'ko',
-                    'code': 500,
-                    'message': err.message
-                });
+                next(err);
             } else {
                 response.json({
                     'status': 'ok',

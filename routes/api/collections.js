@@ -48,11 +48,7 @@ collectionsApi.get('/', function (request, response, next) {
     if (withChildren == null) {
         daoCollections.getCollections(user, category, collection, function (err, data) {
             if (err) {
-                response.json({
-                    'status': 'ko',
-                    'code': 500,
-                    'message': err.message
-                });
+                next(err);
             } else {
                 response.json({
                     'status': 'ok',
@@ -64,11 +60,7 @@ collectionsApi.get('/', function (request, response, next) {
     } else {
         daoCollections.getCollectionsWithChildren(user, category, collection, function (err, data) {
             if (err) {
-                response.json({
-                    'status': 'ko',
-                    'code': 500,
-                    'message': err.message
-                });
+                next(err);
             } else {
                 data = data.reduce((accumulator, current) => {
                     let col = accumulator.findIndex(collection => collection.ServerId === current.ServerCollectionId);
@@ -166,11 +158,7 @@ collectionsApi.post('/', collectionImages.single('Image'), function (request, re
 
     daoCollections.insertCollection(collection, function (err, collectionId) {
         if (err) {
-            response.json({
-                'status': 'ko',
-                'code': 500,
-                'message': err.message
-            });
+            next(err);
         } else {
             let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collectionId);
             fs.mkdirsSync(finalPath);
@@ -202,11 +190,7 @@ collectionsApi.post('/edit', collectionImages.single('Image'), function (request
 
     daoCollections.updateCollection(collection, function (err, oldImage) {
         if (err) {
-            response.json({
-                'status': 'ko',
-                'code': 500,
-                'message': err.message
-            });
+            next(err);
         } else {
             if (oldImage != null) {
                 fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collection.Id, oldImage));
