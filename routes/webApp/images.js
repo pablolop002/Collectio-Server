@@ -2,6 +2,7 @@
 
 // Load modules
 const express = require('express');
+const path = require('path');
 
 // Router
 const imagesApp = express.Router();
