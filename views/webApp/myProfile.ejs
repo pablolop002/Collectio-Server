@@ -32,7 +32,41 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-
+                        <table class="table-responsive table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col"><%= __('CreatedAt') %></th>
+                                <th scope="col"><%= __('FriendlyName') %></th>
+                                <th scope="col"><%= __('Device') %></th>
+                                <th scope="col"><%= __('LastUsed') %></th>
+                                <th scope="col"><%= __('Actions') %></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for (let i = 0; i < aplikeys.lenght; i++) { %>
+                                <tr>
+                                    <th scope="row">apikeys[i].CreatedAt</th>
+                                    <td>apikeys[i].UserDeviceName</td>
+                                    <td>apikeys[i].Device</td>
+                                    <td>apikeys[i].UsedAt</td>
+                                    <td>
+                                        <a><i class="fas fa-edit"></i></a>
+                                        <a><i class="fas fa-trash"></i></a>
+                                        <a><i class="fas fa-check"></i></a>
+                                    </td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th scope="col"><%= __('CreatedAt') %></th>
+                                <th scope="col"><%= __('FriendlyName') %></th>
+                                <th scope="col"><%= __('Device') %></th>
+                                <th scope="col"><%= __('LastUsed') %></th>
+                                <th scope="col"><%= __('Actions') %></th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                     <div class="col-md-6">
 

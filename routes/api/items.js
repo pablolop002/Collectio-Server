@@ -55,12 +55,12 @@ itemsApi.use(function (request, response, next) {
                 if (request.method === 'post' && collection.length > 0) {
                     next();
                 } else {
-                    next(new Error(i18n.__('NotOwnedCollectionEdit')));
+                    next(new Error(i18n.__('collectionNotOwned')));
                 }
             }
         });
     } else {
-        next(new Error(i18n.__('NotCollectionIdSend')));
+        next(new Error(i18n.__('noCollectionId')));
     }
 });
 

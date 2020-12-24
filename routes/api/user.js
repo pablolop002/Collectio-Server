@@ -79,7 +79,7 @@ usersApi.post('/', profiles.single('Image'), function (request, response, next) 
                 response.json({
                     'status': 'ok',
                     'code': 1,
-                    'message': i18n.__('userUpdateCorrect')
+                    'message': i18n.__('userUpdate')
                 });
             }
         }
@@ -122,7 +122,7 @@ usersApi.post('/apikey-update', profiles.none(), function (request, response, ne
                 response.json({
                     'status': 'ok',
                     'code': 1,
-                    'message': i18n.__('apikeyUpdateCorrect')
+                    'message': i18n.__('apikeyUpdate')
                 });
             }
         }
@@ -142,7 +142,7 @@ usersApi.post('/apikey-delete', profiles.none(), function (request, response, ne
                 response.json({
                     'status': 'ok',
                     'code': 1,
-                    'message': i18n.__('apikeyDeleteCorrect')
+                    'message': i18n.__('apikeyDelete')
                 });
             }
         }

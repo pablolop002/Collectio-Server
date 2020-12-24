@@ -17,10 +17,6 @@
 	"signInGoogle": "Iniciar Sesión con Google",
 	"signOut": "Cerrar Sesión",
 	"profile": "Perfil",
-	"%s dog": {
-		"one": "%s dog",
-		"other": "%s dog"
-	},
 	"profileImage": "Imagen de perfil",
 	"noToken": "No hay token de sesión o no es válido. Primero inicia sesión",
 	"noApiAuth": "Autentificación incorrecta",
@@ -34,7 +30,18 @@
 	"error403": "Ups, no tienes permiso para acceder a eso.",
 	"error500": "Hemos tenido un problema y nuestros duendes están en ello. Si los ves, por favor, indica la siguiente ruta del archivo que contiene el error:",
 	"error500File": "Archivo de error: ",
-	"userUpdateCorrect": "userUpdateCorrect",
-	"NotOwnedCollectionEdit": "NotOwnedCollectionEdit",
-	"NotCollectionIdSend": "NotCollectionIdSend"
+	"userUpdate": "Usuario actualizado",
+	"collectionNotOwned": "No eres el dueño de la colección",
+	"itemNotOwned": "No eres dueño del elemento",
+	"noCollectionId": "Id de colección no enviado",
+	"noItemId": "Id del elemento no enviado",
+	"collectionDeleted": "Colección eliminada correctamente",
+	"apikeyUpdateCorrect": "Dispositivo actualizado",
+	"apikeyDeleteCorrect": "Dispositivo eliminado",
+	"CreatedAt": "Fecha de creación",
+	"FriendlyName": "Nombre",
+	"Device": "Dispositivo",
+	"LastUsed": "Último uso",
+	"Actions": "Acciones",
+	"fileFormatNotValid": "Formato de archivo no valido"
 }
