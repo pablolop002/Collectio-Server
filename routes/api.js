@@ -13,6 +13,7 @@ const passport = require('../config/auth');
 // SubRoutes
 const apiUserRouter = require('./api/user');
 const apiCollectionsRouter = require('./api/collections');
+const apiItemsRouter = require('./api/items');
 
 // Function includes
 const DAOUsers = require('../repositories/DAOUsers');
@@ -142,6 +143,7 @@ api.use('/images', express.static(path.join(__basedir, 'storage', 'images')));
 // Routes
 api.use('/user', apiUserRouter);
 api.use('/collections', apiCollectionsRouter);
+api.use('/items', apiItemsRouter);
 
 // Error 404
 api.use(function (request, response) {
