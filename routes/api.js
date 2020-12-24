@@ -144,7 +144,7 @@ api.use('/user', apiUserRouter);
 api.use('/collections', apiCollectionsRouter);
 
 // Error 404
-api.use(function (request, response, next) {
+api.use(function (request, response) {
     response.json({
         'status': 'ko',
         'code': 404,
@@ -153,7 +153,7 @@ api.use(function (request, response, next) {
 });
 
 // Error 500
-api.use(function (error, request, response, next) {
+api.use(function (error, request, response) {
     response.json({
         'status': 'ko',
         'code': 500,

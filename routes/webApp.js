@@ -1,13 +1,14 @@
 "use strict";
 
-//
+// Load modules
 const express = require('express');
 const passport = require('../config/auth');
 const path = require('path');
 
-//
+// SubRouters
+const collections = require('./webApp/collections');
+const images = require('./webApp/images');
 const users = require('./webApp/user');
-//const collections = require('./webApp/collections');
 
 // Router
 const webApp = express.Router();
@@ -32,26 +33,15 @@ webApp.post("/login/Apple/callback", function (request, response, next) {
     })(request, response, next);
 });
 
-// Redirect if not logged
-webApp.use(function (request, response, next) {
-    if (request.user) {
-        next();
-    } else {
-        response.redirect("/");
-    }
-});
-
-// Static user resources
-webApp.use('/images', express.static(path.join(__basedir, 'storage', 'images')));
-
-// SignOut
+// Sign Out
 webApp.get('/logout', function (request, response, next) {
     request.session.destroy();
     response.redirect('/');
 });
 
-// Use Routers
+// Routes
+webApp.use('/collections', collections);
+webApp.use('/images', images);
 webApp.use('/profile', users);
-//webApp.use('/collections', collections);
 
 module.exports = webApp;

@@ -39,6 +39,16 @@ const daoUsers = new DAOUsers(database.pool);
 // Router
 const usersApp = express.Router();
 
+// Error if not logged
+usersApp.use(function (request, response, next) {
+    if (request.user) {
+        next();
+    } else {
+        response.status(403);
+        response.render('error', {'current': 'error', 'errorCode': 403});
+    }
+});
+
 usersApp.get('/:id*?', function (request, response, next) {
     if (!request.params.id || request.params.id === request.user.Id) {
         daoUsers.listApiKeys(request.user.Id, function (err, apiKeys) {
@@ -49,28 +59,37 @@ usersApp.get('/:id*?', function (request, response, next) {
             }
         });
     } else {
-        daoUsers.getUser(request.params.id, function (err, user) {
-            if (err) {
-                next(err);
-            } else {
-                /*daoCollections.getCollections(user.Id, null, null, function (err, collections) {
-                    if (err) {
-                        next(err);
-                    } else {
-                        response.render('webApp/otherProfile', {
-                            'current': 'otherUser',
-                            'userInfo': user,
-                            'collections': collections
-                        });
-                    }
-                });*/response.redirect("/");
-            }
-        });
+        response.redirect("/users/" + request.params.id);
     }
 });
 
-usersApp.post('/{:id}', profiles.single('Image'), function (request, response, next) {
+usersApp.post('/', profiles.single('profile[Image]'), function (request, response, next) {
+    request.body.profile.Id = request.user.Id;
+    daoUsers.updateUser(request.body.profile, function (err, data) {
 
+    });
+});
+
+usersApp.post('/delete-apikey', profiles.none(), function (request, response, next) {
+    request.body.apikey.UserId = request.user.Id;
+    daoUsers.updateApikey(request.body.apikey, function (err, data) {
+        if (err) {
+            next(err);
+        } else {
+            response.redirect('/profile');
+        }
+    });
+});
+
+usersApp.post('/update-apikey', profiles.none(), function (request, response, next) {
+    request.body.apikey.UserId = request.user.Id;
+    daoUsers.deleteApikey(request.body.apikey, function (err, data) {
+        if (err) {
+            next(err);
+        } else {
+            response.redirect('/profile');
+        }
+    });
 });
 
 module.exports = usersApp;
