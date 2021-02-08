@@ -108,7 +108,7 @@ api.get('/subcategories', function (request, response, next) {
     })
 });
 
-// Check Session
+// Check Session and update Apikey usedAt
 api.use(function (request, response, next) {
     let apikey = request.header('apikey');
     if (apikey != null) {
@@ -118,7 +118,13 @@ api.use(function (request, response, next) {
             } else {
                 if (user != null) {
                     request.user = user[0];
-                    next();
+                    daoUsers.updateUseApiKey(apikey, request.user.Id, function (err, confirm) {
+                        if (err) {
+                            next(err);
+                        } else {
+                            next();
+                        }
+                    });
                 } else {
                     response.json({
                         'status': 'ko',
