@@ -172,6 +172,24 @@ class DAOUsers {
         });
     }
 
+    updateUseApiKey(apikey, userId, callback) {
+        this.pool.getConnection(function (err, connection) {
+            if (err) {
+                callback(err);
+            } else {
+                connection.query("UPDATE MobileSessions SET UsedAt = current_timestamp WHERE Token = ? AND UserId = ?",
+                    [apikey, userId], function (err, updateData) {
+                        if (err) {
+                            connection.release();
+                            callback(err);
+                        } else {
+                            callback(null, true);
+                        }
+                    });
+            }
+        });
+    }
+
     updateApikey(session, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
