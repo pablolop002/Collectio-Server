@@ -29,7 +29,7 @@ class DAOCategories {
             if (err) {
                 callback(err);
             } else {
-                connection.query("SELECT Id, Spanish, English, Catalan, Basque FROM Subcategories", function (err, data) {
+                connection.query("SELECT Id, CategoryId, Spanish, English, Catalan, Basque FROM Subcategories", function (err, data) {
                     connection.release();
                     if (err) {
                         callback(err);
