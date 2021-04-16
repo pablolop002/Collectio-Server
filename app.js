@@ -4,7 +4,6 @@
 global.__basedir = __dirname;
 
 // Load Modules
-const bodyParser = require('body-parser');
 const express = require('express');
 const expressSession = require('express-session');
 const fs = require('fs-extra');
@@ -44,8 +43,9 @@ app.use(expressSession({
     store: database.sessionStore
 }));
 
-// Body Parser
-app.use(bodyParser.urlencoded({extended: true}));
+// Body Parser (Express)
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 // Passport
 app.use(passport.initialize());
