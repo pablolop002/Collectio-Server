@@ -45,7 +45,7 @@ usersApp.use(function (request, response, next) {
         next();
     } else {
         response.status(403);
-        response.render('error', {'current': 'error', 'errorCode': 403});
+        response.render('pages/error', {'current': 'error', 'errorCode': 403});
     }
 });
 
@@ -55,7 +55,7 @@ usersApp.get('/:id*?', function (request, response, next) {
             if (err) {
                 next(err);
             } else {
-                response.render('webApp/myProfile', {'current': 'profile', 'apiKeys': apiKeys});
+                response.render('pages/myProfile', {'current': 'profile', 'apiKeys': apiKeys});
             }
         });
     } else {

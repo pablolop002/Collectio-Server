@@ -23,8 +23,7 @@ const collectionImages = multer({
             if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
                 cb(null, true);
             } else {
-                cb(null, false);
-                return cb(new Error(i18n.__('fileFormatNotValid')));
+                cb(new Error(i18n.__('fileFormatNotValid')), false);
             }
         }
     })
@@ -40,13 +39,14 @@ const daoCollections = new DAOCollections(database.pool);
 const collectionsApi = express.Router();
 
 collectionsApi.get('/', function (request, response, next) {
-    let user = request.query.others ? null : request.user.Id;
-    let category = request.query.category ? request.query.category : null;
-    let collection = request.query.collection ? request.query.collection : null;
-    let withChildren = request.query.withChildren ? request.query.withChildren : null;
+    let user = request.query.others && request.query.others === "true" ? null : request.user.Id;
+    let category = request.query.categoryId ? request.query.categoryId : null;
+    let collection = request.query.collectionId ? request.query.collectionId : null;
+    let withChildren = request.query.withChildren ? request.query.withChildren : "false";
+    let syncDate = request.query.lastSync ? request.query.lastSync : null;
 
-    if (withChildren == null) {
-        daoCollections.getCollections(user, category, collection, function (err, data) {
+    if (withChildren === "false") {
+        daoCollections.getCollections(user, category, collection, syncDate, function (err, data) {
             if (err) {
                 next(err);
             } else {
@@ -136,6 +136,7 @@ collectionsApi.get('/', function (request, response, next) {
 
                     return accumulator;
                 }, []);
+
                 response.json({
                     'status': 'ok',
                     'code': 1,
@@ -146,7 +147,7 @@ collectionsApi.get('/', function (request, response, next) {
     }
 });
 
-collectionsApi.post('/', collectionImages.single('Image'), function (request, response, next) {
+collectionsApi.put('/', collectionImages.single('Images'), function (request, response, next) {
     let collection = {
         'CategoryId': request.body.CategoryId,
         'UserId': request.user.Id,
@@ -166,47 +167,58 @@ collectionsApi.post('/', collectionImages.single('Image'), function (request, re
             response.json({
                 'status': 'ok',
                 'code': 1,
-                'data': collectionId
+                'data': collectionId.insertId
             });
         }
     });
 });
 
-collectionsApi.post('/edit', collectionImages.single('Image'), function (request, response, next) {
-    let collection = {
-        'Id': request.body.ServerId,
-        'UserId': request.user.Id
-    };
-
-    if (request.body.Name) collection.Name = request.body.Name;
-    if (request.body.Desription) collection.Desription = request.body.Desription;
-    if (request.body.Private) collection.Private = request.body.Private;
-    if (request.file) {
-        collection.Image = request.body.file.filename;
-        let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collection.Id);
-        fs.mkdirsSync(finalPath);
-        fs.moveSync(request.file.path, path.join(finalPath, request.file.filename));
+collectionsApi.post('/', collectionImages.single('Images'), function (request, response, next) {
+    if (!request.body.ServerId) {
+        response.json({
+            'status': 'ko',
+            'code': 2,
+            'message': i18n.__('noCollectionId')
+        });
     }
 
-    daoCollections.updateCollection(collection, function (err, oldImage) {
+    daoCollections.getCollections(request.user.Id, null, request.body.ServerId, function (err, collection) {
         if (err) {
             next(err);
         } else {
-            if (oldImage != null) {
-                fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collection.Id, oldImage));
+            if (collection[0] != null) {
+                if (request.body.Name) collection.Name = request.body.Name;
+                if (request.body.Desription) collection.Desription = request.body.Desription;
+                if (request.body.Private) collection.Private = request.body.Private;
+                if (request.file) {
+                    collection.Image = request.body.file.filename;
+                    let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collection.Id);
+                    fs.mkdirsSync(finalPath);
+                    fs.moveSync(request.file.path, path.join(finalPath, request.file.filename));
+                }
+
+                daoCollections.updateCollection(collection, function (err, oldImage) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        if (oldImage != null) {
+                            fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, "collection" + collection.Id, oldImage));
+                        }
+                        response.json({
+                            'status': 'ok',
+                            'code': 1,
+                            'data': collection.Id
+                        });
+                    }
+                });
             }
-            response.json({
-                'status': 'ok',
-                'code': 1,
-                'data': collection.Id
-            });
         }
     });
 });
 
-collectionsApi.post('/delete', collectionImages.none(), function (request, response, next) {
-    if (request.body.CollectionId) {
-        daoCollections.deleteCollection(request.body.CollectionId, request.user.Id, function (err, data) {
+collectionsApi.delete('/:id', collectionImages.none(), function (request, response, next) {
+    if (request.params.id) {
+        daoCollections.deleteCollection(request.body.ServerId, request.user.Id, function (err, data) {
             if (err) {
                 next(err);
             } else {
@@ -216,6 +228,12 @@ collectionsApi.post('/delete', collectionImages.none(), function (request, respo
                     'message': i18n.__('collectionDeleted')
                 });
             }
+        });
+    } else {
+        response.json({
+            'status': 'ko',
+            'code': 2,
+            'message': i18n.__('noCollectionId')
         });
     }
 });

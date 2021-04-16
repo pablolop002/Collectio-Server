@@ -3,7 +3,7 @@
 const passport = require('passport');
 const AppleStrategy = require('passport-apple');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const path = require('path');
+const MicrosoftStrategy = require('passport-microsoft').Strategy;
 
 const conf = require('./conf');
 const DAOUser = require('../repositories/DAOUsers');
@@ -20,6 +20,7 @@ passport.use('Google', new GoogleStrategy({
         daoUser.addOrUpdateGoogle(profile.id, profile.emails[0].value, cb);
     }
 ));
+
 passport.use('GoogleMobile', new GoogleStrategy({
         clientID: conf.googleClientId,
         clientSecret: conf.googleClientSecret,
@@ -29,6 +30,28 @@ passport.use('GoogleMobile', new GoogleStrategy({
         daoUser.addOrUpdateGoogle(profile.id, profile.emails[0].value, cb);
     }
 ));
+
+/*passport.use('Microsoft', new MicrosoftStrategy({
+        clientID: conf.microsoftClientId,
+        clientSecret: conf.microsoftClientSecret,
+        callbackURL: conf.domain + "/login/microsoft/callback",
+        scope: ['user.read']
+    },
+    function(accessToken, refreshToken, profile, cb) {
+        daoUser.addOrUpdateMicrosoft(profile.id, profile.emails[0].value, cb);
+    }
+));
+
+passport.use('MicrosoftMobile', new MicrosoftStrategy({
+        clientID: conf.microsoftClientId,
+        clientSecret: conf.microsoftClientSecret,
+        callbackURL: conf.domain + "/api/login/microsoft/callback",
+        scope: ['user.read']
+    },
+    function(accessToken, refreshToken, profile, cb) {
+        daoUser.addOrUpdateMicrosoft(profile.id, profile.emails[0].value, cb);
+    }
+));*/
 
 /*passport.use('Apple', new AppleStrategy({
     clientID: conf.appleClientId,

@@ -237,12 +237,14 @@ VALUES (1, 1, NULL, 'Muebles antiguos', '', '', ''),
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users`
 (
-    `Id`       int(11) NOT NULL,
-    `Nickname` varchar(100) DEFAULT NULL,
-    `Mail`     varchar(100) DEFAULT NULL,
-    `Image`    varchar(100) DEFAULT NULL,
-    `AppleId`  varchar(100) DEFAULT NULL,
-    `GoogleId` varchar(100) DEFAULT NULL
+    `Id`          int(11)                NOT NULL,
+    `Nickname`    varchar(100) DEFAULT NULL,
+    `Mail`        varchar(100) DEFAULT NULL,
+    `Image`       varchar(100) DEFAULT NULL,
+    `AppleId`     varchar(100) DEFAULT NULL,
+    `GoogleId`    varchar(100) DEFAULT NULL,
+    `MicrosoftId` varchar(100) DEFAULT NULL,
+    `IsAdmin`     tinyint(1)   DEFAULT 0 NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -299,7 +301,8 @@ ALTER TABLE `Subcategories`
 ALTER TABLE `Users`
     ADD PRIMARY KEY (`Id`),
     ADD UNIQUE KEY `Users_AppleId_uindex` (`AppleId`),
-    ADD UNIQUE KEY `Users_GoogleId_uindex` (`GoogleId`);
+    ADD UNIQUE KEY `Users_GoogleId_uindex` (`GoogleId`),
+    ADD UNIQUE KEY `Users_MicrosoftId_uindex` (`MicrosoftId`);
 
 --
 -- AUTO_INCREMENT for dumped tables

@@ -61,27 +61,27 @@ app.use(function (request, response, next) {
 
 // Static pages
 app.get('/', upload.none(), function (request, response) {
-    response.render('index', {'current': 'index'});
+    response.render('pages/index', {'current': 'index'});
 });
 
 app.get('/about', upload.none(), function (request, response) {
-    response.render('about', {'current': 'about'});
+    response.render('pages/about', {'current': 'about'});
 });
 
 app.get('/privacy-policy', upload.none(), function (request, response) {
-    response.render('privacy-policy', {'current': 'privacy'});
+    response.render('pages/privacy-policy', {'current': 'privacy'});
 });
 
 app.get('/terms', upload.none(), function (request, response) {
-    response.render('terms', {'current': 'terms'});
+    response.render('pages/terms', {'current': 'terms'});
 });
 
 app.get('/legal-notice', upload.none(), function (request, response) {
-    response.render('legal-notice', {'current': 'legal'});
+    response.render('pages/legal-notice', {'current': 'legal'});
 });
 
 app.get('/cookies', upload.none(), function (request, response) {
-    response.render('cookies', {'current': 'cookies'});
+    response.render('pages/cookies', {'current': 'cookies'});
 });
 
 // Routes
@@ -91,7 +91,7 @@ app.use('/', webAppRouter);
 // Error 404
 app.use(function (request, response) {
     response.status(404);
-    response.render('error', {'current': 'error', 'errorCode': 404});
+    response.render('pages/error', {'current': 'error', 'errorCode': 404});
 });
 
 // Error 500
@@ -101,7 +101,7 @@ app.use(function (error, request, response) {
 
     fs.outputFileSync(file, doc);
 
-    response.render('error', {'current': 'error', 'errorCode': 500, 'file': file});
+    response.render('pages/error', {'current': 'error', 'errorCode': 500, 'file': file});
 });
 
 module.exports = app;

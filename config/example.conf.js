@@ -11,6 +11,8 @@ module.exports = {
     'googleClientSecret': '',
     'appleClientId': '',
     'appleTeamId': '',
+    'microsoftClientId': '',
+    'microsoftClientSecret': '',
     'appleKeyId': '',
     'applePrivateKeyName': '',
     'mailHost': '',

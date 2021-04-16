@@ -47,7 +47,7 @@ collectionsApp.use(function (request, response, next) {
         next();
     } else {
         response.status(403);
-        response.render('error', {'current': 'error', 'errorCode': 403});
+        response.render('pages/error', {'current': 'error', 'errorCode': 403});
     }
 });
 

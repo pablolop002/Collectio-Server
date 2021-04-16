@@ -189,6 +189,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/User'
+  /user/image:
+    delete:
+      tags:
+        - user
+      summary: Delete user image
+      description: ''
+      operationId: deleteUserImage
+      responses:
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/InternalError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/ForbiddenBasicAuth'
+        '200':
+          description: user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/User'
   /user/api-keys:
     get:
       tags:

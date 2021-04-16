@@ -23,8 +23,7 @@ const itemImages = multer({
             if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
                 cb(null, true);
             } else {
-                cb(null, false);
-                return cb(new Error(i18n.__('fileFormatNotValid')));
+                cb(new Error(i18n.__('fileFormatNotValid')), false);
             }
         }
     })
@@ -41,7 +40,7 @@ const daoItems = new DAOItems(database.pool);
 // Router
 const itemsApi = express.Router();
 
-itemsApi.use(function (request, response, next) {
+/*itemsApi.use(function (request, response, next) {
     if (request.query.collectionId) {
         daoCollections.getCollections(request.user.Id, null, request.query.collectionId, function (err, collection) {
             if (err) {
@@ -62,7 +61,7 @@ itemsApi.use(function (request, response, next) {
     } else {
         next(new Error(i18n.__('noCollectionId')));
     }
-});
+});*/
 
 itemsApi.get('/', function (request, response, next) {
     let user = request.query.others ? null : request.user.Id;
@@ -71,30 +70,34 @@ itemsApi.get('/', function (request, response, next) {
     let withChildren = request.query.withChildren ? request.query.withChildren : null;
 
     if (collection == null) {
-        if (withChildren == null) {
-            daoItems.getItem(item, user, function (err, data) {
-                if (err) {
-                    next(err);
-                } else {
-                    response.json({
-                        'status': 'ok',
-                        'code': 1,
-                        'message': data
-                    });
-                }
-            });
+        if (item != null) {
+            if (withChildren == null || withChildren === false) {
+                daoItems.getItem(item, user, function (err, data) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        response.json({
+                            'status': 'ok',
+                            'code': 1,
+                            'message': data
+                        });
+                    }
+                });
+            } else {
+                daoItems.getItemWithChildren(item, user, function (err, data) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        response.json({
+                            'status': 'ok',
+                            'code': 1,
+                            'message': data
+                        });
+                    }
+                });
+            }
         } else {
-            daoItems.getItemWithChildren(item, user, function (err, data) {
-                if (err) {
-                    next(err);
-                } else {
-                    response.json({
-                        'status': 'ok',
-                        'code': 1,
-                        'message': data
-                    });
-                }
-            });
+            next(new Error(i18n.__('noCollectionOrItemId')));
         }
     } else {
         if (withChildren == null) {
@@ -125,33 +128,66 @@ itemsApi.get('/', function (request, response, next) {
     }
 });
 
-itemsApi.post('/', itemImages.array("Images", 6), function (request, response, next) {
-    if (request.body.CollectionId) {
-        daoCollections.getCollections(request.user.Id, null, request.body.CollectionId, function (err, collectionCheck) {
-            if (err) {
-                next(err);
-            } else {
-                if (collectionCheck != null && collectionCheck[0]) {
-                    let item = {
-                        'CollectionId': request.body.CollectionId
-                    };
-
-                    if (request.body.Name) item.Name = request.body.Name;
-                    if (request.body.Desription) item.Desription = request.body.Desription;
-                    if (request.body.Private) item.Private = request.body.Private;
-
-                    //ToDo: Save new item
+itemsApi.put('/', itemImages.array("Images", 6),
+    function (request, response, next) {
+        if (request.body.CollectionId) {
+            daoCollections.getCollections(request.user.Id, null, request.body.CollectionId, function (err, collectionCheck) {
+                if (err) {
+                    next(err);
                 } else {
-                    next(new Error(i18n.__('collectionNotOwned')));
-                }
-            }
-        });
-    } else {
-        next(new Error(i18n.__('noCollectionId')));
-    }
-});
+                    if (collectionCheck != null && collectionCheck[0]) {
+                        let item = {
+                            'CollectionId': request.body.CollectionId
+                        };
 
-itemsApi.post('/edit', itemImages.none(), function (request, response, next) {
+                        if (request.body.Name) item.Name = request.body.Name;
+                        if (request.body.Desription) item.Desription = request.body.Desription;
+                        if (request.body.Private) item.Private = request.body.Private;
+
+                        daoItems.addItem(item, function (err, response) {
+                            if (err) {
+                                next(err);
+                            } else {
+                                let ids = {
+                                    'item': response.insertId
+                                };
+
+                                request.files.forEach((elem, index, array) => {
+                                    let itemImage = {
+                                        'ItemId': response.insertId,
+                                        'Image': elem.filename
+                                    }
+
+                                    daoItems.addItemImage(itemImage, function (err, res) {
+                                        if (err) {
+                                            fs.removeSync(elem.path);
+                                        } else {
+                                            let finalPath = path.join(__basedir, "storage", "images", "user" + request.user.Id,
+                                                "collection" + request.collection.Id, "item" + response.insertId, elem.filename);
+                                            itemImage[elem.filename] = res.insertId;
+                                            fs.moveSync(elem.path, finalPath);
+                                        }
+                                    });
+                                });
+
+                                response.json({
+                                    'status': 'ok',
+                                    'code': 1,
+                                    'data': ids
+                                });
+                            }
+                        });
+                    } else {
+                        next(new Error(i18n.__('collectionNotOwned')));
+                    }
+                }
+            });
+        } else {
+            next(new Error(i18n.__('noCollectionId')));
+        }
+    });
+
+itemsApi.post('/', itemImages.none(), function (request, response, next) {
     if (request.body.ItemId) {
         daoItems.getItem(request.body.ItemId, request.user.Id, function (err, itemCheck) {
             if (err) {
@@ -167,7 +203,15 @@ itemsApi.post('/edit', itemImages.none(), function (request, response, next) {
                     if (request.body.Desription) item.Desription = request.body.Desription;
                     if (request.body.Private) item.Private = request.body.Private;
 
-                    //ToDo: Edit item
+                    daoItems.updateItem(item, function (err, item) {
+                        if (err) {
+                            next(err);
+                        } else {
+                           response.json({
+                               //ToDo: Edit item
+                           });
+                        }
+                    });
                 } else {
                     next(new Error(i18n.__('itemNotOwned')));
                 }
@@ -178,14 +222,14 @@ itemsApi.post('/edit', itemImages.none(), function (request, response, next) {
     }
 });
 
-itemsApi.post('/delete', itemImages.none(), function (request, response, next) {
-    if (request.body.ItemId) {
-        daoItems.getItem(request.body.ItemId, request.user.Id, function (err, itemCheck) {
+itemsApi.delete('/:id', itemImages.none(), function (request, response, next) {
+    if (request.params.id) {
+        daoItems.getItem(request.params.id, request.user.Id, function (err, itemCheck) {
             if (err) {
                 next(err);
             } else {
                 if (itemCheck != null && itemCheck[0]) {
-                    daoItems.deleteItem(request.body.ItemId, function (err, data) {
+                    daoItems.deleteItem(request.params.id, function (err, data) {
                         if (err) {
                             next(err);
                         } else {
@@ -234,25 +278,52 @@ itemsApi.get('/images/', function (request, response, next) {
     }
 });
 
-itemsApi.post('/images/', itemImages.array("Images", 6), function (request, response, next) {
-    if (request.body.ItemId) {
-        daoItems.getItem(request.body.ItemId, request.user.Id, function (err, itemCheck) {
-            if (err) {
-                next(err);
-            } else {
-                if (itemCheck != null && itemCheck[0]) {
-                    // ToDo: Save images
+itemsApi.put('/images/', itemImages.array("Images", 6),
+    function (request, response, next) {
+        if (request.body.ItemId) {
+            daoItems.getItem(request.body.ItemId, request.user.Id, function (err, itemCheck) {
+                if (err) {
+                    next(err);
                 } else {
-                    next(new Error(i18n.__('itemNotOwned')));
+                    if (itemCheck != null && itemCheck[0]) {
+                        let destFolder = path.join(__basedir, "storage", "images", "user" + request.user.Id,
+                            "collection" + request.collection.Id, "item" + request.body.ItemId);
+                        request.files.forEach(function (item, index) {
+                            daoItems.addItemImage({
+                                'ItemId': request.body.ItemId,
+                                'Image': item.filename
+                            }, function (err, data) {
+                                if (err) {
+                                    next(err);
+                                }
+                                fs.moveSync(item.path, path.join(destFolder, item.filename));
+                            });
+                        });
+                        request.body.ToRemove.forEach(function (item, index) {
+                            daoItems.deleteItemImage(item, function (err, image) {
+                                if (err) {
+                                    next(err);
+                                } else {
+                                    fs.removeSync(image);
+                                }
+                            });
+                        });
+                        response.json({
+                            'status': 'ok',
+                            'code': 1,
+                            'message': i18n.__('')
+                        });
+                    } else {
+                        next(new Error(i18n.__('itemNotOwned')));
+                    }
                 }
-            }
-        });
-    } else {
-        next(new Error(i18n.__('noItemId')));
-    }
-});
+            });
+        } else {
+            next(new Error(i18n.__('noItemId')));
+        }
+    });
 
-itemsApi.post('/images/delete', itemImages.none(), function (request, response, next) {
+itemsApi.delete('/images/:id', itemImages.none(), function (request, response, next) {
     if (request.body.ItemImageId) {
         daoItems.getItem(request.body.ItemImageId, request.user.Id, function (err, itemImageCheck) {
             if (err) {
@@ -266,7 +337,7 @@ itemsApi.post('/images/delete', itemImages.none(), function (request, response, 
                             response.json({
                                 'status': 'ok',
                                 'code': 1,
-                                'message': data
+                                'message': i18n.__('correctItemImageDeleted')
                             });
                         }
                     });

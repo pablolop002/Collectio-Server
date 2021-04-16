@@ -23,8 +23,7 @@ const profiles = multer({
             if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
                 cb(null, true);
             } else {
-                cb(null, false);
-                return cb(new Error(i18n.__('fileFormatNotValid')));
+                cb(new Error(i18n.__('fileFormatNotValid')), false);
             }
         }
     })
@@ -39,7 +38,7 @@ const daoUsers = new DAOUsers(database.pool);
 // Router
 const usersApi = express.Router();
 
-usersApi.get('/', profiles.none(), function (request, response, next) {
+usersApi.get('/', function (request, response, next) {
     response.json({
         'status': 'ok',
         'code': 0,
@@ -53,7 +52,7 @@ usersApi.get('/', profiles.none(), function (request, response, next) {
     });
 });
 
-usersApi.post('/', profiles.single('Image'), function (request, response, next) {
+usersApi.post('/', profiles.single('Images'), function (request, response, next) {
     let user = request.user;
 
     if (request.body.Nickname) {
@@ -75,11 +74,55 @@ usersApi.post('/', profiles.single('Image'), function (request, response, next) 
                 if (request.file != null && request.user.Image) {
                     fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, request.user.Image));
                 }
+                daoUsers.getUser(user.Id, function (err, updatedUser) {
+                    if (err) {
+                        response.json({
+                            'status': 'ok',
+                            'code': 1,
+                            'message': i18n.__('userUpdate')
+                        });
+                    } else {
+                        response.json({
+                            'status': 'ok',
+                            'code': 1,
+                            'message': i18n.__('userUpdate'),
+                            'data': {
+                                'Nickname': updatedUser[0].Nickname,
+                                'Mail': updatedUser[0].Mail,
+                                'Image': updatedUser[0].Image ?
+                                    "/images/user" + updatedUser[0].Id + "/" + updatedUser[0].Image :
+                                    "/images/default_profile.png",
+                                'Apple': !!updatedUser[0].AppleId,
+                                'Google': !!updatedUser[0].GoogleId
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    );
+});
 
+usersApi.delete('/image', function (request, response, next) {
+    let user = request.user;
+    user.Image = null;
+
+    daoUsers.updateUser(user, function (err, data) {
+            if (err) {
+                next(err);
+            } else {
+                fs.removeSync(path.join(__basedir, "storage", "images", "user" + request.user.Id, request.user.Image));
                 response.json({
                     'status': 'ok',
                     'code': 1,
-                    'message': i18n.__('userUpdate')
+                    'message': i18n.__('userUpdate'),
+                    'data': {
+                        'Nickname': user.Nickname,
+                        'Mail': user.Mail,
+                        'Image': "/images/default_profile.png",
+                        'Apple': !!user.AppleId,
+                        'Google': !!user.GoogleId
+                    }
                 });
             }
         }
@@ -94,13 +137,13 @@ usersApi.get('/api-keys', function (request, response, next) {
             response.json({
                 'status': 'ok',
                 'code': 1,
-                'data': JSON.stringify(data)
+                'data': data
             });
         }
     });
 });
 
-usersApi.post('/apikey-update', profiles.none(), function (request, response, next) {
+usersApi.post('/api-keys', profiles.none(), function (request, response, next) {
     let apikey = {
         'UserId': request.user.Id
     };
@@ -129,10 +172,10 @@ usersApi.post('/apikey-update', profiles.none(), function (request, response, ne
     );
 });
 
-usersApi.post('/apikey-delete', profiles.none(), function (request, response, next) {
+usersApi.delete('/api-keys/:token', function (request, response, next) {
     let apikey = {
         'UserId': request.user.Id,
-        'Token': request.body.Token
+        'Token': request.params.token
     };
 
     daoUsers.deleteApikey(apikey, function (err, data) {

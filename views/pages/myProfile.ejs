@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="<%= __('lang') %>">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Collectio - <%= __('profile') %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/styles') %>
+</head>
+
+<body>
+<!-- Begin Header -->
+<%- include('../partials/header') %>
+<!-- End Header -->
+
+<!-- Begin Content -->
+<main>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-lg-0">
+                    <% if(locals.user.Image != null) { %>
+                        <img src="/images/user<%= locals.user.Id %>/<%= locals.user.Image %>"
+                             alt="<%= __('profileImage') %>"/>
+                    <% } else { %>
+                        <img src="/images/default-profile.png" alt="<%= __('profileImage') %>"/>
+                    <% } %>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- User Data -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table-responsive table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col"><%= __('CreatedAt') %></th>
+                                    <th scope="col"><%= __('FriendlyName') %></th>
+                                    <th scope="col"><%= __('Device') %></th>
+                                    <th scope="col"><%= __('LastUsed') %></th>
+                                    <th scope="col"><%= __('Actions') %></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for (let i = 0; i < aplikeys.lenght; i++) { %>
+                                    <tr>
+                                        <th scope="row">apikeys[i].CreatedAt</th>
+                                        <td>apikeys[i].UserDeviceName</td>
+                                        <td>apikeys[i].Device</td>
+                                        <td>apikeys[i].UsedAt</td>
+                                        <td>
+                                            <a><i class="fas fa-edit"></i></a>
+                                            <a><i class="fas fa-trash"></i></a>
+                                            <a><i class="fas fa-check"></i></a>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th scope="col"><%= __('CreatedAt') %></th>
+                                    <th scope="col"><%= __('FriendlyName') %></th>
+                                    <th scope="col"><%= __('Device') %></th>
+                                    <th scope="col"><%= __('LastUsed') %></th>
+                                    <th scope="col"><%= __('Actions') %></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- End Content -->
+
+<!-- Begin Footer -->
+<%- include('../partials/footer') %>
+<!-- End Footer -->
+
+<!-- Begin Scripts -->
+<%- include('../partials/scripts') %>
+<!-- End Scripts -->
+</body>
+
+</html>

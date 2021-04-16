@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Collectio - <%= __('error') %> <%= errorCode %></title>
-    <%- include('base/styles') %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/styles') %>
 </head>
 
 <body>
 <!-- Begin Header -->
-<%- include('base/header'); %>
+<%- include('../partials/header'); %>
 <!-- End Header -->
 
 <!-- Begin Content -->
@@ -31,11 +32,11 @@
 <!-- End Content -->
 
 <!-- Begin Footer -->
-<%- include('base/footer'); %>
+<%- include('../partials/footer'); %>
 <!-- End Footer -->
 
 <!-- Begin Scripts -->
-<%- include('base/scripts') %>
+<%- include('../partials/scripts') %>
 <!-- End Scripts -->
 </body>
 

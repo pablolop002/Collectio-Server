@@ -7,7 +7,7 @@ class DAOCollections {
         this.pool = pl;
     }
 
-    getCollections(user, category, collection, callback) {
+    getCollections(user, category, collection, syncDate, callback) {
         this.pool.getConnection(function (err, connection) {
             if (err) {
                 callback(new Error("Error de conexión a la base de datos"));
@@ -31,6 +31,11 @@ class DAOCollections {
                 if (collection) {
                     query += " AND Id = ?";
                     values.push(collection);
+                }
+
+                if (syncDate) {
+                    query += "AND UpdatedAt > ?";
+                    values.push(syncDate);
                 }
 
                 query += orderBy;
