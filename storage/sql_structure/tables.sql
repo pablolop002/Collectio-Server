@@ -1,11 +1,6 @@
 -- phpMyAdmin SQL Dump
 -- version 5.0.3
 -- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Dec 20, 2020 at 12:49 PM
--- Server version: 5.5.68-MariaDB
--- PHP Version: 7.3.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,10 +13,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `collectio_dev`
+-- Database: `collectio`
 --
-CREATE DATABASE IF NOT EXISTS `collectio_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `collectio_dev`;
+CREATE DATABASE IF NOT EXISTS `collectio` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `collectio`;
 
 -- --------------------------------------------------------
 
@@ -33,11 +28,11 @@ DROP TABLE IF EXISTS `Categories`;
 CREATE TABLE `Categories`
 (
     `Id`      int(11) NOT NULL,
-    `Image`   varchar(100) DEFAULT NULL,
-    `Spanish` varchar(100) DEFAULT NULL,
-    `English` varchar(100) DEFAULT NULL,
-    `Catalan` varchar(100) DEFAULT NULL,
-    `Basque`  varchar(100) DEFAULT NULL
+    `Image`   varchar(255) DEFAULT NULL,
+    `Spanish` varchar(255) DEFAULT NULL,
+    `English` varchar(255) DEFAULT NULL,
+    `Catalan` varchar(255) DEFAULT NULL,
+    `Basque`  varchar(255) DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -80,15 +75,15 @@ VALUES (1, NULL, 'Antigüedades', 'Antiques', '', ''),
 DROP TABLE IF EXISTS `Collections`;
 CREATE TABLE `Collections`
 (
-    `Id`          int(11)      NOT NULL,
-    `CategoryId`  int(11)      NOT NULL,
-    `UserId`      int(11)      NOT NULL,
-    `Name`        varchar(100) NOT NULL,
-    `Description` varchar(100)      DEFAULT NULL,
-    `Image`       varchar(100)      DEFAULT NULL,
-    `Private`     tinyint(1)        DEFAULT '1',
-    `CreatedAt`   timestamp    NULL DEFAULT NULL,
-    `UpdatedAt`   timestamp    NULL DEFAULT NULL
+    `Id`          int(11)   NOT NULL,
+    `CategoryId`  int(11)   NOT NULL,
+    `UserId`      int(11)   NOT NULL,
+    `Name`        text      NOT NULL,
+    `Description` text           DEFAULT NULL,
+    `Image`       varchar(255)   DEFAULT NULL,
+    `Private`     tinyint(1)     DEFAULT '1',
+    `CreatedAt`   timestamp NULL DEFAULT NULL,
+    `UpdatedAt`   timestamp NULL DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -103,7 +98,7 @@ CREATE TABLE `ItemImages`
 (
     `Id`     int(11)      NOT NULL,
     `ItemId` int(11)      NOT NULL,
-    `Image`  varchar(100) NOT NULL
+    `Image`  varchar(255) NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -116,14 +111,14 @@ CREATE TABLE `ItemImages`
 DROP TABLE IF EXISTS `Items`;
 CREATE TABLE `Items`
 (
-    `Id`            int(11)      NOT NULL,
-    `CollectionId`  int(11)      NOT NULL,
-    `SubcategoryId` int(11)           DEFAULT NULL,
-    `Name`          varchar(100) NOT NULL,
-    `Description`   varchar(100)      DEFAULT NULL,
-    `Private`       tinyint(1)        DEFAULT '1',
-    `CreatedAt`     timestamp    NULL DEFAULT NULL,
-    `UpdatedAt`     timestamp    NULL DEFAULT NULL
+    `Id`            int(11)   NOT NULL,
+    `CollectionId`  int(11)   NOT NULL,
+    `SubcategoryId` int(11)        DEFAULT NULL,
+    `Name`          text      NOT NULL,
+    `Description`   text           DEFAULT NULL,
+    `Private`       tinyint(1)     DEFAULT '1',
+    `CreatedAt`     timestamp NULL DEFAULT NULL,
+    `UpdatedAt`     timestamp NULL DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -136,12 +131,12 @@ CREATE TABLE `Items`
 DROP TABLE IF EXISTS `MobileSessions`;
 CREATE TABLE `MobileSessions`
 (
-    `Token`          varchar(100) NOT NULL,
+    `Token`          varchar(255) NOT NULL,
     `UserId`         int(11)      NOT NULL,
     `CreatedAt`      timestamp    NULL DEFAULT CURRENT_TIMESTAMP,
     `UsedAt`         timestamp    NULL DEFAULT NULL,
-    `Device`         varchar(100)      DEFAULT NULL,
-    `UserDeviceName` varchar(100)      DEFAULT NULL
+    `Device`         varchar(255)      DEFAULT NULL,
+    `UserDeviceName` varchar(255)      DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -156,11 +151,11 @@ CREATE TABLE `Subcategories`
 (
     `Id`         int(11) NOT NULL,
     `CategoryId` int(11) NOT NULL,
-    `Image`      varchar(100) DEFAULT NULL,
-    `Spanish`    varchar(100) DEFAULT NULL,
-    `English`    varchar(100) DEFAULT NULL,
-    `Catalan`    varchar(100) DEFAULT NULL,
-    `Basque`     varchar(100) DEFAULT NULL
+    `Image`      varchar(255) DEFAULT NULL,
+    `Spanish`    varchar(255) DEFAULT NULL,
+    `English`    varchar(255) DEFAULT NULL,
+    `Catalan`    varchar(255) DEFAULT NULL,
+    `Basque`     varchar(255) DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -238,12 +233,12 @@ DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users`
 (
     `Id`          int(11)                NOT NULL,
-    `Nickname`    varchar(100) DEFAULT NULL,
-    `Mail`        varchar(100) DEFAULT NULL,
-    `Image`       varchar(100) DEFAULT NULL,
-    `AppleId`     varchar(100) DEFAULT NULL,
-    `GoogleId`    varchar(100) DEFAULT NULL,
-    `MicrosoftId` varchar(100) DEFAULT NULL,
+    `Nickname`    varchar(255) DEFAULT NULL,
+    `Mail`        varchar(255) DEFAULT NULL,
+    `Image`       varchar(255) DEFAULT NULL,
+    `AppleId`     varchar(255) DEFAULT NULL,
+    `GoogleId`    varchar(255) DEFAULT NULL,
+    `MicrosoftId` varchar(255) DEFAULT NULL,
     `IsAdmin`     tinyint(1)   DEFAULT 0 NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
