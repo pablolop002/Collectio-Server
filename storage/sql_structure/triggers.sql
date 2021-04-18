@@ -1,5 +1,5 @@
 /* Update Items on ItemImages {insert|update|delete} */
-    create trigger update_items_on_itemsImage_insert
+create trigger update_items_on_itemsImage_insert
     after insert
     on ItemImages
     for each row

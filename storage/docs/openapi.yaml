@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  description: 'This is the Collectio Server API'
+  description: "This is the Collectio Server API"
   version: 1.0.0
   title: Collectio
   termsOfService: https://collectioapp.com/
@@ -38,24 +38,24 @@ paths:
       summary: Apple login
       operationId: appleLogin
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ErrorLogin'
-        '403':
+                $ref: "#/components/responses/ErrorLogin"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ErrorLogin'
-        '200':
+                $ref: "#/components/responses/ErrorLogin"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/CorrectLogin'
+                $ref: "#/components/responses/CorrectLogin"
   /login/google:
     get:
       tags:
@@ -63,24 +63,24 @@ paths:
       summary: Google login
       operationId: googleLogin
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ErrorLogin'
-        '403':
+                $ref: "#/components/responses/ErrorLogin"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ErrorLogin'
-        '200':
+                $ref: "#/components/responses/ErrorLogin"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/CorrectLogin'
+                $ref: "#/components/responses/CorrectLogin"
   /categories:
     get:
       tags:
@@ -88,24 +88,24 @@ paths:
       summary: Available categories
       operationId: categories
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ListCategories'
+                $ref: "#/components/responses/ListCategories"
   /subcategories:
     get:
       tags:
@@ -113,171 +113,171 @@ paths:
       summary: Available subcategories
       operationId: subcategories
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ListSubcategories'
+                $ref: "#/components/responses/ListSubcategories"
   /user:
     get:
       tags:
         - user
       summary: Get user
-      description: ''
+      description: ""
       operationId: getUser
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: user
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/User'
+                $ref: "#/components/responses/User"
     post:
       tags:
         - user
       summary: Edit user
-      description: ''
+      description: ""
       operationId: editUser
       requestBody:
-        description: ''
+        description: ""
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: User
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/User'
+                $ref: "#/components/responses/User"
   /user/image:
     delete:
       tags:
         - user
       summary: Delete user image
-      description: ''
+      description: ""
       operationId: deleteUserImage
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: user
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/User'
+                $ref: "#/components/responses/User"
   /user/api-keys:
     get:
       tags:
         - apiKeys
       summary: Get api keys
-      description: ''
+      description: ""
       operationId: listApiKeys
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ListApiKeys'
+                $ref: "#/components/responses/ListApiKeys"
     post:
       tags:
         - apiKeys
       summary: Edit apikey
-      description: ''
+      description: ""
       operationId: editApikey
       requestBody:
-        description: ''
+        description: ""
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Apikey'
+              $ref: "#/components/schemas/Apikey"
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/EditApikey'
+                $ref: "#/components/responses/EditApikey"
     delete:
       tags:
         - apiKeys
       summary: Delete apikey
-      description: ''
+      description: ""
       operationId: deleteApikey
       parameters:
         - name: Token
@@ -288,30 +288,30 @@ paths:
           schema:
             type: string
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/DeleteApikey'
+                $ref: "#/components/responses/DeleteApikey"
   /collections:
     get:
       tags:
         - collections
       summary: List collections
-      description: ''
+      description: ""
       operationId: listCollections
       parameters:
         - name: categoryId
@@ -345,93 +345,93 @@ paths:
             type: boolean
             default: false
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ListCollections'
+                $ref: "#/components/responses/ListCollections"
     put:
       tags:
         - collections
       summary: New collection
-      description: ''
+      description: ""
       operationId: newCollection
-      requestBody: 
-        description: ''
+      requestBody:
+        description: ""
         required: true
         content:
           multipart/form-data:
             schema:
-               $ref: '#/components/schemas/Collection'
+              $ref: "#/components/schemas/Collection"
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/NewCollection'
+                $ref: "#/components/responses/NewCollection"
     post:
       tags:
         - collections
       summary: Edit collection
-      description: ''
+      description: ""
       operationId: editCollection
       requestBody:
-        description: ''
+        description: ""
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Collection'
+              $ref: "#/components/schemas/Collection"
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/EditCollection'
+                $ref: "#/components/responses/EditCollection"
     delete:
       tags:
         - collections
       summary: Delete collection
-      description: ''
+      description: ""
       operationId: deleteCollection
       parameters:
         - name: ServerId
@@ -443,30 +443,30 @@ paths:
             type: integer
             format: int64
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/DeleteCollection'
+                $ref: "#/components/responses/DeleteCollection"
   /items:
     get:
       tags:
         - items
       summary: List items
-      description: ''
+      description: ""
       operationId: listItems
       parameters:
         - name: collectionId
@@ -508,93 +508,93 @@ paths:
             type: boolean
             default: false
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: items
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ListItems'
+                $ref: "#/components/responses/ListItems"
     put:
       tags:
         - items
       summary: New item
-      description: ''
+      description: ""
       operationId: newItem
       requestBody:
-        description: ''
+        description: ""
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Item'
+              $ref: "#/components/schemas/Item"
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/NewItem'
+                $ref: "#/components/responses/NewItem"
     post:
       tags:
         - items
       summary: Edit item
-      description: ''
+      description: ""
       operationId: editItem
       requestBody:
-        description: ''
+        description: ""
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Item'
+              $ref: "#/components/schemas/Item"
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/EditItem'
+                $ref: "#/components/responses/EditItem"
     delete:
       tags:
         - items
       summary: Delete item
-      description: ''
+      description: ""
       operationId: deleteItem
       parameters:
         - name: ServerId
@@ -606,30 +606,30 @@ paths:
             type: integer
             format: int64
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/DeleteItem'
+                $ref: "#/components/responses/DeleteItem"
   /items/images:
     get:
       tags:
         - itemImages
       summary: List item images
-      description: ''
+      description: ""
       operationId: listItemImages
       parameters:
         - name: ItemId
@@ -641,61 +641,61 @@ paths:
             type: integer
             format: int64
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: item images
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ListItemImages'
+                $ref: "#/components/responses/ListItemImages"
     put:
       tags:
         - itemImages
       summary: New item image
-      description: ''
+      description: ""
       operationId: newItemImage
       requestBody:
-        description: ''
+        description: ""
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/ItemImage'
+              $ref: "#/components/schemas/ItemImage"
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: item image
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/NewItemImage'
+                $ref: "#/components/responses/NewItemImage"
     delete:
       tags:
         - itemImages
       summary: Delete item image
-      description: ''
+      description: ""
       operationId: deleteItemImage
       parameters:
         - name: ServerId
@@ -707,24 +707,24 @@ paths:
             type: integer
             format: int64
       responses:
-        '500':
+        "500":
           description: Internal Error
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/InternalError'
-        '403':
+                $ref: "#/components/responses/InternalError"
+        "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/ForbiddenBasicAuth'
-        '200':
+                $ref: "#/components/responses/ForbiddenBasicAuth"
+        "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/DeleteItemImage'
+                $ref: "#/components/responses/DeleteItemImage"
 components:
   securitySchemes:
     BasicAuth:
@@ -736,19 +736,19 @@ components:
       name: Token
   responses:
     ForbiddenBasicAuth:
-      $ref: '#/components/schemas/ResponseWS'
+      $ref: "#/components/schemas/ResponseWS"
       # Code 403, Status: 'KO'
     NotFound:
-      $ref: '#/components/schemas/ResponseWS'
+      $ref: "#/components/schemas/ResponseWS"
       # Code 404, Status: 'KO'
     InternalError:
-      $ref: '#/components/schemas/ResponseWS'
+      $ref: "#/components/schemas/ResponseWS"
       # Code 500, Status: 'KO'
     ErrorLogin:
-      $ref: '#/components/schemas/ResponseWS'
+      $ref: "#/components/schemas/ResponseWS"
       # ?error=
     CorrectLogin:
-      $ref: '#/components/schemas/ResponseWS'
+      $ref: "#/components/schemas/ResponseWS"
       # ?access_token=
   requestBodies:
     ModifyUser:
@@ -757,17 +757,17 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       description: List of user object
       required: true
     Pet:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Pet'
+            $ref: "#/components/schemas/Pet"
         application/xml:
           schema:
-            $ref: '#/components/schemas/Pet'
+            $ref: "#/components/schemas/Pet"
       description: Pet object that needs to be added to the store
       required: true
   schemas:
@@ -788,23 +788,23 @@ components:
           oneOf:
             - type: array
               items:
-                $ref: '#/components/schemas/Category'
+                $ref: "#/components/schemas/Category"
             - type: array
               items:
-                $ref: '#/components/schemas/Subcategory'
+                $ref: "#/components/schemas/Subcategory"
             - type: array
               items:
-                $ref: '#/components/schemas/Collection'
+                $ref: "#/components/schemas/Collection"
             - type: array
               items:
-                $ref: '#/components/schemas/Item'
+                $ref: "#/components/schemas/Item"
             - type: array
               items:
-                $ref: '#/components/schemas/ItemImage'
+                $ref: "#/components/schemas/ItemImage"
             - type: array
               items:
-                $ref: '#/components/schemas/Apikey'
-            - $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/Apikey"
+            - $ref: "#/components/schemas/User"
     Category:
       type: object
       properties:
@@ -869,7 +869,7 @@ components:
         Items:
           type: array
           items:
-            $ref: '#/components/schemas/Item'
+            $ref: "#/components/schemas/Item"
     Item:
       type: object
       properties:
@@ -897,7 +897,7 @@ components:
         Images:
           type: array
           items:
-            $ref: '#/components/schemas/ItemImage'
+            $ref: "#/components/schemas/ItemImage"
     ItemImage:
       type: object
       properties:
