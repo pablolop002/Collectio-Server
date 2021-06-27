@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Collectio - <%= __('profile') %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%- include('../partials/styles') %>
     <%- include('../partials/icons') %>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Begin Header -->
 <%- include('../partials/header') %>
 <!-- End Header -->
 
 <!-- Begin Content -->
 <main>
-    <div class="section">
-        <div class="container">
+    <div class="container">
+        <div class="section">
+            <h1 class="text-center"><%= __('profile') %></h1>
             <div class="row">
                 <div class="col-md-6 offset-lg-0">
                     <% if(locals.user.Image != null) { %>

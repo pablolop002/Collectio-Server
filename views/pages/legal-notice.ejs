@@ -9,18 +9,16 @@
     <%- include('../partials/icons') %>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Begin Header -->
 <%- include('../partials/header'); %>
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div class="section">
-    <div class="h2 text-center">
-        <u><%= __('legalNotice') %></u>
-    </div>
-    <div class="container text-justify">
-        <div class="section text-body">
+<div class="container">
+    <div class="section text-justify">
+        <h1 class="text-center"><%= __('legalNotice') %></h1>
+        <div class="text-body">
             <p>_________________________________, provisto con NIF/CIF ___________________, dirección
                 ________________________________________, no puede asumir ninguna responsabilidad derivada del uso
                 incorrecto, inapropiado o ilícito de la información aparecida en la página de Internet de

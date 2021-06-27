@@ -4,48 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Collectio - <%= __('about') %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%- include('../partials/styles') %>
     <%- include('../partials/icons') %>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Begin Header -->
 <%- include('../partials/header'); %>
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div class="section">
-    <div class="container">
-        <div class="intro">
-            <h2 class="text-center"><%= __('team') %></h2>
-            <p class="text-center"><%= __('teamDescription') %></p>
-        </div>
-        <div class="section">
-            <div class="row people">
-                <div class="col-md-6 col-lg-4">
-                </div>
+<div class="container">
+    <div class="section">
+        <h1 class="text-center"><%= __('team') %></h1>
+        <p class="text-center"><%= __('teamDescription') %></p>
+        <div class="row people">
+            <div class="col-md-6 col-lg-4">
+            </div>
 
-                <div class="col-md-6 col-lg-4 text-center">
-                    <img class="w-75 img-fluid rounded-circle" src="/img/pablo.jpg"
-                         alt="<%= __('teamImagePablo') %>">
-                    <h3 class="name text-center">Pablo López Veleiro</h3>
-                    <p class="title text-center"><%= __('softwareEngineer') %></p>
-                    <p class="description text-justify"><%= __('teamDescriptionPablo') %></p>
-                    <div class="social text-center">
-                        <a href="https://twitter.com/pablolop002" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-twitter fa-2x"></i>
-                        </a>
-                        <a href="https://instagram.com/pablolop002" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-instagram fa-2x"></i>
-                        </a>
-                        <a href="https://github.com/pablolop002" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github fa-2x"></i>
-                        </a>
-                    </div>
+            <div class="col-md-6 col-lg-4 text-center">
+                <img class="w-75 img-fluid rounded-circle" src="/img/pablo.jpg"
+                     alt="<%= __('teamImagePablo') %>">
+                <h2 class="name text-center">Pablo López Veleiro</h2>
+                <p class="title text-center"><%= __('softwareEngineer') %></p>
+                <p class="description text-justify"><%= __('teamDescriptionPablo') %></p>
+                <div class="social text-center">
+                    <a href="https://twitter.com/pablolop002" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter fa-2x"></i>
+                    </a>
+                    <a href="https://instagram.com/pablolop002" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
+                    <a href="https://github.com/pablolop002" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
                 </div>
-                <div class="col-md-6 col-lg-4 item">
-                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 item">
             </div>
         </div>
     </div>

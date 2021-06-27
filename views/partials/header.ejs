@@ -1,7 +1,7 @@
-<nav class="navbar navbar-dark navbar-expand-lg primary-bg">
+<nav class="navbar navbar-light navbar-expand-lg primary-bg">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="/img/favicon.png"> Collectio
+            <img src="/img/logo.png" alt="Collectio" height="50">
         </a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
             <span class="sr-only"></span>
@@ -50,17 +50,15 @@
             </ul>
             <div class="ms-md-auto navbar-text actions">
                 <% if (locals.user) { %>
-                    <a href="/profile">
-                        <% if (locals.user.Image) { %>
-                            <img class="profile-image" src="/images/user<%= locals.user.Id %>/<%= locals.user.Image %>"
-                                 alt="<%= __('profileImage') %>">
-                        <% } else { %>
-                            <img class="profile-image" src="/images/default-profile.png"
-                                 alt="<%= __('profileImage') %>">
-                        <% } %>
+                    <a class="btn" href="/profile">
+                        <img class="img-circle" width="50" height="50"
+                             <% if (locals.user.Image) { %>src="/images/user<%= locals.user.Id %>/<%= locals.user.Image %>"
+                             <% } else { %>src="/images/default-profile.png"
+                                <% } %>
+                             alt="<%= __('profileImage') %>">
                     </a>
-                    <a class="btn btn-outline-light action-button primary-border-button" role="button" href="/logout">
-                        <i class="fas fa-sign-out-alt"></i> <%= __('signOut') %>
+                    <a class="btn btn-outline-danger action-button align-middle" role="button" href="/logout">
+                        <%= __('signOut') %>
                     </a>
                 <% } else { %>
                     <a class="btn btn-outline-light action-button primary-border-button" role="button"

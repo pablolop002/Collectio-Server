@@ -4,22 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Collectio - <%= __('terms') %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%- include('../partials/styles') %>
     <%- include('../partials/icons') %>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Begin Header -->
 <%- include('../partials/header'); %>
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div class="section">
-    <div class="h2 text-center">
-        <u><%= __('terms') %></u>
-    </div>
-    <div class="container text-justify">
+<div class="container">
+    <div class="section text-justify">
+        <h1 class="text-center"><%= __('terms') %></h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a href="#web" class="nav-link active" data-bs-toggle="tab"><%= __('web') %></a>
@@ -30,21 +28,19 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="web">
-                <div class="section">
-                    <div class="text-body">
-                        <p class="h2"><strong>Titulo</strong></p>
-                        <p class="h4"><strong>Subtitulo</strong></p>
-                        <p>Contenido</p>
-                    </div>
+                <div class="text-body">
+                    <br>
+                    <p class="h2"><strong>Titulo</strong></p>
+                    <p class="h4"><strong>Subtitulo</strong></p>
+                    <p>Contenido</p>
                 </div>
             </div>
             <div class="tab-pane fade" id="mobile">
-                <div class="section">
-                    <div class="text-body">
-                        <p class="h2"><strong>Titulo</strong></p>
-                        <p class="h4"><strong>Subtitulo</strong></p>
-                        <p>Contenido</p>
-                    </div>
+                <div class="text-body">
+                    <br>
+                    <p class="h2"><strong>Titulo</strong></p>
+                    <p class="h4"><strong>Subtitulo</strong></p>
+                    <p>Contenido</p>
                 </div>
             </div>
         </div>

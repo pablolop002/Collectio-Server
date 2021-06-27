@@ -4,22 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Collectio - <%= __('privacyPolicy') %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%- include('../partials/styles') %>
     <%- include('../partials/icons') %>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Begin Header -->
 <%- include('../partials/header'); %>
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div class="section">
-    <div class="h2 text-center">
-        <u><%= __('privacyPolicy') %></u>
-    </div>
-    <div class="container text-justify">
+<div class="container">
+    <div class="section text-justify">
+        <h1 class="text-center"><%= __('privacyPolicy') %></h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a href="#web" class="nav-link active" data-bs-toggle="tab"><%= __('web') %></a>
@@ -30,369 +28,367 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="web">
-                <div class="section">
-                    <div class="text-body">
-                        <p class="h2"><strong>1. Protección de datos de carácter personal según la LOPD</strong></p>
-                        <p>_____________________________, en aplicación de la normativa vigente en materia de
-                            protección de datos de carácter personal, informa que los datos personales que se recogen
-                            a través de los formularios del Sitio web: ________________________________, se incluyen en
-                            los ficheros automatizados específicos de usuarios de los servicios de
-                            _______________________________</p>
-                        <p>La recogida y tratamiento automatizado de los datos de carácter personal tiene como
-                            finalidad el mantenimiento de la relación comercial y el desempeño de tareas de
-                            información, formación, asesoramiento y otras actividades propias de
-                            ______________________________________</p>
-                        <p>Estos datos únicamente serán cedidos a aquellas entidades que sean necesarias con el único
-                            objetivo de dar cumplimiento a la finalidad anteriormente expuesta.</p>
-                        <p>_______________________________________ adopta las medidas necesarias para garantizar la
-                            seguridad, integridad y confidencialidad de los datos conforme a lo dispuesto en el
-                            Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016,
-                            relativo a la protección de las personas físicas en lo que respecta al tratamiento de
-                            datos personales y a la libre circulación de los mismos.</p>
-                        <p>El usuario podrá en cualquier momento ejercitar los derechos de acceso, oposición,
-                            rectificación y cancelación reconocidos en el citado Reglamento (UE). El ejercicio de
-                            estos derechos puede realizarlo el propio usuario a través de email a:
-                            _________________________________ o en la dirección:
-                            ________________________________________</p>
-                        <p>El usuario manifiesta que todos los datos facilitados por él son ciertos y correctos, y se
-                            compromete a mantenerlos actualizados, comunicando los cambios a
-                            _________________________________________</p>
-                        <p class="h4"><strong>Finalidad del tratamiento de los datos personales:</strong></p>
-                        <p class="h6"><strong>Con qué finalidad trataremos tus datos personales?</strong></p>
-                        <p>En __________________________________, trataremos tus datos personales recabados a través
-                            del Sitio Web: ______________________________, con las siguientes finalidades:</p>
-                        <ol>
-                            <li>
-                                <p>En caso de contratación de los bienes y servicios ofertados a través de
-                                    ____________________________, para mantener la relación contractual, así como la
-                                    gestión, administración, información, prestación y mejora del servicio.</p>
-                            </li>
-                            <li>
-                                <p>Envío de información solicitada a través de los formularios dispuestos en
-                                    ____________________________</p>
-                            </li>
-                            <li>
-                                <p>Remitir boletines (newsletters), así como comunicaciones comerciales de promociones
-                                    y/o publicidad de ______________________________ y del sector.</p>
-                            </li>
-                        </ol>
-                        <p>Te recordamos que puedes oponerte al envío de comunicaciones comerciales por cualquier vía
-                            y en cualquier momento, remitiendo un correo electrónico a la dirección indicada
-                            anteriormente.</p>
-                        <p>Los campos de dichos registros son de cumplimentación obligatoria, siendo imposible realizar
-                            las finalidades expresadas si no se aportan esos datos.</p>
-                        <p class="h6"><strong>Por cuánto tiempo se conservan los datos personales recabados?</strong>
-                        </p>
-                        <p>Los datos personales proporcionados se conservarán mientras se mantenga la relación
-                            comercial o no solicites su supresión y durante el plazo por el cuál pudieran derivarse
-                            responsabilidades legales por los servicios prestados.</p>
-                        <p class="h4"><strong>Legitimación:</strong></p>
-                        <p>El tratamiento de tus datos se realiza con las siguientes bases jurídicas que legitiman el
-                            mismo:</p>
-                        <ol>
-                            <li>
-                                <p>La solicitud de información y/o la contratación de los servicios de
-                                    ___________________________, cuyos términos y condiciones se pondrán a tu
-                                    disposición en todo caso, de forma previa a una eventual contratación.</p>
-                            </li>
-                            <li>
-                                <p>El consentimiento libre, específico, informado e inequívoco, en tanto que te
-                                    informamos poniendo a tu disposición la presente política de privacidad, que tras
-                                    la lectura de la misma, en caso de estar conforme, puedes aceptar mediante una
-                                    declaración o una clara acción afirmativa, como el marcado de una casilla
-                                    dispuesta al efecto.</p>
-                            </li>
-                        </ol>
-                        <p>En caso de que no nos facilites tus datos o lo hagas de forma errónea o incompleta, no
-                            podremos atender tu solicitud, resultando del todo imposible proporcionarte la información
-                            solicitada o llevar a cabo la contratación de los servicios.</p>
-                        <p class="h4"><strong>Destinatarios:</strong></p>
-                        <p>Los datos no se comunicarán a ningún tercero ajeno a _________________________________,
-                            salvo obligación legal.</p>
-                        <p>Como encargados de tratamiento, tenemos contratados a los siguientes proveedores de
-                            servicios, habiéndose comprometido al cumplimiento de las disposiciones normativas, de
-                            aplicación en materia de protección de datos, en el momento de su contratación:</p>
-                        <ul>
-                            <li>
-                                <p>(ENCARGADO) ______________________________________________________, con
-                                    domicilio en ___________________________________________, NIF/CIF no
-                                    ________________________, presta servicios de
-                                    ________________________________________.</p>
-                                <ul>
-                                    <li>
-                                        <p>Puede consultar la política de privacidad y demás aspectos legales de la
-                                            compañía en el siguiente enlace:
-                                            ____________________________________________</p>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <p>(ENCARGADO) ____________________________________________, con domicilio en
-                                    ____________________________________________, NIF/CIF no _________________________,
-                                    presta servicios de ___________________________________________ .</p>
-                                <ul>
-                                    <li>
-                                        <p>Puede consultar la política de privacidad y demás aspectos legales de la
-                                            compañía en el siguiente enlace:
-                                            ______________________________________________</p>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <p class="h2"><strong>2. Datos recopilados por usuarios de los servicios</strong></p>
-                        <p>En los casos en que el usuario incluya ficheros con datos de carácter personal en los
-                            servidores de alojamiento compartido, _______________________________________ no se hace
-                            responsable del incumplimiento por parte del usuario del RGPD.</p>
-                        <p class="h2"><strong>3. Retención de datos en conformidad a la LSSI</strong></p>
-                        <p>______________________________________ informa de que, como prestador de servicio de
-                            alojamiento de datos y en virtud de lo establecido en la Ley 34/2002 de 11 de julio de
-                            Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI), retiene por
-                            un periodo máximo de 12 meses la información imprescindible para identificar el origen de
-                            los datos alojados y el momento en que se inició la prestación del servicio. La retención
-                            de estos datos no afecta al secreto de las comunicaciones y sólo podrán ser utilizados en
-                            el marco de una investigación criminal o para la salvaguardia de la seguridad pública,
-                            poniéndose a disposición de los jueces y/o tribunales o del Ministerio que así los
-                            requiera.</p>
-                        <p>La comunicación de datos a las Fuerzas y Cuerpos del Estado se hará en virtud a lo
-                            dispuesto en la normativa sobre protección de datos personales.</p>
-                        <p class="h2">
-                            <strong>4. Derechos propiedad intelectual ______________________________</strong>
-                        </p>
-                        <p>_________________________________ es titular de todos los derechos de autor, propiedad
-                            intelectual, industrial, "know how" y cuantos otros derechos guardan relación con los
-                            contenidos del sitio web _______________________ y los servicios ofertados en el mismo, así
-                            como de los programas necesarios para su implementación y la información relacionada.</p>
-                        <p>No se permite la reproducción, publicación y/o uso no estrictamente privado de los
-                            contenidos, totales o parciales, del sitio web __________________________________ sin el
-                            consentimiento previo y por escrito.</p>
-                        <p class="h2"><strong>5. Propiedad intelectual del software</strong></p>
-                        <p>El usuario debe respetar los programas de terceros puestos a su disposición por
-                            ____________________________, aun siendo gratuitos y/o de disposición pública.</p>
-                        <p>__________________________ dispone de los derechos de explotación y propiedad intelectual
-                            necesarios del software.</p>
-                        <p>El usuario no adquiere derecho alguno o licencia por el servicio contratado, sobre el
-                            software necesario para la prestación del servicio, ni tampoco sobre la información
-                            técnica de seguimiento del servicio, excepción hecha de los derechos y licencias
-                            necesarios para el cumplimiento de los servicios contratados y únicamente durante la
-                            duración de los mismos.</p>
-                        <p>Para toda actuación que exceda del cumplimiento del contrato, el usuario necesitará
-                            autorización por escrito por parte de _______________________________, quedando prohibido
-                            al usuario acceder, modificar, visualizar la configuración, estructura y ficheros de los
-                            servidores propiedad de _______________________________, asumiendo la responsabilidad civil
-                            y penal derivada de cualquier incidencia que se pudiera producir en los servidores y
-                            sistemas de seguridad como consecuencia directa de una actuación negligente o maliciosa por
-                            su parte.</p>
-                        <p class="h2"><strong>6. Propiedad intelectual de los contenidos alojados</strong></p>
-                        <p>Se prohíbe el uso contrario a la legislación sobre propiedad intelectual de los servicios
-                            prestados por _______________________________ y, en particular de:</p>
-                        <ul>
-                            <li>
-                                <p>La utilización que resulte contraria a las leyes españolas o que infrinja los
-                                    derechos de terceros.</p>
-                            </li>
-                            <li>
-                                <p>La publicación o la transmisión de cualquier contenido que, a juicio de
-                                    ________________________, resulte violento, obsceno, abusivo, ilegal, racial,
-                                    xenófobo o difamatorio.</p>
-                            </li>
-                            <li>
-                                <p>Los cracks, números de serie de programas o cualquier otro contenido que vulnere
-                                    derechos de la propiedad intelectual de terceros.</p>
-                            </li>
-                            <li>
-                                <p>La recogida y/o utilización de datos personales de otros usuarios sin su
-                                    consentimiento expreso
-                                    o contraviniendo lo dispuesto en Reglamento (UE) 2016/679 del Parlamento Europeo y
-                                    del Consejo,
-                                    de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que
-                                    respecta al
-                                    tratamiento de datos personales y a la libre circulación de los mismos.</p>
-                            </li>
-                            <li>
-                                <p>La utilización del servidor de correo del dominio y de las direcciones de correo
-                                    electrónico
-                                    para el envío de correo masivo no deseado.</p>
-                            </li>
-                        </ul>
-                        <p>El usuario tiene toda la responsabilidad sobre el contenido de su web, la
-                            información
-                            transmitida y almacenada, los enlaces de hipertexto, las reivindicaciones de
-                            terceros y las
-                            acciones legales en referencia a propiedad intelectual, derechos de terceros y
-                            protección de
-                            menores.</p>
-                        <p>El usuario es responsable respecto a las leyes y reglamentos en vigor y las reglas
-                            que tienen que
-                            ver con el funcionamiento del servicio online, comercio electrónico, derechos de
-                            autor,
-                            mantenimiento del orden público, así como principios universales de uso de
-                            Internet.</p>
-                        <p>El usuario indemnizará a ___________________ por los gastos que generara la
-                            imputación de
-                            ______________________________ en alguna causa cuya responsabilidad fuera atribuible
-                            al usuario,
-                            incluidos honorarios y gastos de defensa jurídica, incluso en el caso de una
-                            decisión judicial
-                            no definitiva.</p>
-                        <p class="h2"><strong>7. Protección de la información alojada</strong></p>
-                        <p>______________________________ realiza copias de seguridad de los contenidos alojados
-                            en sus
-                            servidores, sin embargo no se responsabiliza de la pérdida o el borrado accidental
-                            de los datos
-                            por parte de los usuarios. De igual manera, no garantiza la reposición total de los
-                            datos
-                            borrados por los usuarios, ya que los citados datos podrían haber sido suprimidos
-                            y/o
-                            modificados durante el periodo del tiempo transcurrido desde la última copia de
-                            seguridad.</p>
-                        <p>Los servicios ofertados, excepto los servicios específicos de backup, no incluyen la
-                            reposición
-                            de los contenidos conservados en las copias de seguridad realizadas por
-                            ______________________________, cuando esta pérdida sea imputable al usuario; en
-                            este caso, se
-                            determinará una tarifa acorde a la complejidad y volumen de la recuperación,
-                            siempre previa
-                            aceptación del usuario.</p>
-                        <p>La reposición de datos borrados sólo está incluida en el precio del servicio
-                            cuando la
-                            pérdida del contenido sea debida a causas atribuibles a
-                            ________________________________</p>
-                        <p class="h2"><strong>8. Comunicaciones comerciales</strong></p>
-                        <p>En aplicación de la LSSI. _______________________________ no enviará comunicaciones
-                            publicitarias o promocionales por correo electrónico u otro medio de comunicación
-                            electrónica
-                            equivalente que previamente no hubieran sido solicitadas o expresamente autorizadas
-                            por los
-                            destinatarios de las mismas.</p>
-                        <p>En el caso de usuarios con los que exista una relación contractual previa,
-                            ______________________________ sí está autorizado al envío de comunicaciones comerciales
-                            referentes a
-                            productos o servicios de ____________________________ que sean similares a los que
-                            inicialmente fueron
-                            objeto de contratación con el cliente.</p>
-                        <p>En todo caso, el usuario, tras acreditar su identidad, podrá solicitar que no se le haga
-                            llegar más
-                            información comercial a través de los canales de Atención al Cliente.</p>
+                <div class="text-body">
+                    <br>
+                    <p class="h2"><strong>1. Protección de datos de carácter personal según la LOPD</strong></p>
+                    <p>_____________________________, en aplicación de la normativa vigente en materia de
+                        protección de datos de carácter personal, informa que los datos personales que se recogen
+                        a través de los formularios del Sitio web: ________________________________, se incluyen en
+                        los ficheros automatizados específicos de usuarios de los servicios de
+                        _______________________________</p>
+                    <p>La recogida y tratamiento automatizado de los datos de carácter personal tiene como
+                        finalidad el mantenimiento de la relación comercial y el desempeño de tareas de
+                        información, formación, asesoramiento y otras actividades propias de
+                        ______________________________________</p>
+                    <p>Estos datos únicamente serán cedidos a aquellas entidades que sean necesarias con el único
+                        objetivo de dar cumplimiento a la finalidad anteriormente expuesta.</p>
+                    <p>_______________________________________ adopta las medidas necesarias para garantizar la
+                        seguridad, integridad y confidencialidad de los datos conforme a lo dispuesto en el
+                        Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016,
+                        relativo a la protección de las personas físicas en lo que respecta al tratamiento de
+                        datos personales y a la libre circulación de los mismos.</p>
+                    <p>El usuario podrá en cualquier momento ejercitar los derechos de acceso, oposición,
+                        rectificación y cancelación reconocidos en el citado Reglamento (UE). El ejercicio de
+                        estos derechos puede realizarlo el propio usuario a través de email a:
+                        _________________________________ o en la dirección:
+                        ________________________________________</p>
+                    <p>El usuario manifiesta que todos los datos facilitados por él son ciertos y correctos, y se
+                        compromete a mantenerlos actualizados, comunicando los cambios a
+                        _________________________________________</p>
+                    <p class="h4"><strong>Finalidad del tratamiento de los datos personales:</strong></p>
+                    <p class="h6"><strong>Con qué finalidad trataremos tus datos personales?</strong></p>
+                    <p>En __________________________________, trataremos tus datos personales recabados a través
+                        del Sitio Web: ______________________________, con las siguientes finalidades:</p>
+                    <ol>
+                        <li>
+                            <p>En caso de contratación de los bienes y servicios ofertados a través de
+                                ____________________________, para mantener la relación contractual, así como la
+                                gestión, administración, información, prestación y mejora del servicio.</p>
+                        </li>
+                        <li>
+                            <p>Envío de información solicitada a través de los formularios dispuestos en
+                                ____________________________</p>
+                        </li>
+                        <li>
+                            <p>Remitir boletines (newsletters), así como comunicaciones comerciales de promociones
+                                y/o publicidad de ______________________________ y del sector.</p>
+                        </li>
+                    </ol>
+                    <p>Te recordamos que puedes oponerte al envío de comunicaciones comerciales por cualquier vía
+                        y en cualquier momento, remitiendo un correo electrónico a la dirección indicada
+                        anteriormente.</p>
+                    <p>Los campos de dichos registros son de cumplimentación obligatoria, siendo imposible realizar
+                        las finalidades expresadas si no se aportan esos datos.</p>
+                    <p class="h6"><strong>Por cuánto tiempo se conservan los datos personales recabados?</strong>
+                    </p>
+                    <p>Los datos personales proporcionados se conservarán mientras se mantenga la relación
+                        comercial o no solicites su supresión y durante el plazo por el cuál pudieran derivarse
+                        responsabilidades legales por los servicios prestados.</p>
+                    <p class="h4"><strong>Legitimación:</strong></p>
+                    <p>El tratamiento de tus datos se realiza con las siguientes bases jurídicas que legitiman el
+                        mismo:</p>
+                    <ol>
+                        <li>
+                            <p>La solicitud de información y/o la contratación de los servicios de
+                                ___________________________, cuyos términos y condiciones se pondrán a tu
+                                disposición en todo caso, de forma previa a una eventual contratación.</p>
+                        </li>
+                        <li>
+                            <p>El consentimiento libre, específico, informado e inequívoco, en tanto que te
+                                informamos poniendo a tu disposición la presente política de privacidad, que tras
+                                la lectura de la misma, en caso de estar conforme, puedes aceptar mediante una
+                                declaración o una clara acción afirmativa, como el marcado de una casilla
+                                dispuesta al efecto.</p>
+                        </li>
+                    </ol>
+                    <p>En caso de que no nos facilites tus datos o lo hagas de forma errónea o incompleta, no
+                        podremos atender tu solicitud, resultando del todo imposible proporcionarte la información
+                        solicitada o llevar a cabo la contratación de los servicios.</p>
+                    <p class="h4"><strong>Destinatarios:</strong></p>
+                    <p>Los datos no se comunicarán a ningún tercero ajeno a _________________________________,
+                        salvo obligación legal.</p>
+                    <p>Como encargados de tratamiento, tenemos contratados a los siguientes proveedores de
+                        servicios, habiéndose comprometido al cumplimiento de las disposiciones normativas, de
+                        aplicación en materia de protección de datos, en el momento de su contratación:</p>
+                    <ul>
+                        <li>
+                            <p>(ENCARGADO) ______________________________________________________, con
+                                domicilio en ___________________________________________, NIF/CIF no
+                                ________________________, presta servicios de
+                                ________________________________________.</p>
+                            <ul>
+                                <li>
+                                    <p>Puede consultar la política de privacidad y demás aspectos legales de la
+                                        compañía en el siguiente enlace:
+                                        ____________________________________________</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>(ENCARGADO) ____________________________________________, con domicilio en
+                                ____________________________________________, NIF/CIF no _________________________,
+                                presta servicios de ___________________________________________ .</p>
+                            <ul>
+                                <li>
+                                    <p>Puede consultar la política de privacidad y demás aspectos legales de la
+                                        compañía en el siguiente enlace:
+                                        ______________________________________________</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="h2"><strong>2. Datos recopilados por usuarios de los servicios</strong></p>
+                    <p>En los casos en que el usuario incluya ficheros con datos de carácter personal en los
+                        servidores de alojamiento compartido, _______________________________________ no se hace
+                        responsable del incumplimiento por parte del usuario del RGPD.</p>
+                    <p class="h2"><strong>3. Retención de datos en conformidad a la LSSI</strong></p>
+                    <p>______________________________________ informa de que, como prestador de servicio de
+                        alojamiento de datos y en virtud de lo establecido en la Ley 34/2002 de 11 de julio de
+                        Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI), retiene por
+                        un periodo máximo de 12 meses la información imprescindible para identificar el origen de
+                        los datos alojados y el momento en que se inició la prestación del servicio. La retención
+                        de estos datos no afecta al secreto de las comunicaciones y sólo podrán ser utilizados en
+                        el marco de una investigación criminal o para la salvaguardia de la seguridad pública,
+                        poniéndose a disposición de los jueces y/o tribunales o del Ministerio que así los
+                        requiera.</p>
+                    <p>La comunicación de datos a las Fuerzas y Cuerpos del Estado se hará en virtud a lo
+                        dispuesto en la normativa sobre protección de datos personales.</p>
+                    <p class="h2">
+                        <strong>4. Derechos propiedad intelectual ______________________________</strong>
+                    </p>
+                    <p>_________________________________ es titular de todos los derechos de autor, propiedad
+                        intelectual, industrial, "know how" y cuantos otros derechos guardan relación con los
+                        contenidos del sitio web _______________________ y los servicios ofertados en el mismo, así
+                        como de los programas necesarios para su implementación y la información relacionada.</p>
+                    <p>No se permite la reproducción, publicación y/o uso no estrictamente privado de los
+                        contenidos, totales o parciales, del sitio web __________________________________ sin el
+                        consentimiento previo y por escrito.</p>
+                    <p class="h2"><strong>5. Propiedad intelectual del software</strong></p>
+                    <p>El usuario debe respetar los programas de terceros puestos a su disposición por
+                        ____________________________, aun siendo gratuitos y/o de disposición pública.</p>
+                    <p>__________________________ dispone de los derechos de explotación y propiedad intelectual
+                        necesarios del software.</p>
+                    <p>El usuario no adquiere derecho alguno o licencia por el servicio contratado, sobre el
+                        software necesario para la prestación del servicio, ni tampoco sobre la información
+                        técnica de seguimiento del servicio, excepción hecha de los derechos y licencias
+                        necesarios para el cumplimiento de los servicios contratados y únicamente durante la
+                        duración de los mismos.</p>
+                    <p>Para toda actuación que exceda del cumplimiento del contrato, el usuario necesitará
+                        autorización por escrito por parte de _______________________________, quedando prohibido
+                        al usuario acceder, modificar, visualizar la configuración, estructura y ficheros de los
+                        servidores propiedad de _______________________________, asumiendo la responsabilidad civil
+                        y penal derivada de cualquier incidencia que se pudiera producir en los servidores y
+                        sistemas de seguridad como consecuencia directa de una actuación negligente o maliciosa por
+                        su parte.</p>
+                    <p class="h2"><strong>6. Propiedad intelectual de los contenidos alojados</strong></p>
+                    <p>Se prohíbe el uso contrario a la legislación sobre propiedad intelectual de los servicios
+                        prestados por _______________________________ y, en particular de:</p>
+                    <ul>
+                        <li>
+                            <p>La utilización que resulte contraria a las leyes españolas o que infrinja los
+                                derechos de terceros.</p>
+                        </li>
+                        <li>
+                            <p>La publicación o la transmisión de cualquier contenido que, a juicio de
+                                ________________________, resulte violento, obsceno, abusivo, ilegal, racial,
+                                xenófobo o difamatorio.</p>
+                        </li>
+                        <li>
+                            <p>Los cracks, números de serie de programas o cualquier otro contenido que vulnere
+                                derechos de la propiedad intelectual de terceros.</p>
+                        </li>
+                        <li>
+                            <p>La recogida y/o utilización de datos personales de otros usuarios sin su
+                                consentimiento expreso
+                                o contraviniendo lo dispuesto en Reglamento (UE) 2016/679 del Parlamento Europeo y
+                                del Consejo,
+                                de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que
+                                respecta al
+                                tratamiento de datos personales y a la libre circulación de los mismos.</p>
+                        </li>
+                        <li>
+                            <p>La utilización del servidor de correo del dominio y de las direcciones de correo
+                                electrónico
+                                para el envío de correo masivo no deseado.</p>
+                        </li>
+                    </ul>
+                    <p>El usuario tiene toda la responsabilidad sobre el contenido de su web, la
+                        información
+                        transmitida y almacenada, los enlaces de hipertexto, las reivindicaciones de
+                        terceros y las
+                        acciones legales en referencia a propiedad intelectual, derechos de terceros y
+                        protección de
+                        menores.</p>
+                    <p>El usuario es responsable respecto a las leyes y reglamentos en vigor y las reglas
+                        que tienen que
+                        ver con el funcionamiento del servicio online, comercio electrónico, derechos de
+                        autor,
+                        mantenimiento del orden público, así como principios universales de uso de
+                        Internet.</p>
+                    <p>El usuario indemnizará a ___________________ por los gastos que generara la
+                        imputación de
+                        ______________________________ en alguna causa cuya responsabilidad fuera atribuible
+                        al usuario,
+                        incluidos honorarios y gastos de defensa jurídica, incluso en el caso de una
+                        decisión judicial
+                        no definitiva.</p>
+                    <p class="h2"><strong>7. Protección de la información alojada</strong></p>
+                    <p>______________________________ realiza copias de seguridad de los contenidos alojados
+                        en sus
+                        servidores, sin embargo no se responsabiliza de la pérdida o el borrado accidental
+                        de los datos
+                        por parte de los usuarios. De igual manera, no garantiza la reposición total de los
+                        datos
+                        borrados por los usuarios, ya que los citados datos podrían haber sido suprimidos
+                        y/o
+                        modificados durante el periodo del tiempo transcurrido desde la última copia de
+                        seguridad.</p>
+                    <p>Los servicios ofertados, excepto los servicios específicos de backup, no incluyen la
+                        reposición
+                        de los contenidos conservados en las copias de seguridad realizadas por
+                        ______________________________, cuando esta pérdida sea imputable al usuario; en
+                        este caso, se
+                        determinará una tarifa acorde a la complejidad y volumen de la recuperación,
+                        siempre previa
+                        aceptación del usuario.</p>
+                    <p>La reposición de datos borrados sólo está incluida en el precio del servicio
+                        cuando la
+                        pérdida del contenido sea debida a causas atribuibles a
+                        ________________________________</p>
+                    <p class="h2"><strong>8. Comunicaciones comerciales</strong></p>
+                    <p>En aplicación de la LSSI. _______________________________ no enviará comunicaciones
+                        publicitarias o promocionales por correo electrónico u otro medio de comunicación
+                        electrónica
+                        equivalente que previamente no hubieran sido solicitadas o expresamente autorizadas
+                        por los
+                        destinatarios de las mismas.</p>
+                    <p>En el caso de usuarios con los que exista una relación contractual previa,
+                        ______________________________ sí está autorizado al envío de comunicaciones comerciales
+                        referentes a
+                        productos o servicios de ____________________________ que sean similares a los que
+                        inicialmente fueron
+                        objeto de contratación con el cliente.</p>
+                    <p>En todo caso, el usuario, tras acreditar su identidad, podrá solicitar que no se le haga
+                        llegar más
+                        información comercial a través de los canales de Atención al Cliente.</p>
 
-                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="mobile">
-                <div class="section">
-                    <div class="text-body">
-                        <p>Fecha última actualización: dd/mm/yyyy</p>
-                        <p>De conformidad con el Reglamento (UE) 2016/679, del Parlamento Europeo y del Consejo, de 27
-                            de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al
-                            tratamiento de datos personales y a la libre circulación de estos datos(Reglamento General
-                            de Protección de Datos - RGPD), XXXEMPRESAXXX, informa a los usuarios de la aplicación
-                            _______________________ (en adelante, la Aplicación), acerca del tratamiento de los datos
-                            personales, que ellos voluntariamente hayan facilitado durante el proceso de registro,
-                            acceso y utilización del servicio.</p>
-                        <p class="h2"><strong>1. Identificación del responsable del tratamiento</strong></p>
-                        <p>XXXEMPRESAXXX, con CIF/NIF no: ________________ y domicilio a efectos de notificaciones en:
-                            ________________________________________ e inscrita en el Registro Mercantil
-                            de_________________ Tomo _________, Folio ___________, Sección a, Hoja _______, inscripción
-                            a (en adelante, el Responsable del Tratamiento), es la entidad responsable del tratamiento
-                            de los datos facilitados por los clientes de la Aplicación (en adelante, el/los
-                            Usuario/s).</p>
-                        <p class="h2"><strong>2. Finalidad del tratamiento de datos</strong></p>
-                        <p>Para proceder al registro, acceso y posterior uso de la Aplicación, el Usuario deberá
-                            facilitar -de forma voluntaria-, datos de carácter personal (esencialmente, identificativos
-                            y de contacto), los cuales serán incorporados a soportes automatizados titularidad de
-                            XXXEMPRESAXXX</p>
-                        <p>La recogida, almacenamiento, modificación, estructuración y en su caso, eliminación, de los
-                            datos proporcionados por los Usuarios, constituirán operaciones de tratamiento llevadas a
-                            cabo por el Responsable, con la finalidad de garantizar el correcto funcionamiento de la
-                            Aplicación, mantener la relación de prestación de servicios y/o comercial con el Usuario, y
-                            para la gestión, administración, información, prestación y mejora del servicio.</p>
-                        <p>Los datos personales facilitados por el Usuario -especialmente, el correo electrónico o
-                            e-mail- podrán emplearse también para remitir boletines (newsletters), así como
-                            comunicaciones comerciales de promociones y/o publicidad de la Aplicación, siempre y cuando,
-                            el Usuario haya prestado previamente su consentimiento expreso para la recepción de estas
-                            comunicaciones vía electrónica.</p>
-                        <p class="h2"><strong>3. Legitimación</strong></p>
-                        <p>El tratamiento de los datos del Usuario, se realiza con las siguientes bases jurídicas que
-                            legitiman el mismo:</p>
-                        <ul>
-                            <li>
-                                <p>La solicitud de información y/o la contratación de los servicios de la Aplicación,
-                                    cuyos términos y condiciones se pondrán a disposición del Usuario en todo caso, con
-                                    carácter previo, para su expresa aceptación.</p>
-                            </li>
-                            <li>
-                                <p>El consentimiento libre, específico, informado e inequívoco del Usuario, poniendo a
-                                    su disposición la presente política de privacidad, que deberá aceptar mediante una
-                                    declaración o una clara acción afirmativa, como el marcado de una casilla dispuesta
-                                    al efecto.</p>
-                            </li>
-                        </ul>
-                        <p>En caso de que el Usuario no facilite a XXXEMPRESAXXX sus datos, o lo haga de forma errónea o
-                            incompleta, no será posible proceder al uso de la Aplicación.</p>
-                        <p class="h2"><strong>4. Conservación de los datos personales</strong></p>
-                        <p>Los datos personales proporcionados por el Usuario, se conservarán en los sistemas y bases de
-                            datos del Responsable del Tratamiento, mientras aquél continúe haciendo uso de la
-                            Aplicación, y siempre que no solicite su supresión.</p>
-                        <p>Con el objetivo de depurar las posibles responsabilidades derivadas del tratamiento, los
-                            datos se conservarán por un período mínimo de cinco años.</p>
-                        <p class="h2"><strong>5. Destinatarios</strong></p>
-                        <p>Los datos no se comunicarán a ningún tercero ajeno a XXXEMPRESAXXX, salvo obligación legal o
-                            en cualquier caso, previa solicitud del consentimiento del Usuario.</p>
-                        <p>De otra parte, XXXEMPRESAXXX podrá dar acceso o transmitir los datos personales facilitados
-                            por el Usuario, a terceros proveedores de servicios, con los que haya suscrito acuerdos de
-                            encargo de tratamiento de datos, y que únicamente accedan a dicha información para prestar
-                            un servicio en favor y por cuenta del Responsable.</p>
-                        <p class="h2"><strong>6. Retención de datos</strong></p>
-                        <p>XXXEMPRESAXXX, informa al Usuario de que, como prestador de servicio de alojamiento de datos
-                            y en virtud de lo establecido en la Ley 34/2002 de 11 de julio de Servicios de la Sociedad
-                            de la Información y de Comercio Electrónico (LSSI), retiene por un período máximo de 12
-                            meses la información imprescindible para identificar el origen de los datos alojados y el
-                            momento en que se inició la prestación del servicio.</p>
-                        <p>La retención de estos datos no afecta al secreto de las comunicaciones y sólo podrán ser
-                            utilizados en el marco de una investigación criminal o para la salvaguardia de la seguridad
-                            pública, poniéndose a disposición de los jueces y/o tribunales o del Ministerio que así los
-                            requiera.</p>
-                        <p>La comunicación de datos a las Fuerzas y Cuerpos de Seguridad del Estado, se hará en virtud
-                            de lo dispuesto por la normativa sobre protección de datos personales, y bajo el máximo
-                            respeto a la misma.</p>
-                        <p class="h2"><strong>7. Protección de la información alojada</strong></p>
-                        <p>El Responsable del Tratamiento, adopta las medidas necesarias para garantizar la seguridad,
-                            integridad y confidencialidad de los datos conforme a lo dispuesto en el Reglamento (UE)
-                            2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la
-                            protección de las personas físicas en lo que respecta al tratamiento de datos personales y a
-                            la libre circulación de los mismos.</p>
-                        <p>Si bien el Responsable, realiza copias de seguridad de los contenidos alojados en sus
-                            servidores, sin embargo no se responsabiliza de la pérdida o el borrado accidental de los
-                            datos por parte de los Usuarios. De igual manera, no garantiza la reposición total de los
-                            datos borrados por los Usuarios, ya que los citados datos podrían haber sido suprimidos y/o
-                            modificados durante el periodo de tiempo transcurrido desde la última copia de
-                            seguridad.</p>
-                        <p>Los servicios facilitados o prestados a través de la Aplicación, excepto los servicios
-                            específicos de backup, no incluyen la reposición de los contenidos conservados en las copias
-                            de seguridad realizadas por el Responsable del Tratamiento, cuando esta pérdida sea
-                            imputable al usuario; en este caso, se determinará una tarifa acorde a la complejidad y
-                            volumen de la recuperación, siempre previa aceptación del usuario. La reposición de datos
-                            borrados sólo está incluida en el precio del servicio cuando la pérdida del contenido sea
-                            debida a causas atribuibles al Responsable.</p>
-                        <p class="h2"><strong>8. Ejercicio de derechos</strong></p>
-                        <p>XXXEMPRESAXXX, informa al Usuario de que le asisten los derechos de acceso, rectificación,
-                            limitación, supresión, oposición y portabilidad, los cuales podrá ejercitar mediante
-                            petición dirigida al correo electrónico: _____________________________</p>
-                        <p>Asimismo, el Usuario tiene derecho a revocar el consentimiento inicialmente prestado, y a
-                            interponer reclamaciones de derechos frente a la Agencia Española de Protección de Datos
-                            (AEPD).</p>
-                        <p class="h2"><strong>9. Comunicaciones comerciales por vía electrónica</strong></p>
-                        <p>En aplicación de la LSSI (Ley de Servicios de la Sociedad de la Información), XXXEMPRESAXXX,
-                            no enviará comunicaciones publicitarias o promocionales por correo electrónico u otro medio
-                            de comunicación electrónica equivalente que previamente no hubieran sido solicitadas o
-                            expresamente autorizadas por los destinatarios de las mismas.</p>
-                        <p>En el caso de usuarios con los que exista una relación contractual, jurídica o de servicios
-                            previa, el Responsable del Tratamiento, sí está autorizado al envío de comunicaciones
-                            comerciales referentes a productos o servicios del Responsable que sean similares a los que
-                            inicialmente fueron objeto de contratación con el cliente.</p>
-                        <p>En caso de que el Usuario quiera darse de baja a la hora de recibir las citadas
-                            comunicaciones, podrá hacerlo remitiendo su voluntad por e-mail al correo electrónico:
-                            ____________________________________.</p>
-                    </div>
+                <div class="text-body">
+                    <br>
+                    <p>Fecha última actualización: dd/mm/yyyy</p>
+                    <p>De conformidad con el Reglamento (UE) 2016/679, del Parlamento Europeo y del Consejo, de 27
+                        de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al
+                        tratamiento de datos personales y a la libre circulación de estos datos(Reglamento General
+                        de Protección de Datos - RGPD), XXXEMPRESAXXX, informa a los usuarios de la aplicación
+                        _______________________ (en adelante, la Aplicación), acerca del tratamiento de los datos
+                        personales, que ellos voluntariamente hayan facilitado durante el proceso de registro,
+                        acceso y utilización del servicio.</p>
+                    <p class="h2"><strong>1. Identificación del responsable del tratamiento</strong></p>
+                    <p>XXXEMPRESAXXX, con CIF/NIF no: ________________ y domicilio a efectos de notificaciones en:
+                        ________________________________________ e inscrita en el Registro Mercantil
+                        de_________________ Tomo _________, Folio ___________, Sección a, Hoja _______, inscripción
+                        a (en adelante, el Responsable del Tratamiento), es la entidad responsable del tratamiento
+                        de los datos facilitados por los clientes de la Aplicación (en adelante, el/los
+                        Usuario/s).</p>
+                    <p class="h2"><strong>2. Finalidad del tratamiento de datos</strong></p>
+                    <p>Para proceder al registro, acceso y posterior uso de la Aplicación, el Usuario deberá
+                        facilitar -de forma voluntaria-, datos de carácter personal (esencialmente, identificativos
+                        y de contacto), los cuales serán incorporados a soportes automatizados titularidad de
+                        XXXEMPRESAXXX</p>
+                    <p>La recogida, almacenamiento, modificación, estructuración y en su caso, eliminación, de los
+                        datos proporcionados por los Usuarios, constituirán operaciones de tratamiento llevadas a
+                        cabo por el Responsable, con la finalidad de garantizar el correcto funcionamiento de la
+                        Aplicación, mantener la relación de prestación de servicios y/o comercial con el Usuario, y
+                        para la gestión, administración, información, prestación y mejora del servicio.</p>
+                    <p>Los datos personales facilitados por el Usuario -especialmente, el correo electrónico o
+                        e-mail- podrán emplearse también para remitir boletines (newsletters), así como
+                        comunicaciones comerciales de promociones y/o publicidad de la Aplicación, siempre y cuando,
+                        el Usuario haya prestado previamente su consentimiento expreso para la recepción de estas
+                        comunicaciones vía electrónica.</p>
+                    <p class="h2"><strong>3. Legitimación</strong></p>
+                    <p>El tratamiento de los datos del Usuario, se realiza con las siguientes bases jurídicas que
+                        legitiman el mismo:</p>
+                    <ul>
+                        <li>
+                            <p>La solicitud de información y/o la contratación de los servicios de la Aplicación,
+                                cuyos términos y condiciones se pondrán a disposición del Usuario en todo caso, con
+                                carácter previo, para su expresa aceptación.</p>
+                        </li>
+                        <li>
+                            <p>El consentimiento libre, específico, informado e inequívoco del Usuario, poniendo a
+                                su disposición la presente política de privacidad, que deberá aceptar mediante una
+                                declaración o una clara acción afirmativa, como el marcado de una casilla dispuesta
+                                al efecto.</p>
+                        </li>
+                    </ul>
+                    <p>En caso de que el Usuario no facilite a XXXEMPRESAXXX sus datos, o lo haga de forma errónea o
+                        incompleta, no será posible proceder al uso de la Aplicación.</p>
+                    <p class="h2"><strong>4. Conservación de los datos personales</strong></p>
+                    <p>Los datos personales proporcionados por el Usuario, se conservarán en los sistemas y bases de
+                        datos del Responsable del Tratamiento, mientras aquél continúe haciendo uso de la
+                        Aplicación, y siempre que no solicite su supresión.</p>
+                    <p>Con el objetivo de depurar las posibles responsabilidades derivadas del tratamiento, los
+                        datos se conservarán por un período mínimo de cinco años.</p>
+                    <p class="h2"><strong>5. Destinatarios</strong></p>
+                    <p>Los datos no se comunicarán a ningún tercero ajeno a XXXEMPRESAXXX, salvo obligación legal o
+                        en cualquier caso, previa solicitud del consentimiento del Usuario.</p>
+                    <p>De otra parte, XXXEMPRESAXXX podrá dar acceso o transmitir los datos personales facilitados
+                        por el Usuario, a terceros proveedores de servicios, con los que haya suscrito acuerdos de
+                        encargo de tratamiento de datos, y que únicamente accedan a dicha información para prestar
+                        un servicio en favor y por cuenta del Responsable.</p>
+                    <p class="h2"><strong>6. Retención de datos</strong></p>
+                    <p>XXXEMPRESAXXX, informa al Usuario de que, como prestador de servicio de alojamiento de datos
+                        y en virtud de lo establecido en la Ley 34/2002 de 11 de julio de Servicios de la Sociedad
+                        de la Información y de Comercio Electrónico (LSSI), retiene por un período máximo de 12
+                        meses la información imprescindible para identificar el origen de los datos alojados y el
+                        momento en que se inició la prestación del servicio.</p>
+                    <p>La retención de estos datos no afecta al secreto de las comunicaciones y sólo podrán ser
+                        utilizados en el marco de una investigación criminal o para la salvaguardia de la seguridad
+                        pública, poniéndose a disposición de los jueces y/o tribunales o del Ministerio que así los
+                        requiera.</p>
+                    <p>La comunicación de datos a las Fuerzas y Cuerpos de Seguridad del Estado, se hará en virtud
+                        de lo dispuesto por la normativa sobre protección de datos personales, y bajo el máximo
+                        respeto a la misma.</p>
+                    <p class="h2"><strong>7. Protección de la información alojada</strong></p>
+                    <p>El Responsable del Tratamiento, adopta las medidas necesarias para garantizar la seguridad,
+                        integridad y confidencialidad de los datos conforme a lo dispuesto en el Reglamento (UE)
+                        2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la
+                        protección de las personas físicas en lo que respecta al tratamiento de datos personales y a
+                        la libre circulación de los mismos.</p>
+                    <p>Si bien el Responsable, realiza copias de seguridad de los contenidos alojados en sus
+                        servidores, sin embargo no se responsabiliza de la pérdida o el borrado accidental de los
+                        datos por parte de los Usuarios. De igual manera, no garantiza la reposición total de los
+                        datos borrados por los Usuarios, ya que los citados datos podrían haber sido suprimidos y/o
+                        modificados durante el periodo de tiempo transcurrido desde la última copia de
+                        seguridad.</p>
+                    <p>Los servicios facilitados o prestados a través de la Aplicación, excepto los servicios
+                        específicos de backup, no incluyen la reposición de los contenidos conservados en las copias
+                        de seguridad realizadas por el Responsable del Tratamiento, cuando esta pérdida sea
+                        imputable al usuario; en este caso, se determinará una tarifa acorde a la complejidad y
+                        volumen de la recuperación, siempre previa aceptación del usuario. La reposición de datos
+                        borrados sólo está incluida en el precio del servicio cuando la pérdida del contenido sea
+                        debida a causas atribuibles al Responsable.</p>
+                    <p class="h2"><strong>8. Ejercicio de derechos</strong></p>
+                    <p>XXXEMPRESAXXX, informa al Usuario de que le asisten los derechos de acceso, rectificación,
+                        limitación, supresión, oposición y portabilidad, los cuales podrá ejercitar mediante
+                        petición dirigida al correo electrónico: _____________________________</p>
+                    <p>Asimismo, el Usuario tiene derecho a revocar el consentimiento inicialmente prestado, y a
+                        interponer reclamaciones de derechos frente a la Agencia Española de Protección de Datos
+                        (AEPD).</p>
+                    <p class="h2"><strong>9. Comunicaciones comerciales por vía electrónica</strong></p>
+                    <p>En aplicación de la LSSI (Ley de Servicios de la Sociedad de la Información), XXXEMPRESAXXX,
+                        no enviará comunicaciones publicitarias o promocionales por correo electrónico u otro medio
+                        de comunicación electrónica equivalente que previamente no hubieran sido solicitadas o
+                        expresamente autorizadas por los destinatarios de las mismas.</p>
+                    <p>En el caso de usuarios con los que exista una relación contractual, jurídica o de servicios
+                        previa, el Responsable del Tratamiento, sí está autorizado al envío de comunicaciones
+                        comerciales referentes a productos o servicios del Responsable que sean similares a los que
+                        inicialmente fueron objeto de contratación con el cliente.</p>
+                    <p>En caso de que el Usuario quiera darse de baja a la hora de recibir las citadas
+                        comunicaciones, podrá hacerlo remitiendo su voluntad por e-mail al correo electrónico:
+                        ____________________________________.</p>
                 </div>
             </div>
         </div>
