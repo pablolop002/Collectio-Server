@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
