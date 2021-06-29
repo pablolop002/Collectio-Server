@@ -111,14 +111,14 @@ CREATE TABLE `ItemImages`
 DROP TABLE IF EXISTS `Items`;
 CREATE TABLE `Items`
 (
-    `Id`            int(11)   NOT NULL,
-    `CollectionId`  int(11)   NOT NULL,
-    `SubcategoryId` int(11)        DEFAULT NULL,
-    `Name`          text      NOT NULL,
-    `Description`   text           DEFAULT NULL,
-    `Private`       tinyint(1)     DEFAULT '1',
-    `CreatedAt`     timestamp NULL DEFAULT NULL,
-    `UpdatedAt`     timestamp NULL DEFAULT NULL
+    `Id`            int(11)    NOT NULL,
+    `CollectionId`  int(11)    NOT NULL,
+    `SubcategoryId` int(11)             DEFAULT NULL,
+    `Name`          text       NOT NULL,
+    `Description`   text                DEFAULT NULL,
+    `Private`       tinyint(1) NOT NULL DEFAULT '1',
+    `CreatedAt`     timestamp  NULL     DEFAULT NULL,
+    `UpdatedAt`     timestamp  NULL     DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
