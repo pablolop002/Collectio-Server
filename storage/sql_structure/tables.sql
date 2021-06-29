@@ -75,15 +75,15 @@ VALUES (1, NULL, 'Antigüedades', 'Antiques', '', ''),
 DROP TABLE IF EXISTS `Collections`;
 CREATE TABLE `Collections`
 (
-    `Id`          int(11)   NOT NULL,
-    `CategoryId`  int(11)   NOT NULL,
-    `UserId`      int(11)   NOT NULL,
-    `Name`        text      NOT NULL,
-    `Description` text           DEFAULT NULL,
-    `Image`       varchar(255)   DEFAULT NULL,
-    `Private`     tinyint(1)     DEFAULT '1',
-    `CreatedAt`   timestamp NULL DEFAULT NULL,
-    `UpdatedAt`   timestamp NULL DEFAULT NULL
+    `Id`          int(11)    NOT NULL,
+    `CategoryId`  int(11)    NOT NULL,
+    `UserId`      int(11)    NOT NULL,
+    `Name`        text       NOT NULL,
+    `Description` text                DEFAULT NULL,
+    `Image`       varchar(255)        DEFAULT NULL,
+    `Private`     tinyint(1) NOT NULL DEFAULT '1',
+    `CreatedAt`   timestamp  NULL     DEFAULT NULL,
+    `UpdatedAt`   timestamp  NULL     DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
