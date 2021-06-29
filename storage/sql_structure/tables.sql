@@ -1,7 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.1.0
--- https://www.phpmyadmin.net/
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -15,7 +11,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `collectio`
 --
-CREATE DATABASE IF NOT EXISTS `collectio` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `collectio` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `collectio`;
 
 -- --------------------------------------------------------
@@ -131,7 +127,7 @@ CREATE TABLE `Items`
 DROP TABLE IF EXISTS `MobileSessions`;
 CREATE TABLE `MobileSessions`
 (
-    `Token`          varchar(255) NOT NULL,
+    `Token`          varchar(191) NOT NULL,
     `UserId`         int(11)      NOT NULL,
     `CreatedAt`      timestamp    NULL DEFAULT CURRENT_TIMESTAMP,
     `UsedAt`         timestamp    NULL DEFAULT NULL,
@@ -237,9 +233,9 @@ CREATE TABLE `Users`
     `Nickname`    varchar(255) DEFAULT NULL,
     `Mail`        varchar(255) DEFAULT NULL,
     `Image`       varchar(255) DEFAULT NULL,
-    `AppleId`     varchar(255) DEFAULT NULL,
-    `GoogleId`    varchar(255) DEFAULT NULL,
-    `MicrosoftId` varchar(255) DEFAULT NULL,
+    `AppleId`     varchar(191) DEFAULT NULL,
+    `GoogleId`    varchar(191) DEFAULT NULL,
+    `MicrosoftId` varchar(191) DEFAULT NULL,
     `IsAdmin`     tinyint(1)   DEFAULT 0 NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
