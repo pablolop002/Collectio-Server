@@ -349,26 +349,26 @@ ALTER TABLE `Users`
 -- Constraints for table `Collections`
 --
 ALTER TABLE `Collections`
-    ADD CONSTRAINT `Collections_Categories_Id_fk` FOREIGN KEY (`CategoryId`) REFERENCES `Categories` (`Id`),
-    ADD CONSTRAINT `Collections_Users_Id_fk` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`);
+    ADD CONSTRAINT `Collections_Categories_Id_fk` FOREIGN KEY (`CategoryId`) REFERENCES `Categories` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `Collections_Users_Id_fk` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ItemImages`
 --
 ALTER TABLE `ItemImages`
-    ADD CONSTRAINT `ItemImages_Items_Id_fk` FOREIGN KEY (`ItemId`) REFERENCES `Items` (`Id`);
+    ADD CONSTRAINT `ItemImages_Items_Id_fk` FOREIGN KEY (`ItemId`) REFERENCES `Items` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Items`
 --
 ALTER TABLE `Items`
-    ADD CONSTRAINT `Items_Collections_Id_fk` FOREIGN KEY (`CollectionId`) REFERENCES `Collections` (`Id`);
+    ADD CONSTRAINT `Items_Collections_Id_fk` FOREIGN KEY (`CollectionId`) REFERENCES `Collections` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `MobileSessions`
 --
 ALTER TABLE `MobileSessions`
-    ADD CONSTRAINT `MobileSessions_Users_Id_fk` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`);
+    ADD CONSTRAINT `MobileSessions_Users_Id_fk` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Subcategories`
