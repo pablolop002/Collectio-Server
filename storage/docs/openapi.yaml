@@ -127,19 +127,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
-          description: api token
+          description: Categories
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListCategories"
+                $ref: "#/components/responses/Categories"
+              example:
+                code: 200
+                status: "ok"
+                message: ""
+                data: [{id: 1, image: "image.png", spanish: "Categoría", english: "Category", catalan: "", basque: ""}]
   /subcategories:
     get:
       tags:
@@ -152,19 +165,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListSubcategories"
+                $ref: "#/components/responses/Subcategories"
   /user:
     get:
       tags:
@@ -178,13 +199,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: user
           content:
@@ -210,13 +239,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: User
           content:
@@ -236,13 +273,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: user
           content:
@@ -262,19 +307,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListApiKeys"
+                $ref: "#/components/responses/ApiKeys"
     post:
       tags:
         - apiKeys
@@ -294,13 +347,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
@@ -327,13 +388,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
@@ -348,7 +417,7 @@ paths:
       description: ""
       operationId: listCollections
       parameters:
-        - name: categoryId
+        - name: category
           in: query
           description: Filter collections by category id
           required: false
@@ -356,7 +425,7 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: collectionId
+        - name: collection
           in: query
           description: Filter collections by collection id
           required: false
@@ -384,13 +453,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
@@ -416,13 +493,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
@@ -448,13 +533,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
@@ -482,13 +575,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: api token
           content:
@@ -503,7 +604,7 @@ paths:
       description: ""
       operationId: listItems
       parameters:
-        - name: collectionId
+        - name: collection
           in: query
           description: Filter items by collection id
           required: false
@@ -511,7 +612,7 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: itemId
+        - name: item
           in: query
           description: Filter items by item id
           required: false
@@ -526,7 +627,7 @@ paths:
           schema:
             type: boolean
             default: false
-        - name: subcategoryId
+        - name: subcategory
           in: query
           description: Filter items by subcategory id
           required: false
@@ -547,13 +648,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: items
           content:
@@ -579,13 +688,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: item
           content:
@@ -611,13 +728,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: item
           content:
@@ -645,13 +770,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: item
           content:
@@ -680,13 +813,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: item images
           content:
@@ -712,13 +853,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: item image
           content:
@@ -746,13 +895,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/InternalError"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ForbiddenBasicAuth"
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
         "200":
           description: item
           content:
@@ -769,42 +926,145 @@ components:
       in: header
       name: Token
   responses:
-    ForbiddenBasicAuth:
-      $ref: "#/components/schemas/ResponseWS"
-      # Code 403, Status: 'KO'
-    NotFound:
-      $ref: "#/components/schemas/ResponseWS"
-      # Code 404, Status: 'KO'
-    InternalError:
-      $ref: "#/components/schemas/ResponseWS"
-      # Code 500, Status: 'KO'
-    ErrorLogin:
-      $ref: "#/components/schemas/ResponseWS"
-      # ?error=
-    CorrectLogin:
-      $ref: "#/components/schemas/ResponseWS"
-      # ?access_token=
-  requestBodies:
-    ModifyUser:
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/User"
-      description: List of user object
-      required: true
-    Pet:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Pet"
-        application/xml:
-          schema:
-            $ref: "#/components/schemas/Pet"
-      description: Pet object that needs to be added to the store
-      required: true
+    Error:
+      $ref: "#/components/schemas/ResponseWSError"
+    Categories:
+      $ref: "#/components/schemas/ResponseWSCategories"
+    Subcategories:
+      $ref: "#/components/schemas/ResponseWSSubcategories"
+    User:
+      $ref: "#/components/schemas/ResponseWSUser"
+    ApiKeys:
+      $ref: "#/components/schemas/ResponseWSApiKeys"
+    Collections:
+      $ref: "#/components/schemas/ResponseWSCollections"
+    Items:
+      $ref: "#/components/schemas/ResponseWSItems"
+    ItemImages:
+      $ref: "#/components/schemas/ResponseWSItemImages"
   schemas:
+    ResponseWSError:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+    ResponseWSCategories:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+    ResponseWSSubcategories:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Subcategory"
+    ResponseWSUser:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/User"
+    ResponseWSApiKeys:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Apikey"
+    ResponseWSCollections:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Collection"
+    ResponseWSItems:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+    ResponseWSItemImages:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemImage"
     ResponseWS:
       type: object
       properties:
@@ -864,8 +1124,8 @@ components:
         CategoryId:
           type: integer
           format: int64
-        Image:
-          type: string
+#        Image:
+#          type: string
         Spanish:
           type: string
         English:
@@ -952,9 +1212,11 @@ components:
           type: string
         Image:
           type: string
-        Apple:
+        AppleId:
           type: boolean
-        Google:
+        GoogleId:
+          type: boolean
+        MicrosoftId:
           type: boolean
     Apikey:
       type: object
