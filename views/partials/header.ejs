@@ -60,14 +60,9 @@
                     <a class="btn btn-outline-danger action-button align-middle" role="button" href="/logout">
                         <%= __('signOut') %>
                     </a>
-                <% } else { %>
-                    <a class="btn btn-outline-light action-button primary-border-button" role="button"
-                       href="/login/apple">
-                        <i class="fab fa-apple"></i> <%= __('signInApple') %>
-                    </a>
-                    <a class="btn btn-outline-light action-button primary-border-button" role="button"
-                       href="/login/google">
-                        <i class="fab fa-google"></i> <%= __('signInGoogle') %>
+                <% /*} else if (current !== 'sign-in') {*/ %>
+                    <a class="btn btn-outline-primary action-button align-middle" role="button" href="/login">
+                        <%= __('signIn') %>
                     </a>
                 <% } %>
             </div>
