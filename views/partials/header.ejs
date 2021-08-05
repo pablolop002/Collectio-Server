@@ -50,12 +50,14 @@
             </ul>
             <div class="ms-md-auto navbar-text actions">
                 <% if (locals.user) { %>
-                    <a class="btn" href="/profile">
-                        <img class="img-circle" width="50" height="50"
-                             <% if (locals.user.Image) { %>src="/images/user<%= locals.user.Id %>/<%= locals.user.Image %>"
-                             <% } else { %>src="/images/default-profile.png"
-                                <% } %>
-                             alt="<%= __('profileImage') %>">
+                    <a class="btn" href="/profile" style="font-size: 50px">
+                        <% if (locals.user.Image) { %>
+                            <img class="img-circle" width="50" height="50"
+                                 src="/images/user<%= locals.user.Id %>/<%= locals.user.Image %>"
+                                 alt="<%= __('profileImage') %>">
+                        <% } else { %>
+                            <i class="fas fa-user-circle"></i>
+                        <% } %>
                     </a>
                     <a class="btn btn-outline-danger action-button align-middle" role="button" href="/logout">
                         <%= __('signOut') %>
