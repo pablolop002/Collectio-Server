@@ -195,7 +195,7 @@ api.use(function (request, response) {
 });
 
 // Error 500
-api.use(function (error, request, response) {
+api.use(function (error, request, response, next) {
   response.json({
     status: "ko",
     code: 500,
