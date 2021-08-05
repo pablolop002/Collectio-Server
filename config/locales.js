@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   lang: {
-    locales: ["en", "es", "ca"],
+    locales: [/*"en",*/ "es" /*, "ca", "eu"*/],
     defaultLocale: "es",
     retryInDefaultLocale: true,
     cookie: "langCookie",
