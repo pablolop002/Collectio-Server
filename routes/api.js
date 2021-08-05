@@ -97,7 +97,8 @@ api.use(function (request, response, next) {
 
   if (!token || token !== conf.authApi) {
     response.status(403);
-    response.render("error", { current: "error", errorCode: 403 });
+    response.render("pages/error", { current: "error", errorCode: 403 });
+    return;
   }
 
   request.mobileAuth = true;
