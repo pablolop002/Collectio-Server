@@ -41,21 +41,24 @@ paths:
         "500":
           description: Internal Error
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/responses/ErrorLogin"
+                type: string
+                example: collectioapp://#?err=Localized_error_message
         "403":
           description: Forbidden
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/responses/ErrorLogin"
+                type: string
+                example: collectioapp://#?err=Localized_error_message
         "200":
           description: api token
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/responses/CorrectLogin"
+                type: string
+                example: collectioapp://#?access_token=token
   /login/google:
     get:
       tags:
@@ -66,21 +69,52 @@ paths:
         "500":
           description: Internal Error
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/responses/ErrorLogin"
+                type: string
+                example: collectioapp://#?err=Localized_error_message
         "403":
           description: Forbidden
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/responses/ErrorLogin"
+                type: string
+                example: collectioapp://#?err=Localized_error_message
         "200":
           description: api token
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/responses/CorrectLogin"
+                type: string
+                example: collectioapp://#?access_token=token
+  /login/microsoft:
+    get:
+      tags:
+        - login
+      summary: Microsoft login
+      operationId: microsoftLogin
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "403":
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "200":
+          description: api token
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?access_token=token
   /categories:
     get:
       tags:
