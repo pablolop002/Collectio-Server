@@ -59,6 +59,9 @@ app.use(function (request, response, next) {
   if (request.user) {
     response.locals.user = request.user;
   }
+
+  response.locals.domain = conf.domain;
+
   next();
 });
 
