@@ -2,6 +2,11 @@
     border-radius: 50%;
 }
 
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 .section {
     padding-bottom: 40px;
 }
