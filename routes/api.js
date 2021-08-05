@@ -177,9 +177,6 @@ api.use(function (request, response, next) {
   }
 });
 
-// Static Content
-api.use("/images", express.static(path.join(__basedir, "storage", "images")));
-
 // Routes
 api.use("/user", apiUserRouter);
 api.use("/collections", apiCollectionsRouter);
