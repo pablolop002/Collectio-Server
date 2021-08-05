@@ -101,7 +101,7 @@ app.use(function (request, response) {
 });
 
 // Error 500
-app.use(function (error, request, response) {
+app.use(function (error, request, response, next) {
   let file = path.join(
     __basedir,
     "storage",
