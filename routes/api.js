@@ -70,6 +70,26 @@ api.post("/login/apple/callback", function (request, response, next) {
   })(request, response, next);
 });
 
+// Microsoft API Auth
+api.get("/login/microsoft", passport.authenticate("MicrosoftMobile"));
+
+api.get(
+  "/login/microsoft/callback",
+  passport.authenticate("MicrosoftMobile"),
+  function (request, response) {
+    daoUsers.createApikey(request.user.Id, function (err, token) {
+      if (err) {
+        response.redirect("collectioapp://#?err=" + err);
+      } else {
+        response.redirect("collectioapp://#?access_token=" + token);
+      }
+    });
+  }
+);
+
+// Static Content
+api.use("/images", express.static(path.join(__basedir, "storage", "images")));
+
 // Check Authorization
 api.use(function (request, response, next) {
   let token = request.header("Authorization"),
