@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest",
+    "test": "jest --coverage",
     "restart": "touch ./tmp/restart.txt",
     "lint:ejs": "find views/ -type f -iname '*.ejs' -exec bash -c \"./node_modules/.bin/ejslint '{}'\" \\;"
   },
