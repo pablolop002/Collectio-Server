@@ -39,7 +39,7 @@ passport.use(
   )
 );
 
-/*passport.use(
+passport.use(
   "Microsoft",
   new MicrosoftStrategy(
     {
@@ -67,7 +67,7 @@ passport.use(
       daoUser.addOrUpdateMicrosoft(profile.id, profile.emails[0].value, cb);
     }
   )
-);*/
+);
 
 /*passport.use(
   "Apple",
