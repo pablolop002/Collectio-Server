@@ -50,7 +50,7 @@ const usersApi = express.Router();
 usersApi.get("/", function (request, response, next) {
   response.json({
     status: "ok",
-    code: 0,
+    code: 1,
     data: {
       Nickname: request.user.Nickname,
       Mail: request.user.Mail,
