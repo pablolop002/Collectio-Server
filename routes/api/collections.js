@@ -187,7 +187,7 @@ collectionsApi.put(
       CategoryId: request.body.CategoryId,
       UserId: request.user.Id,
       Name: request.body.Name,
-      Desription: request.body.Description,
+      Description: request.body.Description,
       Image: request.file != null ? request.file.filename : null,
       Private: request.body.Private,
     };
