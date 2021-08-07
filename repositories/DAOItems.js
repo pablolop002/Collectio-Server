@@ -211,8 +211,8 @@ class DAOItems {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
         connection.query(
-          "INSERT INTO ItemImages(ItemId, Image) VALUES (?, ?)",
-          [itemImages.ItemId, itemImages.Image],
+          "SELECT Id as ServerId, ItemId as ItemServerId, Image FROM ItemImages WHERE ItemId = ?",
+          [item],
           function (err, data) {
             connection.release();
             if (err) {
