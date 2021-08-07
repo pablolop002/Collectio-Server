@@ -54,8 +54,8 @@ collectionsApi.get("/", function (request, response, next) {
       ? null
       : request.user.Id;
   let category = request.query.categoryId ? request.query.categoryId : null;
-  let collection = request.query.collectionId
-    ? request.query.collectionId
+  let collection = request.query.collectionServerId
+    ? request.query.collectionServerId
     : null;
   let withChildren = request.query.withChildren
     ? request.query.withChildren
