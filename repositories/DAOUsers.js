@@ -147,6 +147,75 @@ class DAOUsers {
     });
   }
 
+  addOrUpdateMicrosoft(microsoftToken, mail, callback) {
+    this.pool.getConnection(function (err, connection) {
+      if (err) {
+        callback(err);
+      } else {
+        connection.query(
+          "SELECT * FROM Users WHERE MicrosoftId = ? OR Mail = ?",
+          [microsoftToken, mail],
+          function (err, tempUser) {
+            if (err) {
+              connection.release();
+              callback(err);
+            } else {
+              if (tempUser.length > 0) {
+                connection.query(
+                  "UPDATE Users SET MicrosoftId = ? WHERE Id = ?",
+                  [microsoftToken, tempUser[0].Id],
+                  function (err, dataInsert) {
+                    if (err) {
+                      connection.release();
+                      callback(err);
+                    } else {
+                      connection.query(
+                        "SELECT * FROM Users WHERE Id = ?",
+                        [tempUser[0].Id],
+                        function (err, user) {
+                          connection.release();
+                          if (err) {
+                            callback(err);
+                          } else {
+                            callback(null, user[0]);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+              } else {
+                connection.query(
+                  "INSERT INTO Users(MicrosoftId, Mail) VALUES (?, ?)",
+                  [microsoftToken, mail],
+                  function (err, dataInsert) {
+                    connection.release();
+                    if (err) {
+                      callback(err);
+                    } else {
+                      connection.query(
+                        "SELECT * FROM Users WHERE Id = ?",
+                        [dataInsert.insertId],
+                        function (err, user) {
+                          connection.release();
+                          if (err) {
+                            callback(err);
+                          } else {
+                            callback(null, user[0]);
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+              }
+            }
+          }
+        );
+      }
+    });
+  }
+
   updateUser(user, callback) {
     this.pool.getConnection(function (err, connection) {
       if (err) {
