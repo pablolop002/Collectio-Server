@@ -55,9 +55,7 @@ usersApi.get("/", function (request, response, next) {
       ServerId: request.user.UserId,
       Nickname: request.user.Nickname,
       Mail: request.user.Mail,
-      Image: request.user.Image
-        ? "/images/user" + request.user.Id + "/" + request.user.Image
-        : "/images/default_profile.png",
+      Image: request.user.Image ? request.user.Image : null,
       Apple: !!request.user.AppleId,
       Google: !!request.user.GoogleId,
     },
