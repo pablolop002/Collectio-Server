@@ -53,8 +53,10 @@ const itemsApi = express.Router();
 
 itemsApi.get("/", function (request, response, next) {
   let user = request.query.others ? null : request.user.Id;
-  let collection = request.query.collection ? request.query.collection : null;
-  let item = request.query.item ? request.query.item : null;
+  let collection = request.query.collectionServerId
+    ? request.query.collectionServerId
+    : null;
+  let item = request.query.itemServerId ? request.query.itemServerId : null;
   let withChildren = request.query.withChildren
     ? request.query.withChildren
     : null;
