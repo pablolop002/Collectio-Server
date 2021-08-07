@@ -59,9 +59,9 @@ class DAOCollections {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
         let query =
-          "SELECT c.Id as ServerCollectionId, c.CategoryId, c.UserId, c.Name as CategoryName," +
-          " c.Description as CategoryDescription, c.Image as CategoryImage, c.Private as CategoryPrivate," +
-          " c.CreatedAt as CategoryCreatedAt, c.UpdatedAt as CategoryUpdatedAt," +
+          "SELECT c.Id as ServerCollectionId, c.CategoryId, c.UserId, c.Name as CollectionName," +
+          " c.Description as CollectionDescription, c.Image as CollectionImage, c.Private as CollectionPrivate," +
+          " c.CreatedAt as CollectionCreatedAt, c.UpdatedAt as CollectionUpdatedAt," +
           " i.Id as ServerItemId, i.SubcategoryId, i.Name as ItemName, i.Description as ItemDescription," +
           " i.CreatedAt as ItemCreatedAt, i.UpdatedAt as ItemUpdatedAt, i.Private as ItemPrivate," +
           " ii.Id as ServerItemImageId, ii.Image as ItemImage" +

@@ -97,20 +97,20 @@ collectionsApi.get("/", function (request, response, next) {
               let collection = {
                 ServerId: current.ServerCollectionId,
                 CategoryId: current.CategoryId,
-                UserId: current.UserId,
-                Name: current.CategoryName,
-                Description: current.CategoryDescription,
-                Image: current.CategoryImage,
-                Private: current.CategoryPrivate,
-                CreatedAt: current.CategoryCreatedAt,
-                UpdatedAt: current.CategoryUpdatedAt,
+                UserServerId: current.UserId,
+                Name: current.CollectionName,
+                Description: current.CollectionDescription,
+                Image: current.CollectionImage,
+                Private: current.CollectionPrivate,
+                CreatedAt: current.CollectionCreatedAt,
+                UpdatedAt: current.CollectionUpdatedAt,
                 Items: [],
               };
 
               if (current.ServerItemId != null) {
                 collection.Items.push({
                   ServerId: current.ServerItemId,
-                  CollectionId: current.ServerCollectionId,
+                  CollectionServerId: current.ServerCollectionId,
                   SubcategoryId: current.SubcategoryId,
                   Name: current.ItemName,
                   Description: current.ItemDescription,
@@ -123,7 +123,7 @@ collectionsApi.get("/", function (request, response, next) {
                 if (current.ServerItemImageId != null) {
                   collection.Items[0].Images.push({
                     ServerId: current.ServerItemImageId,
-                    ItemId: current.ServerItemId,
+                    ItemServerId: current.ServerItemId,
                     Image: current.ItemImage,
                   });
                 }
