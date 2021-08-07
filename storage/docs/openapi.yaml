@@ -420,7 +420,7 @@ paths:
       description: List collections
       operationId: listCollections
       parameters:
-        - name: category
+        - name: categoryId
           in: query
           description: Filter collections by category id
           required: false
@@ -428,7 +428,7 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: collection
+        - name: collectionServerId
           in: query
           description: Filter collections by collection id
           required: false
@@ -608,7 +608,7 @@ paths:
       description: List items
       operationId: listItems
       parameters:
-        - name: collection
+        - name: collectionServerId
           in: query
           description: Filter items by collection id
           required: false
@@ -616,7 +616,7 @@ paths:
           schema:
             type: integer
             format: int64
-        - name: item
+        - name: itemServerId
           in: query
           description: Filter items by item id
           required: false
@@ -804,7 +804,7 @@ paths:
       description: List item images
       operationId: listItemImages
       parameters:
-        - name: ItemId
+        - name: ItemServerId
           in: query
           description: Filter item images by item id
           required: true
