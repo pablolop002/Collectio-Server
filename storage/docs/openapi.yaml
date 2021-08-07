@@ -450,6 +450,13 @@ paths:
           schema:
             type: boolean
             default: false
+        - name: lastSync
+          in: query
+          description: Return collections created or updated after value
+          required: false
+          schema:
+            type: string
+            format: DateTime
       responses:
         "500":
           description: Internal Error
