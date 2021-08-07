@@ -638,14 +638,14 @@ paths:
           schema:
             type: boolean
             default: false
-        - name: subcategory
-          in: query
-          description: Filter items by subcategory id
-          required: false
-          explode: true
-          schema:
-            type: integer
-            format: int64
+#        - name: subcategoryId
+#          in: query
+#          description: Filter items by subcategory id
+#          required: false
+#          explode: true
+#          schema:
+#            type: integer
+#            format: int64
         - name: withChildren
           in: query
           description: Return collections with childrens
