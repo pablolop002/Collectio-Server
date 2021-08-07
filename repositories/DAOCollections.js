@@ -113,7 +113,7 @@ class DAOCollections {
             collection.Name,
             collection.Description,
             collection.Image,
-            collection.Private,
+            collection.Private === "false" ? 0 : 1,
             new Date(),
             new Date(),
           ],
