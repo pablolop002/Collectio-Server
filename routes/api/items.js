@@ -211,9 +211,9 @@ itemsApi.put(
 );
 
 itemsApi.post("/", itemImages.none(), function (request, response, next) {
-  if (request.body.ItemId) {
+  if (request.body.ItemServerId) {
     daoItems.getItem(
-      request.body.ItemId,
+      request.body.ItemServerId,
       request.user.Id,
       function (err, itemCheck) {
         if (err) {
@@ -221,8 +221,8 @@ itemsApi.post("/", itemImages.none(), function (request, response, next) {
         } else {
           if (itemCheck != null && itemCheck[0]) {
             let item = {
-              Id: request.body.ServerId,
-              CollectionId: request.body.CollectionId,
+              Id: itemCheck[0].Id,
+              CollectionId: itemCheck[0].CollectionId,
             };
 
             if (request.body.Name) item.Name = request.body.Name;
@@ -235,7 +235,8 @@ itemsApi.post("/", itemImages.none(), function (request, response, next) {
                 next(err);
               } else {
                 response.json({
-                  //ToDo: Edit item
+                  status: "ok",
+                  code: 1,
                 });
               }
             });
