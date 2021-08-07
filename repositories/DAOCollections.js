@@ -134,51 +134,40 @@ class DAOCollections {
       if (err) {
         callback(err);
       } else {
-        connection.query(
-          "SELECT * FROM Collections WHERE Id = ? AND UserId = ?",
-          [collection.Id, collection.UserId],
-          function (err, oldCollection) {
-            if (err) {
-              callback(err);
-            } else {
-              let query = "UPDATE Collections SET UpdatedAt = ?";
-              let values = [];
-              values.push(new Date());
+        let query = "UPDATE Collections SET UpdatedAt = ?";
+        let values = [new Date()];
 
-              if (collection.Name) {
-                query += ", Name = ?";
-                values.push(collection.Name);
-              }
+        if (collection.Name) {
+          query += ", Name = ?";
+          values.push(collection.Name);
+        }
 
-              if (collection.Description) {
-                query += ", Description = ?";
-                values.push(collection.Description);
-              }
+        if (collection.Description) {
+          query += ", Description = ?";
+          values.push(collection.Description);
+        }
 
-              if (collection.Image) {
-                query += ", Image = ?";
-                values.push(collection.Image);
-              }
+        if (collection.Image) {
+          query += ", Image = ?";
+          values.push(collection.Image);
+        }
 
-              if (collection.Private) {
-                query += ", Private = ?";
-                values.push(collection.Private);
-              }
+        if (collection.Private) {
+          query += ", Private = ?";
+          values.push(collection.Private);
+        }
 
-              query += " WHERE Id = ? AND UserId = ?";
-              values.push([collection.Id, collection.UserId]);
+        query += " WHERE Id = ? AND UserId = ?";
+        values.push(collection.ServerId, collection.UserId);
 
-              connection.query(query, values, function (err, data) {
-                connection.release();
-                if (err) {
-                  callback(err);
-                } else {
-                  callback(null, oldCollection[0].Image);
-                }
-              });
-            }
+        connection.query(query, values, function (err, data) {
+          connection.release();
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, data);
           }
-        );
+        });
       }
     });
   }

@@ -234,57 +234,68 @@ collectionsApi.post(
       request.user.Id,
       null,
       request.body.ServerId,
-      function (err, collection) {
+      null,
+      function (err, collections) {
         if (err) {
           next(err);
         } else {
-          if (collection[0] != null) {
+          if (collections.length > 0) {
+            let collection = collections[0];
+            let oldImage = collection.Image;
             if (request.body.Name) collection.Name = request.body.Name;
             if (request.body.Desription)
               collection.Desription = request.body.Desription;
             if (request.body.Private) collection.Private = request.body.Private;
-            if (request.file) {
-              collection.Image = request.body.file.filename;
-              let finalPath = path.join(
-                __basedir,
-                "storage",
-                "images",
-                "user" + request.user.Id,
-                "collection" + collection.Id
-              );
-              fs.mkdirsSync(finalPath);
-              fs.moveSync(
-                request.file.path,
-                path.join(finalPath, request.file.filename)
-              );
+            if (request.file && oldImage !== request.file.filename) {
+              collection.Image = request.file.filename;
+            } else {
+              collection.Image = null;
+              if (request.file) {
+                fs.removeSync(request.file.path);
+              }
             }
 
-            daoCollections.updateCollection(
-              collection,
-              function (err, oldImage) {
-                if (err) {
-                  next(err);
-                } else {
-                  if (oldImage != null) {
+            daoCollections.updateCollection(collection, function (err, data) {
+              if (err) {
+                next(err);
+              } else {
+                if (collection.Image) {
+                  let finalPath = path.join(
+                    __basedir,
+                    "storage",
+                    "images",
+                    "user" + request.user.Id,
+                    "collection" + collection.ServerId
+                  );
+
+                  fs.mkdirsSync(finalPath);
+
+                  fs.moveSync(
+                    request.file.path,
+                    path.join(finalPath, request.file.filename)
+                  );
+
+                  if (oldImage) {
                     fs.removeSync(
                       path.join(
                         __basedir,
                         "storage",
                         "images",
                         "user" + request.user.Id,
-                        "collection" + collection.Id,
+                        "collection" + collection.ServerId,
                         oldImage
                       )
                     );
                   }
-                  response.json({
-                    status: "ok",
-                    code: 1,
-                    data: collection.Id,
-                  });
                 }
+                response.json({
+                  status: "ok",
+                  code: 1,
+                  //message: _(''),
+                  data: collection.ServerId,
+                });
               }
-            );
+            });
           }
         }
       }
