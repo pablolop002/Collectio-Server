@@ -184,7 +184,28 @@ class DAOItems {
     });
   }
 
-  addItemImage(itemImages, callback) {
+  getItemImage(itemImage, callback) {
+    this.pool.getConnection(function (err, connection) {
+      if (err) {
+        callback(new Error("Error de conexión a la base de datos"));
+      } else {
+        connection.query(
+          "SELECT * FROM ItemImages WHERE Id = ?",
+          [itemImage],
+          function (err, data) {
+            connection.release();
+            if (err) {
+              callback(new Error("Error de acceso a la base de datos"));
+            } else {
+              callback(null, data);
+            }
+          }
+        );
+      }
+    });
+  }
+
+  getItemImagesFromItem(item, callback) {
     this.pool.getConnection(function (err, connection) {
       if (err) {
         callback(new Error("Error de conexión a la base de datos"));
