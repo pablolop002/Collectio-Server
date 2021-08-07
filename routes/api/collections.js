@@ -75,7 +75,7 @@ collectionsApi.get("/", function (request, response, next) {
           response.json({
             status: "ok",
             code: 1,
-            message: data,
+            data: data,
           });
         }
       }
