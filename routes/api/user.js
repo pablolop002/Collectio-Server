@@ -184,8 +184,8 @@ usersApi.post("/api-keys", profiles.none(), function (request, response, next) {
     apikey.Device = request.body.Device;
   }
 
-  if (request.body.FriendlyName) {
-    apikey.UserDeviceName = request.body.FriendlyName;
+  if (request.body.UserDeviceName) {
+    apikey.UserDeviceName = request.body.UserDeviceName;
   }
 
   daoUsers.updateApikey(apikey, function (err, data) {
