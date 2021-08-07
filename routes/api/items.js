@@ -265,6 +265,17 @@ itemsApi.delete("/:id", itemImages.none(), function (request, response, next) {
               if (err) {
                 next(err);
               } else {
+                fs.removeSync(
+                  path.join(
+                    __basedir,
+                    "storage",
+                    "images",
+                    "user" + request.user.Id,
+                    "collection" + itemCheck[0].CollectionId,
+                    "item" + itemCheck[0].Id
+                  )
+                );
+
                 response.json({
                   status: "ok",
                   code: 1,
