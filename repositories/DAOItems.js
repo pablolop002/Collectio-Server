@@ -246,6 +246,27 @@ class DAOItems {
       }
     });
   }
+
+  deleteItemImages(items, callback) {
+    this.pool.getConnection(function (err, connection) {
+      if (err) {
+        callback(new Error("Error de conexión a la base de datos"));
+      } else {
+        connection.query(
+          "DELETE FROM ItemImages WHERE Id IN (?)",
+          [items],
+          function (err, data) {
+            connection.release();
+            if (err) {
+              callback(new Error("Error de acceso a la base de datos"));
+            } else {
+              callback(null, data);
+            }
+          }
+        );
+      }
+    });
+  }
 }
 
 module.exports = DAOItems;
