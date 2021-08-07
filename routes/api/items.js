@@ -69,7 +69,7 @@ itemsApi.get("/", function (request, response, next) {
             response.json({
               status: "ok",
               code: 1,
-              message: data,
+              data: data,
             });
           }
         });
@@ -81,7 +81,7 @@ itemsApi.get("/", function (request, response, next) {
             response.json({
               status: "ok",
               code: 1,
-              message: data,
+              data: data,
             });
           }
         });
@@ -101,7 +101,7 @@ itemsApi.get("/", function (request, response, next) {
             response.json({
               status: "ok",
               code: 1,
-              message: data,
+              data: data,
             });
           }
         }
@@ -117,7 +117,7 @@ itemsApi.get("/", function (request, response, next) {
             response.json({
               status: "ok",
               code: 1,
-              message: data,
+              data: data,
             });
           }
         }
@@ -258,7 +258,6 @@ itemsApi.delete("/:id", itemImages.none(), function (request, response, next) {
                 response.json({
                   status: "ok",
                   code: 1,
-                  message: data,
                 });
               }
             });
