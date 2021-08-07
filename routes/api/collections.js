@@ -196,18 +196,20 @@ collectionsApi.put(
       if (err) {
         next(err);
       } else {
-        let finalPath = path.join(
-          __basedir,
-          "storage",
-          "images",
-          "user" + request.user.Id,
-          "collection" + collectionId
-        );
-        fs.mkdirsSync(finalPath);
-        fs.moveSync(
-          request.file.path,
-          path.join(finalPath, request.file.filename)
-        );
+        if (request.file) {
+          let finalPath = path.join(
+            __basedir,
+            "storage",
+            "images",
+            "user" + request.user.Id,
+            "collection" + collectionId.insertId
+          );
+          fs.mkdirsSync(finalPath);
+          fs.moveSync(
+            request.file.path,
+            path.join(finalPath, request.file.filename)
+          );
+        }
         response.json({
           status: "ok",
           code: 1,
