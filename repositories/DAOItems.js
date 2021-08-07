@@ -97,12 +97,13 @@ class DAOItems {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
         connection.query(
-          "INSERT INTO Items(CollectionId, Name, Description, SubcategoryId, CreatedAt, UpdatedAt) VALUES (?, ?, ?, ?, ?, ?)",
+          "INSERT INTO Items(CollectionId, Name, Description, SubcategoryId, Private, CreatedAt, UpdatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)",
           [
             item.CollectionId,
             item.Name,
             item.Description,
             item.SubcategoryId,
+            item.Private === "false" ? 0 : 1,
             new Date(),
             new Date(),
           ],
