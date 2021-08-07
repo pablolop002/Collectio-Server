@@ -1109,6 +1109,7 @@ components:
           format: int64
         Image:
           type: string
+          format: binary
         Spanish:
           type: string
         English:
@@ -1128,6 +1129,9 @@ components:
           format: int64
 #        Image:
 #          type: string
+#          format: binary
+        Fields:
+          type: string
         Spanish:
           type: string
         English:
@@ -1142,7 +1146,7 @@ components:
         ServerId:
           type: integer
           format: int64
-        UserId:
+        UserServerId:
           type: integer
           format: int64
         CategoryId:
@@ -1162,6 +1166,7 @@ components:
           format: date-time
         Image:
           type: string
+          format: binary
         Items:
           type: array
           items:
@@ -1172,7 +1177,7 @@ components:
         ServerId:
           type: integer
           format: int64
-        CollectionId:
+        CollectionServerId:
           type: integer
           format: int64
         SubcategoryId:
@@ -1200,11 +1205,12 @@ components:
         ServerId:
           type: integer
           format: int64
-        ItemId:
+        ItemServerId:
           type: integer
           format: int64
         Image:
           type: string
+          format: binary
     User:
       type: object
       properties:
@@ -1214,6 +1220,7 @@ components:
           type: string
         Image:
           type: string
+          format: binary
         AppleId:
           type: boolean
         GoogleId:
