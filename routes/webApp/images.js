@@ -13,14 +13,11 @@ imagesApp.use(function (request, response, next) {
     next();
   } else {
     response.status(403);
-    response.render("error", { current: "error", errorCode: 403 });
+    response.render("pages/error", { current: "error", errorCode: 403 });
   }
 });
 
 // Static user resources
-imagesApp.use(
-  "/images",
-  express.static(path.join(__basedir, "storage", "images"))
-);
+imagesApp.use("/", express.static(path.join(__basedir, "storage", "images")));
 
 module.exports = imagesApp;
