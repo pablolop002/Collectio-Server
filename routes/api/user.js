@@ -52,6 +52,7 @@ usersApi.get("/", function (request, response, next) {
     status: "ok",
     code: 1,
     data: {
+      ServerId: request.user.UserId,
       Nickname: request.user.Nickname,
       Mail: request.user.Mail,
       Image: request.user.Image
