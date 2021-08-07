@@ -12,17 +12,14 @@ class DAOCategories {
       if (err) {
         callback(err);
       } else {
-        connection.query(
-          "SELECT Id, Spanish, English, Catalan, Basque FROM Categories",
-          function (err, data) {
-            connection.release();
-            if (err) {
-              callback(err);
-            } else {
-              callback(null, data);
-            }
+        connection.query("SELECT * FROM Categories", function (err, data) {
+          connection.release();
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, data);
           }
-        );
+        });
       }
     });
   }
@@ -32,17 +29,14 @@ class DAOCategories {
       if (err) {
         callback(err);
       } else {
-        connection.query(
-          "SELECT Id, CategoryId, Spanish, English, Catalan, Basque FROM Subcategories",
-          function (err, data) {
-            connection.release();
-            if (err) {
-              callback(err);
-            } else {
-              callback(null, data);
-            }
+        connection.query("SELECT * FROM Subcategories", function (err, data) {
+          connection.release();
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, data);
           }
-        );
+        });
       }
     });
   }
