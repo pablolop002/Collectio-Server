@@ -17,7 +17,7 @@ const itemImages = multer({
         "storage",
         "images",
         "user" + request.user.Id,
-        "collection" + request.collection.Id,
+        //"collection" + request.collection.Id,
         "temp"
       );
       fs.mkdirsSync(dest);
