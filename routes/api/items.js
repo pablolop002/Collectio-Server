@@ -303,17 +303,20 @@ itemsApi.get("/images/", function (request, response, next) {
           next(err);
         } else {
           if (itemCheck != null && itemCheck[0]) {
-            daoItems.getItemImages(request.body.ItemId, function (err, data) {
-              if (err) {
-                next(err);
-              } else {
-                response.json({
-                  status: "ok",
-                  code: 1,
-                  message: data,
-                });
+            daoItems.getItemImagesFromItem(
+              itemCheck[0].Id,
+              function (err, data) {
+                if (err) {
+                  next(err);
+                } else {
+                  response.json({
+                    status: "ok",
+                    code: 1,
+                    data: data,
+                  });
+                }
               }
-            });
+            );
           } else {
             next(new Error(i18n.__("itemNotOwned")));
           }
