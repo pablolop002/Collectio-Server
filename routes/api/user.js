@@ -110,12 +110,7 @@ usersApi.post(
               data: {
                 Nickname: updatedUser[0].Nickname,
                 Mail: updatedUser[0].Mail,
-                Image: updatedUser[0].Image
-                  ? "/images/user" +
-                    updatedUser[0].Id +
-                    "/" +
-                    updatedUser[0].Image
-                  : "/images/default_profile.png",
+                Image: updatedUser[0].Image ? updatedUser[0].Image : null,
                 Apple: !!updatedUser[0].AppleId,
                 Google: !!updatedUser[0].GoogleId,
               },
