@@ -51,29 +51,6 @@ const daoItems = new DAOItems(database.pool);
 // Router
 const itemsApi = express.Router();
 
-/*itemsApi.use(function (request, response, next) {
-    if (request.query.collectionId) {
-        daoCollections.getCollections(request.user.Id, null, request.query.collectionId, function (err, collection) {
-            if (err) {
-                next(err);
-            } else {
-                request.collection = {
-                    'UserOwner': collection.length > 0,
-                    'Id': request.query.collectionId,
-                };
-
-                if (request.method === 'post' && collection.length > 0) {
-                    next();
-                } else {
-                    next(new Error(i18n.__('collectionNotOwned')));
-                }
-            }
-        });
-    } else {
-        next(new Error(i18n.__('noCollectionId')));
-    }
-});*/
-
 itemsApi.get("/", function (request, response, next) {
   let user = request.query.others ? null : request.user.Id;
   let collection = request.query.collection ? request.query.collection : null;
