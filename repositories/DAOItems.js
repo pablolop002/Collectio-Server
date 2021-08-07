@@ -226,6 +226,34 @@ class DAOItems {
     });
   }
 
+  addItemImage(itemImages, callback) {
+    this.pool.getConnection(function (err, connection) {
+      if (err) {
+        callback(new Error("Error de conexión a la base de datos"));
+      } else {
+        let query = "INSERT INTO ItemImages(ItemId, Image) VALUES (?, ?)";
+        let values = [];
+
+        itemImages.forEach((elem, index, array) => {
+          if (index !== 0) {
+            query += ", (?, ?)";
+          }
+
+          values.push(elem.ItemId, elem.Image);
+        });
+
+        connection.query(query, values, function (err, data, fields) {
+          connection.release();
+          if (err) {
+            callback(new Error("Error de acceso a la base de datos"));
+          } else {
+            callback(null, data);
+          }
+        });
+      }
+    });
+  }
+
   deleteItemImage(item, callback) {
     this.pool.getConnection(function (err, connection) {
       if (err) {
