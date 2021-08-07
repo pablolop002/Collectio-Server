@@ -163,7 +163,7 @@ CREATE TABLE `Subcategories`
 INSERT INTO `Subcategories` (`Id`, `CategoryId`, `Image`, `Fields`, `Spanish`, `English`, `Catalan`, `Basque`)
 VALUES (1, 1, NULL, '', 'Muebles antiguos', '', '', ''),
        (2, 1, NULL, '', 'Porcelana y cerámica', '', '', ''),
-       (3, 1, NULL, '', 'Otros', '', '', ''),
+       (3, 1, NULL, '', 'Otros', 'Other', 'Altre', ''),
        (4, 2, NULL, '', 'Fósiles', '', '', ''),
        (5, 2, NULL, '', 'Minerales y rocas', '', '', ''),
        (6, 5, NULL, '', 'Tapones', '', '', ''),
@@ -218,7 +218,30 @@ VALUES (1, 1, NULL, '', 'Muebles antiguos', '', '', ''),
        (55, 21, NULL, '', 'Postales', '', '', ''),
        (56, 22, NULL, '', 'Relojes de pulsera', '', '', ''),
        (57, 22, NULL, '', 'Relojes de pared', '', '', ''),
-       (58, 22, NULL, '', 'Relojes de bolsillo', '', '', '');
+       (58, 22, NULL, '', 'Relojes de bolsillo', '', '', ''),
+       (59, 2, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (60, 3, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (61, 4, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (62, 5, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (63, 6, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (64, 7, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (65, 8, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (66, 9, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (67, 10, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (68, 11, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (69, 12, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (70, 13, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (71, 14, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (72, 15, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (73, 16, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (74, 17, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (75, 18, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (76, 19, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (77, 20, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (78, 21, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (79, 22, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (80, 23, NULL, '', 'Otros', 'Other', 'Altre', ''),
+       (81, 24, NULL, '', 'Otros', 'Other', 'Altre', '');
 
 -- --------------------------------------------------------
 
@@ -226,7 +249,7 @@ VALUES (1, 1, NULL, '', 'Muebles antiguos', '', '', ''),
 -- Table structure for table `Users`
 --
 
-DROP TABLE IF EXISTS `Users`;
+    DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users`
 (
     `Id`          int(11)                NOT NULL,
