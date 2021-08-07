@@ -220,7 +220,7 @@ collectionsApi.put(
 
 collectionsApi.post(
   "/",
-  collectionImages.single("Images"),
+  collectionImages.single("Image"),
   function (request, response, next) {
     if (!request.body.ServerId) {
       response.json({
