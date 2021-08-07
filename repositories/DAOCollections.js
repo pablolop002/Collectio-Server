@@ -35,7 +35,7 @@ class DAOCollections {
         }
 
         if (syncDate) {
-          query += "AND UpdatedAt > ?";
+          query += " AND UpdatedAt > ?";
           values.push(syncDate);
         }
 
