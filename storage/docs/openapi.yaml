@@ -370,6 +370,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/responses/EditApikey"
+  /user/api-keys/{token}:
     delete:
       tags:
         - apiKeys
@@ -377,7 +378,7 @@ paths:
       description: Delete token
       operationId: deleteApikey
       parameters:
-        - name: Token
+        - name: token
           in: path
           description: Token to delete
           required: true
@@ -556,6 +557,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/responses/EditCollection"
+  /collections/{id}:
     delete:
       tags:
         - collections
@@ -563,9 +565,9 @@ paths:
       description: Delete collection
       operationId: deleteCollection
       parameters:
-        - name: ServerId
+        - name: id
           in: path
-          description: Collection to delete
+          description: Collection to delete server id
           required: true
           explode: true
           schema:
@@ -751,6 +753,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/responses/EditItem"
+  /items/{id}:
     delete:
       tags:
         - items
@@ -758,9 +761,9 @@ paths:
       description: Delete item and its images
       operationId: deleteItem
       parameters:
-        - name: ServerId
+        - name: id
           in: path
-          description: Item to delete
+          description: Item to delete server id
           required: true
           explode: true
           schema:
@@ -876,6 +879,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/responses/NewItemImage"
+  /items/images/{id}:
     delete:
       tags:
         - itemImages
@@ -883,9 +887,9 @@ paths:
       description: Delete item image
       operationId: deleteItemImage
       parameters:
-        - name: ServerId
+        - name: id
           in: path
-          description: Item image to delete
+          description: Item image to delete server id
           required: true
           explode: true
           schema:
