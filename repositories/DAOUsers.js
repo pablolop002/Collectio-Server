@@ -220,8 +220,8 @@ class DAOUsers {
           "UPDATE MobileSessions SET UsedAt = current_timestamp WHERE Token = ? AND UserId = ?",
           [apikey, userId],
           function (err, updateData) {
+            connection.release();
             if (err) {
-              connection.release();
               callback(err);
             } else {
               callback(null, true);
@@ -255,8 +255,8 @@ class DAOUsers {
         values.push([session.Token, session.UserId]);
 
         connection.query(query, values, function (err, updateData) {
+          connection.release();
           if (err) {
-            connection.release();
             callback(err);
           } else {
             callback(null, updateData);
