@@ -58,6 +58,7 @@ usersApi.get("/", function (request, response, next) {
       Image: request.user.Image ? request.user.Image : null,
       Apple: !!request.user.AppleId,
       Google: !!request.user.GoogleId,
+      Microsoft: !!request.user.MicrosoftId,
     },
   });
 });
@@ -113,6 +114,7 @@ usersApi.post(
                 Image: updatedUser[0].Image ? updatedUser[0].Image : null,
                 Apple: !!updatedUser[0].AppleId,
                 Google: !!updatedUser[0].GoogleId,
+                Microsoft: !!updatedUser[0].MicrosoftId,
               },
             });
           }
@@ -150,6 +152,7 @@ usersApi.delete("/image", function (request, response, next) {
           Image: null,
           Apple: !!user.AppleId,
           Google: !!user.GoogleId,
+          Microsoft: !!user.MicrosoftId,
         },
       });
     }
