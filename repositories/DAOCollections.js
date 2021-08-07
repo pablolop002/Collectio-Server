@@ -13,8 +13,7 @@ class DAOCollections {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
         let query =
-          "SELECT Id as ServerId, UserId, Name, Description, Image, Private, CategoryId, CreatedAt, UpdatedAt FROM Collections WHERE true";
-        let orderBy = " ORDER BY UserId, ServerId";
+          "SELECT Id as ServerId, UserId as ServerUserId, Name, Description, Image, Private, CategoryId, CreatedAt, UpdatedAt FROM Collections WHERE true";
         let values = [];
 
         if (user) {
@@ -39,7 +38,7 @@ class DAOCollections {
           values.push(syncDate);
         }
 
-        query += orderBy;
+        query += " ORDER BY UserId, ServerId";
 
         connection.query(query, values, function (err, data) {
           connection.release();
