@@ -120,6 +120,7 @@ paths:
       tags:
         - basicData
       summary: Available categories
+      description: List collection categories
       operationId: categories
       responses:
         "500":
@@ -158,6 +159,7 @@ paths:
       tags:
         - basicData
       summary: Available subcategories
+      description: List item subcategories
       operationId: subcategories
       responses:
         "500":
@@ -191,7 +193,7 @@ paths:
       tags:
         - user
       summary: Get user
-      description: ""
+      description: Obtain user data
       operationId: getUser
       responses:
         "500":
@@ -224,7 +226,7 @@ paths:
       tags:
         - user
       summary: Edit user
-      description: ""
+      description: Edit user data
       operationId: editUser
       requestBody:
         description: ""
@@ -265,7 +267,7 @@ paths:
       tags:
         - user
       summary: Delete user image
-      description: ""
+      description: Delete user image
       operationId: deleteUserImage
       responses:
         "500":
@@ -299,7 +301,7 @@ paths:
       tags:
         - apiKeys
       summary: Get api keys
-      description: ""
+      description: List user tokens
       operationId: listApiKeys
       responses:
         "500":
@@ -332,7 +334,7 @@ paths:
       tags:
         - apiKeys
       summary: Edit apikey
-      description: ""
+      description: Edit user token
       operationId: editApikey
       requestBody:
         description: ""
@@ -372,7 +374,7 @@ paths:
       tags:
         - apiKeys
       summary: Delete apikey
-      description: ""
+      description: Delete token
       operationId: deleteApikey
       parameters:
         - name: Token
@@ -414,7 +416,7 @@ paths:
       tags:
         - collections
       summary: List collections
-      description: ""
+      description: List collections
       operationId: listCollections
       parameters:
         - name: category
@@ -478,7 +480,7 @@ paths:
       tags:
         - collections
       summary: New collection
-      description: ""
+      description: Add new collection
       operationId: newCollection
       requestBody:
         description: ""
@@ -518,7 +520,7 @@ paths:
       tags:
         - collections
       summary: Edit collection
-      description: ""
+      description: Edit collection data
       operationId: editCollection
       requestBody:
         description: ""
@@ -558,7 +560,7 @@ paths:
       tags:
         - collections
       summary: Delete collection
-      description: ""
+      description: Delete collection
       operationId: deleteCollection
       parameters:
         - name: ServerId
@@ -601,7 +603,7 @@ paths:
       tags:
         - items
       summary: List items
-      description: ""
+      description: List items
       operationId: listItems
       parameters:
         - name: collection
@@ -673,7 +675,7 @@ paths:
       tags:
         - items
       summary: New item
-      description: ""
+      description: Add item to collection
       operationId: newItem
       requestBody:
         description: ""
@@ -713,7 +715,7 @@ paths:
       tags:
         - items
       summary: Edit item
-      description: ""
+      description: Edit item data
       operationId: editItem
       requestBody:
         description: ""
@@ -753,7 +755,7 @@ paths:
       tags:
         - items
       summary: Delete item
-      description: ""
+      description: Delete item and its images
       operationId: deleteItem
       parameters:
         - name: ServerId
@@ -796,7 +798,7 @@ paths:
       tags:
         - itemImages
       summary: List item images
-      description: ""
+      description: List item images
       operationId: listItemImages
       parameters:
         - name: ItemId
@@ -838,7 +840,7 @@ paths:
       tags:
         - itemImages
       summary: New item image
-      description: ""
+      description: Add image to item
       operationId: newItemImage
       requestBody:
         description: ""
@@ -878,7 +880,7 @@ paths:
       tags:
         - itemImages
       summary: Delete item image
-      description: ""
+      description: Delete item image
       operationId: deleteItemImage
       parameters:
         - name: ServerId
