@@ -397,35 +397,57 @@ itemsApi.delete(
   "/images/:id",
   itemImages.none(),
   function (request, response, next) {
-    if (request.body.ItemImageId) {
-      daoItems.getItem(
-        request.body.ItemImageId,
-        request.user.Id,
-        function (err, itemImageCheck) {
-          if (err) {
-            next(err);
-          } else {
-            if (itemImageCheck != null && itemImageCheck[0]) {
-              daoItems.deleteItemImage(
-                request.body.ItemImageId,
-                function (err, data) {
-                  if (err) {
-                    next(err);
+    if (request.params.id) {
+      daoItems.getItemImage(request.params.id, function (err, itemImageCheck) {
+        if (err) {
+          next(err);
+        } else {
+          if (itemImageCheck != null && itemImageCheck[0]) {
+            daoItems.getItem(
+              itemImageCheck[0].ItemId,
+              request.user.Id,
+              function (err, itemCheck) {
+                if (err) {
+                  next(err);
+                } else {
+                  if (itemCheck != null && itemCheck[0]) {
+                    daoItems.deleteItemImage(
+                      request.params.Id,
+                      function (err, data) {
+                        if (err) {
+                          next(err);
+                        } else {
+                          fs.removeSync(
+                            path.join(
+                              __basedir,
+                              "storage",
+                              "images",
+                              "user" + request.user.Id,
+                              "collection" + itemCheck[0].CollectionId,
+                              "item" + itemCheck[0].Id,
+                              itemImageCheck[0].Image
+                            )
+                          );
+
+                          response.json({
+                            status: "ok",
+                            code: 1,
+                            message: i18n.__("correctItemImageDeleted"),
+                          });
+                        }
+                      }
+                    );
                   } else {
-                    response.json({
-                      status: "ok",
-                      code: 1,
-                      message: i18n.__("correctItemImageDeleted"),
-                    });
+                    next(new Error(i18n.__("itemNotOwned")));
                   }
                 }
-              );
-            } else {
-              next(new Error(i18n.__("itemNotOwned")));
-            }
+              }
+            );
+          } else {
+            next(new Error(i18n.__("noItemImage")));
           }
         }
-      );
+      });
     } else {
       next(new Error(i18n.__("noItemId")));
     }
