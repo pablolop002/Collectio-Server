@@ -332,53 +332,54 @@ itemsApi.put(
   "/images/",
   itemImages.array("Images", 6),
   function (request, response, next) {
-    if (request.body.ItemId) {
+    if (request.body.ItemServerId) {
       daoItems.getItem(
-        request.body.ItemId,
+        request.body.ItemServerId,
         request.user.Id,
         function (err, itemCheck) {
           if (err) {
             next(err);
           } else {
             if (itemCheck != null && itemCheck[0]) {
-              let destFolder = path.join(
-                __basedir,
-                "storage",
-                "images",
-                "user" + request.user.Id,
-                "collection" + request.collection.Id,
-                "item" + request.body.ItemId
-              );
-              request.files.forEach(function (item, index) {
-                daoItems.addItemImage(
-                  {
-                    ItemId: request.body.ItemId,
-                    Image: item.filename,
-                  },
-                  function (err, data) {
-                    if (err) {
-                      next(err);
-                    }
-                    fs.moveSync(
-                      item.path,
-                      path.join(destFolder, item.filename)
+              let itemImages = [];
+
+              request.files.forEach((elem, index, array) => {
+                itemImages[index] = {
+                  ItemId: itemCheck[0].Id,
+                  Image: elem.filename,
+                  Path: elem.path,
+                };
+              });
+
+              daoItems.addItemImage(itemImages, function (err, res) {
+                if (err) {
+                  itemImages.forEach((elem, index, array) => {
+                    fs.removeSync(elem.Path);
+                  });
+                  next(err);
+                } else {
+                  let ids = {};
+
+                  itemImages.forEach((elem, index, array) => {
+                    let finalPath = path.join(
+                      __basedir,
+                      "storage",
+                      "images",
+                      "user" + request.user.Id,
+                      "collection" + itemCheck[0].CollectionId,
+                      "item" + itemCheck[0].Id,
+                      elem.Image
                     );
-                  }
-                );
-              });
-              request.body.ToRemove.forEach(function (item, index) {
-                daoItems.deleteItemImage(item, function (err, image) {
-                  if (err) {
-                    next(err);
-                  } else {
-                    fs.removeSync(image);
-                  }
-                });
-              });
-              response.json({
-                status: "ok",
-                code: 1,
-                message: i18n.__(""),
+                    ids[elem.Image] = res.insertId;
+                    fs.moveSync(elem.Path, finalPath);
+                  });
+
+                  response.json({
+                    status: "ok",
+                    code: 1,
+                    data: ids,
+                  });
+                }
               });
             } else {
               next(new Error(i18n.__("itemNotOwned")));
