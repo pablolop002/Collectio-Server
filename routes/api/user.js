@@ -139,6 +139,7 @@ usersApi.delete("/image", function (request, response, next) {
           request.user.Image
         )
       );
+
       response.json({
         status: "ok",
         code: 1,
@@ -146,7 +147,7 @@ usersApi.delete("/image", function (request, response, next) {
         data: {
           Nickname: user.Nickname,
           Mail: user.Mail,
-          Image: "/images/default_profile.png",
+          Image: null,
           Apple: !!user.AppleId,
           Google: !!user.GoogleId,
         },
