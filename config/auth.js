@@ -1,56 +1,115 @@
 "use strict";
 
-const passport = require('passport');
-const AppleStrategy = require('passport-apple');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const path = require('path');
+const passport = require("passport");
+const AppleStrategy = require("passport-apple");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const MicrosoftStrategy = require("passport-microsoft").Strategy;
 
-const conf = require('./conf');
-const DAOUser = require('../repositories/DAOUsers');
-const database = require('./databases');
+const conf = require("./conf");
+const DAOUser = require("../repositories/DAOUsers");
+const database = require("./databases");
 
 const daoUser = new DAOUser(database.pool);
 
-passport.use('Google', new GoogleStrategy({
-        clientID: conf.googleClientId,
-        clientSecret: conf.googleClientSecret,
-        callbackURL: conf.domain + '/login/google/callback'
+passport.use(
+  "Google",
+  new GoogleStrategy(
+    {
+      clientID: conf.googleClientId,
+      clientSecret: conf.googleClientSecret,
+      callbackURL: conf.domain + "/login/google/callback",
     },
     function (accessToken, refreshToken, profile, cb) {
-        daoUser.addOrUpdateGoogle(profile.id, profile.emails[0].value, cb);
+      daoUser.addOrUpdateGoogle(profile.id, profile.emails[0].value, cb);
     }
-));
-passport.use('GoogleMobile', new GoogleStrategy({
-        clientID: conf.googleClientId,
-        clientSecret: conf.googleClientSecret,
-        callbackURL: conf.domain + '/api/login/google/callback'
+  )
+);
+
+passport.use(
+  "GoogleMobile",
+  new GoogleStrategy(
+    {
+      clientID: conf.googleClientId,
+      clientSecret: conf.googleClientSecret,
+      callbackURL: conf.domain + "/api/login/google/callback",
     },
     function (accessToken, refreshToken, profile, cb) {
-        daoUser.addOrUpdateGoogle(profile.id, profile.emails[0].value, cb);
+      daoUser.addOrUpdateGoogle(profile.id, profile.emails[0].value, cb);
     }
-));
+  )
+);
 
-/*passport.use('Apple', new AppleStrategy({
-    clientID: conf.appleClientId,
-    teamID: conf.appleTeamId,
-    callbackURL: conf.domain + '/login/apple/callback',
-    keyID: conf.appleKeyId,
-    privateKeyLocation: path.join(__basedir, 'config', conf.applePrivateKeyName),
-    passReqToCallback: true
-}, function(request, accessToken, refreshToken, decodedIdToken, profile, cb) {
-    daoUser.addOrUpdateApple(decodedIdToken.sub, decodedIdToken.email, cb);
-}));
+passport.use(
+  "Microsoft",
+  new MicrosoftStrategy(
+    {
+      clientID: conf.microsoftClientId,
+      clientSecret: conf.microsoftClientSecret,
+      callbackURL: conf.domain + "/login/microsoft/callback",
+      scope: ["user.read"],
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      daoUser.addOrUpdateMicrosoft(profile.id, profile.emails[0].value, cb);
+    }
+  )
+);
 
-passport.use('AppleMobile', new AppleStrategy({
-    clientID: conf.appleClientId,
-    teamID: conf.appleTeamId,
-    callbackURL: conf.domain + '/api/login/apple/callback',
-    keyID: conf.appleKeyId,
-    privateKeyLocation: path.join(__basedir, 'config', conf.applePrivateKeyName),
-    passReqToCallback: true
-}, function(request, accessToken, refreshToken, decodedIdToken, profile, cb) {
-    daoUser.addOrUpdateApple(decodedIdToken.sub, decodedIdToken.email, cb);
-}));*/
+passport.use(
+  "MicrosoftMobile",
+  new MicrosoftStrategy(
+    {
+      clientID: conf.microsoftClientId,
+      clientSecret: conf.microsoftClientSecret,
+      callbackURL: conf.domain + "/api/login/microsoft/callback",
+      scope: ["user.read"],
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      daoUser.addOrUpdateMicrosoft(profile.id, profile.emails[0].value, cb);
+    }
+  )
+);
+
+/*passport.use(
+  "Apple",
+  new AppleStrategy(
+    {
+      clientID: conf.appleClientId,
+      teamID: conf.appleTeamId,
+      callbackURL: conf.domain + "/login/apple/callback",
+      keyID: conf.appleKeyId,
+      privateKeyLocation: path.join(
+        __basedir,
+        "config",
+        conf.applePrivateKeyName
+      ),
+      passReqToCallback: true,
+    },
+    function (request, accessToken, refreshToken, decodedIdToken, profile, cb) {
+      daoUser.addOrUpdateApple(decodedIdToken.sub, decodedIdToken.email, cb);
+    }
+  )
+);
+
+passport.use(
+  "AppleMobile",
+  new AppleStrategy(
+    {
+      clientID: conf.appleClientId,
+      teamID: conf.appleTeamId,
+      callbackURL: conf.domain + "/api/login/apple/callback",
+      keyID: conf.appleKeyId,
+      privateKeyLocation: path.join(
+        __basedir,
+        "config",
+        conf.applePrivateKeyName
+      ),
+      passReqToCallback: true,
+    },
+    function (request, accessToken, refreshToken, decodedIdToken, profile, cb) {
+      daoUser.addOrUpdateApple(decodedIdToken.sub, decodedIdToken.email, cb);
+    }
+  )
+);*/
 
 // Configure Passport authenticated session persistence.
 //
@@ -62,14 +121,14 @@ passport.use('AppleMobile', new AppleStrategy({
 // example does not have a database, the complete Facebook profile is serialized
 // and deserialized.
 passport.serializeUser(function (user, cb) {
-    cb(null, user.Id);
+  cb(null, user.Id);
 });
 
 passport.deserializeUser(function (obj, cb) {
-    daoUser.getUser(obj, function (err, user) {
-        if (err) cb(err);
-        else cb(err, user[0]);
-    });
+  daoUser.getUser(obj, function (err, user) {
+    if (err) cb(err);
+    else cb(err, user[0]);
+  });
 });
 
 module.exports = passport;

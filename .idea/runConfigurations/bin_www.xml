@@ -7,7 +7,7 @@
       <profiling log-folder="storage/logs/v8-profiling" />
     </EXTENSION>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
-      <browser start="true" url="http://localhost:3000/" />
+      <browser url="http://localhost:3000/" />
     </EXTENSION>
     <method v="2" />
   </configuration>

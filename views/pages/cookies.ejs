@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="<%= __('lang') %>">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Collectio - <%= __('cookies') %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/styles') %>
+    <%- include('../partials/icons') %>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<!-- Begin Header -->
+<%- include('../partials/header'); %>
+<!-- End Header -->
+
+<!-- Begin Content -->
+<div class="container">
+    <div class="section text-justify">
+        <h1 class="text-center"><%= __('cookies') %></h1>
+
+    </div>
+</div>
+<!-- End Content -->
+
+<!-- Begin Footer -->
+<%- include('../partials/footer'); %>
+<!-- End Footer -->
+
+<!-- Begin Scripts -->
+<%- include('../partials/scripts') %>
+<!-- End Scripts -->
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="<%= __('lang') %>">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Collectio - <%= __('index') %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%- include('../partials/styles') %>
+    <%- include('../partials/icons') %>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<!-- Begin Header -->
+<%- include('../partials/header'); %>
+<!-- End Header -->
+
+<!-- Begin Content -->
+<div class="container">
+    <div class="section">
+        <h1 class="text-center">Features</h1>
+        <div class="row features">
+            <div class="col-sm-6 col-lg-4 item"><i class="fas fa-map-marker icon"></i>
+                <h2 class="name">En cualquier sitio</h2>
+                <p class="description">Disponible para iOS™, iPadOS™, Android™ y Web (próximamente), con Collectio
+                    puedes acceder a
+                    tus colecciones desde cualquier sitio.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-list-alt icon"></i>
+                <h2 class="name">Para todos</h2>
+                <p class="description">Tanto si coleccionas como entretenimiento como si lo haces profesionalmente,
+                    Collectio es tu aplicación.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-phone icon"></i>
+                <h2 class="name">Colecciona con amigos</h2>
+                <p class="description">Comparte tus colecciones con amigos y conocidos.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-leaf icon"></i>
+                <h2 class="name">Te escuchamos</h2>
+                <p class="description">¿Crees que habría que cambiar algo? Cuéntanoslo, tendremos en cuenta todas las
+                    sugerencias y recomendaciones.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-plane icon"></i>
+                <h2 class="name">Tus datos, tuyos</h2>
+                <p class="description">No procesamos de ninguna forma los datos de tus colecciones, puedes estar
+                    tranquilo.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fas fa-clock icon"></i>
+                <h2 class="name">Opción sin conexión</h2>
+                <p class="description">Si prefieres que tus datos estén solo en local y no en nuestro servidor puedes
+                    elegir usar la aplicación de iOS o Android sin cuenta, aunque perderás la sincronización entre
+                    dispositivos y las funciones sociales.
+                    <br>
+                    La aplicación seguirá sincronizando con el servidor las categorías y subcategorías disponibles para
+                    tus colecciones.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Content -->
+
+<!-- Begin Footer -->
+<%- include('../partials/footer'); %>
+<!-- End Footer -->
+
+<!-- Begin Scripts -->
+<%- include('../partials/scripts') %>
+<!-- End Scripts -->
+</body>
+
+</html>

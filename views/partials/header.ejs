@@ -1,0 +1,73 @@
+<nav class="navbar navbar-light navbar-expand-lg primary-bg">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/logo.png" alt="Collectio" height="70">
+        </a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="sr-only"></span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link<% if (current === 'index') { %> active<% } %>" href="/"><%= __('index') %></a>
+                </li>
+                <% if (locals.user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link<% if (current === 'collections') { %> active<% } %>" href="/collections">
+                            <%= __('collections') %>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link<% if (current === 'friends') { %> active<% } %>" href="/friends">
+                            <%= __('friends') %>
+                        </a>
+                    </li>
+                <% } %>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle nav-link<% if (['about', 'terms', 'privacy', 'legal', 'cookies'].includes(current)) { %> active<% } %>"
+                       data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                        <%= __('more') %>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item<% if (current === 'about') { %> active<% } %>" href="/about">
+                            <%= __('about') %>
+                        </a>
+                        <a class="dropdown-item<% if (current === 'legal') { %> active<% } %>" href="/legal-notice">
+                            <%= __('legalNotice') %>
+                        </a>
+                        <!-- <a class="dropdown-item<% if (current === 'cookies') { %> active<% } %>" href="/cookies">
+                            <%= __('cookies') %>
+                        </a> -->
+                        <a class="dropdown-item<% if (current === 'privacy') { %> active<% } %>" href="/privacy-policy">
+                            <%= __('privacyPolicy') %>
+                        </a>
+                        <a class="dropdown-item<% if (current === 'terms') { %> active<% } %>" href="/terms">
+                            <%= __('terms') %>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <div class="ms-md-auto navbar-text actions">
+                <% if (locals.user) { %>
+                    <a class="btn" href="/profile" style="font-size: 50px">
+                        <% if (locals.user.Image) { %>
+                            <img class="img-circle" width="50" height="50"
+                                 src="/images/user<%= locals.user.Id %>/<%= locals.user.Image %>"
+                                 alt="<%= __('profileImage') %>">
+                        <% } else { %>
+                            <i class="fas fa-user-circle"></i>
+                        <% } %>
+                    </a>
+                    <a class="btn btn-outline-danger action-button align-middle" role="button" href="/logout">
+                        <%= __('signOut') %>
+                    </a>
+                <% /*} else if (current !== 'sign-in') {*/ %>
+                    <a class="btn btn-outline-primary action-button align-middle" role="button" href="/login">
+                        <%= __('signIn') %>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</nav>

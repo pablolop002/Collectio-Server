@@ -1,0 +1,1255 @@
+openapi: 3.0.3
+info:
+  description: "This is the Collectio Server API"
+  version: 1.0.0
+  title: Collectio
+  termsOfService: https://collectioapp.com/
+  contact:
+    email: support@collectioapp.com
+  license:
+    name: MIT
+    url: https://mit-license.org
+servers:
+  - url: https://collectioapp.com/api/v1
+  - url: https://beta.collectioapp.com/api/v1
+security:
+  - basicAuth: []
+  - apiKey: []
+tags:
+  - name: login
+    description: Access to server
+  - name: basicData
+    description: Data used for collections and items
+  - name: user
+    description: User operations
+  - name: apiKeys
+    description: User's api keys operations
+  - name: collections
+    description: Collections operations
+  - name: items
+    description: Collections' items operations
+  - name: itemImages
+    description: Collection's item's images operations
+paths:
+  /login/apple:
+    get:
+      tags:
+        - login
+      summary: Apple login
+      operationId: appleLogin
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "403":
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "200":
+          description: api token
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?access_token=token
+  /login/google:
+    get:
+      tags:
+        - login
+      summary: Google login
+      operationId: googleLogin
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "403":
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "200":
+          description: api token
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?access_token=token
+  /login/microsoft:
+    get:
+      tags:
+        - login
+      summary: Microsoft login
+      operationId: microsoftLogin
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "403":
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?err=Localized_error_message
+        "200":
+          description: api token
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: collectioapp://#?access_token=token
+  /categories:
+    get:
+      tags:
+        - basicData
+      summary: Available categories
+      description: List collection categories
+      operationId: categories
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: Categories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Categories"
+              example:
+                code: 200
+                status: "ok"
+                message: ""
+                data: [{id: 1, image: "image.png", spanish: "Categoría", english: "Category", catalan: "", basque: ""}]
+  /subcategories:
+    get:
+      tags:
+        - basicData
+      summary: Available subcategories
+      description: List item subcategories
+      operationId: subcategories
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Subcategories"
+  /user:
+    get:
+      tags:
+        - user
+      summary: Get user
+      description: Obtain user data
+      operationId: getUser
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/User"
+    post:
+      tags:
+        - user
+      summary: Edit user
+      description: Edit user data
+      operationId: editUser
+      requestBody:
+        description: ""
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: User
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/User"
+  /user/image:
+    delete:
+      tags:
+        - user
+      summary: Delete user image
+      description: Delete user image
+      operationId: deleteUserImage
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/User"
+  /user/api-keys:
+    get:
+      tags:
+        - apiKeys
+      summary: Get api keys
+      description: List user tokens
+      operationId: listApiKeys
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/ApiKeys"
+    post:
+      tags:
+        - apiKeys
+      summary: Edit apikey
+      description: Edit user token
+      operationId: editApikey
+      requestBody:
+        description: ""
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Apikey"
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/EditApikey"
+  /user/api-keys/{token}:
+    delete:
+      tags:
+        - apiKeys
+      summary: Delete apikey
+      description: Delete token
+      operationId: deleteApikey
+      parameters:
+        - name: token
+          in: path
+          description: Token to delete
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/DeleteApikey"
+  /collections:
+    get:
+      tags:
+        - collections
+      summary: List collections
+      description: List collections
+      operationId: listCollections
+      parameters:
+        - name: categoryId
+          in: query
+          description: Filter collections by category id
+          required: false
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: collectionServerId
+          in: query
+          description: Filter collections by collection id
+          required: false
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: others
+          in: query
+          description: Filter by other users
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: withChildren
+          in: query
+          description: Return collections with childrens
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: lastSync
+          in: query
+          description: Return collections created or updated after value
+          required: false
+          schema:
+            type: string
+            format: DateTime
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/ListCollections"
+    put:
+      tags:
+        - collections
+      summary: New collection
+      description: Add new collection
+      operationId: newCollection
+      requestBody:
+        description: ""
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Collection"
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NewCollection"
+    post:
+      tags:
+        - collections
+      summary: Edit collection
+      description: Edit collection data
+      operationId: editCollection
+      requestBody:
+        description: ""
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Collection"
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/EditCollection"
+  /collections/{id}:
+    delete:
+      tags:
+        - collections
+      summary: Delete collection
+      description: Delete collection
+      operationId: deleteCollection
+      parameters:
+        - name: id
+          in: path
+          description: Collection to delete server id
+          required: true
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: api token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/DeleteCollection"
+  /items:
+    get:
+      tags:
+        - items
+      summary: List items
+      description: List items
+      operationId: listItems
+      parameters:
+        - name: collectionServerId
+          in: query
+          description: Filter items by collection id
+          required: false
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: itemServerId
+          in: query
+          description: Filter items by item id
+          required: false
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: others
+          in: query
+          description: Filter by other users
+          required: false
+          schema:
+            type: boolean
+            default: false
+#        - name: subcategoryId
+#          in: query
+#          description: Filter items by subcategory id
+#          required: false
+#          explode: true
+#          schema:
+#            type: integer
+#            format: int64
+        - name: withChildren
+          in: query
+          description: Return collections with childrens
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: items
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/ListItems"
+    put:
+      tags:
+        - items
+      summary: New item
+      description: Add item to collection
+      operationId: newItem
+      requestBody:
+        description: ""
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Item"
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NewItem"
+    post:
+      tags:
+        - items
+      summary: Edit item
+      description: Edit item data
+      operationId: editItem
+      requestBody:
+        description: ""
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Item"
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/EditItem"
+  /items/{id}:
+    delete:
+      tags:
+        - items
+      summary: Delete item
+      description: Delete item and its images
+      operationId: deleteItem
+      parameters:
+        - name: id
+          in: path
+          description: Item to delete server id
+          required: true
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/DeleteItem"
+  /items/images:
+    get:
+      tags:
+        - itemImages
+      summary: List item images
+      description: List item images
+      operationId: listItemImages
+      parameters:
+        - name: ItemServerId
+          in: query
+          description: Filter item images by item id
+          required: true
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: item images
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/ListItemImages"
+    put:
+      tags:
+        - itemImages
+      summary: New item image
+      description: Add image to item
+      operationId: newItemImage
+      requestBody:
+        description: ""
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ItemImage"
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: item image
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/NewItemImage"
+  /items/images/{id}:
+    delete:
+      tags:
+        - itemImages
+      summary: Delete item image
+      description: Delete item image
+      operationId: deleteItemImage
+      parameters:
+        - name: id
+          in: path
+          description: Item image to delete server id
+          required: true
+          explode: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 500
+                status: "ko"
+                message: "Localized error message"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Error"
+              example:
+                code: 403
+                status: "ko"
+                message: "Localized error message"
+        "200":
+          description: item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/DeleteItemImage"
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Token
+  responses:
+    Error:
+      $ref: "#/components/schemas/ResponseWSError"
+    Categories:
+      $ref: "#/components/schemas/ResponseWSCategories"
+    Subcategories:
+      $ref: "#/components/schemas/ResponseWSSubcategories"
+    User:
+      $ref: "#/components/schemas/ResponseWSUser"
+    ApiKeys:
+      $ref: "#/components/schemas/ResponseWSApiKeys"
+    Collections:
+      $ref: "#/components/schemas/ResponseWSCollections"
+    Items:
+      $ref: "#/components/schemas/ResponseWSItems"
+    ItemImages:
+      $ref: "#/components/schemas/ResponseWSItemImages"
+  schemas:
+    ResponseWSError:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+    ResponseWSCategories:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+    ResponseWSSubcategories:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Subcategory"
+    ResponseWSUser:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          $ref: "#/components/schemas/User"
+    ResponseWSApiKeys:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Apikey"
+    ResponseWSCollections:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Collection"
+    ResponseWSItems:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+    ResponseWSItemImages:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemImage"
+    ResponseWS:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          nullable: true
+          oneOf:
+            - type: array
+              items:
+                $ref: "#/components/schemas/Category"
+            - type: array
+              items:
+                $ref: "#/components/schemas/Subcategory"
+            - type: array
+              items:
+                $ref: "#/components/schemas/Collection"
+            - type: array
+              items:
+                $ref: "#/components/schemas/Item"
+            - type: array
+              items:
+                $ref: "#/components/schemas/ItemImage"
+            - type: array
+              items:
+                $ref: "#/components/schemas/Apikey"
+            - $ref: "#/components/schemas/User"
+    Category:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int64
+        Image:
+          type: string
+          format: binary
+        Spanish:
+          type: string
+        English:
+          type: string
+        Catalan:
+          type: string
+        Basque:
+          type: string
+    Subcategory:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int64
+        CategoryId:
+          type: integer
+          format: int64
+#        Image:
+#          type: string
+#          format: binary
+        Fields:
+          type: string
+        Spanish:
+          type: string
+        English:
+          type: string
+        Catalan:
+          type: string
+        Basque:
+          type: string
+    Collection:
+      type: object
+      properties:
+        ServerId:
+          type: integer
+          format: int64
+        UserServerId:
+          type: integer
+          format: int64
+        CategoryId:
+          type: integer
+          format: int64
+        Name:
+          type: string
+        Description:
+          type: string
+        Private:
+          type: boolean
+        CreatedAt:
+          type: string
+          format: date-time
+        UpdatedAt:
+          type: string
+          format: date-time
+        Image:
+          type: string
+          format: binary
+        Items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+    Item:
+      type: object
+      properties:
+        ServerId:
+          type: integer
+          format: int64
+        CollectionServerId:
+          type: integer
+          format: int64
+        SubcategoryId:
+          type: integer
+          format: int64
+        Name:
+          type: string
+        Description:
+          type: string
+        Private:
+          type: boolean
+        CreatedAt:
+          type: string
+          format: date-time
+        UpdatedAt:
+          type: string
+          format: date-time
+        Images:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemImage"
+    ItemImage:
+      type: object
+      properties:
+        ServerId:
+          type: integer
+          format: int64
+        ItemServerId:
+          type: integer
+          format: int64
+        Image:
+          type: string
+          format: binary
+    User:
+      type: object
+      properties:
+        Nickname:
+          type: string
+        Mail:
+          type: string
+        Image:
+          type: string
+          format: binary
+        AppleId:
+          type: boolean
+        GoogleId:
+          type: boolean
+        MicrosoftId:
+          type: boolean
+    Apikey:
+      type: object
+      properties:
+        Token:
+          type: string
+        CreatedAt:
+          type: string
+          format: date-time
+        UsedAt:
+          type: string
+          format: date-time
+        Device:
+          type: string
+        UserDeviceName:
+          type: string
