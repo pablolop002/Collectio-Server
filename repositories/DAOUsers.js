@@ -153,7 +153,7 @@ class DAOUsers {
         callback(err);
       } else {
         connection.query(
-          "UPDATE Users SET Nickname = ?, Mail = ?, Image = ? WHERE (Id = ?)",
+          "UPDATE Users SET Nickname = ?, Mail = ?, Image = ? WHERE Id = ?",
           [user.Nickname, user.Mail, user.Image, user.Id],
           function (err, data) {
             connection.release();
