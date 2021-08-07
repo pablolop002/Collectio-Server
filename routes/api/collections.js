@@ -298,17 +298,35 @@ collectionsApi.delete(
   function (request, response, next) {
     if (request.params.id) {
       daoCollections.deleteCollection(
-        request.body.ServerId,
+        request.params.id,
         request.user.Id,
         function (err, data) {
           if (err) {
             next(err);
           } else {
-            response.json({
-              status: "ok",
-              code: 1,
-              message: i18n.__("collectionDeleted"),
-            });
+            if (data.affectedRows > 0) {
+              fs.removeSync(
+                path.join(
+                  __basedir,
+                  "storage",
+                  "images",
+                  "user" + request.user.Id,
+                  "collection" + request.params.id
+                )
+              );
+
+              response.json({
+                status: "ok",
+                code: 1,
+                message: i18n.__("collectionDeleted"),
+              });
+            } else {
+              response.json({
+                status: "ko",
+                code: 2,
+                message: i18n.__("collectionNotOwned"),
+              });
+            }
           }
         }
       );
