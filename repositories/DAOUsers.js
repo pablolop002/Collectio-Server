@@ -252,7 +252,7 @@ class DAOUsers {
         }
 
         query += " WHERE Token = ? AND UserId = ?";
-        values.push([session.Token, session.UserId]);
+        values.push(session.Token, session.UserId);
 
         connection.query(query, values, function (err, updateData) {
           connection.release();
