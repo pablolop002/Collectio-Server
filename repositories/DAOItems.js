@@ -99,7 +99,7 @@ class DAOItems {
         connection.query(
           "INSERT INTO Items(CollectionId, Name, Description, SubcategoryId, Private, CreatedAt, UpdatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)",
           [
-            item.CollectionId,
+            item.CollectionServerId,
             item.Name,
             item.Description,
             item.SubcategoryId,
