@@ -132,63 +132,70 @@ itemsApi.put(
   "/",
   itemImages.array("Images", 6),
   function (request, response, next) {
-    if (request.body.CollectionId) {
+    if (request.body.CollectionServerId) {
       daoCollections.getCollections(
         request.user.Id,
         null,
-        request.body.CollectionId,
+        request.body.CollectionServerId,
+        null,
         function (err, collectionCheck) {
           if (err) {
             next(err);
           } else {
             if (collectionCheck != null && collectionCheck[0]) {
-              let item = {
-                CollectionId: request.body.CollectionId,
-              };
-
-              if (request.body.Name) item.Name = request.body.Name;
-              if (request.body.Desription)
-                item.Desription = request.body.Desription;
-              if (request.body.Private) item.Private = request.body.Private;
-
-              daoItems.addItem(item, function (err, response) {
+              daoItems.addItem(request.body, function (err, item) {
                 if (err) {
                   next(err);
                 } else {
-                  let ids = {
-                    item: response.insertId,
-                  };
+                  let ids = {};
+                  ids["item"] = item.insertId;
 
-                  request.files.forEach((elem, index, array) => {
-                    let itemImage = {
-                      ItemId: response.insertId,
-                      Image: elem.filename,
-                    };
+                  if (request.files && request.files.length > 0) {
+                    let itemImages = [];
 
-                    daoItems.addItemImage(itemImage, function (err, res) {
+                    request.files.forEach((elem, index, array) => {
+                      itemImages[index] = {
+                        ItemId: item.insertId,
+                        Image: elem.filename,
+                        Path: elem.path,
+                      };
+                    });
+
+                    daoItems.addItemImage(itemImages, function (err, res) {
                       if (err) {
-                        fs.removeSync(elem.path);
+                        itemImages.forEach((elem, index, array) => {
+                          fs.removeSync(elem.Path);
+                        });
+                        next(err);
                       } else {
-                        let finalPath = path.join(
-                          __basedir,
-                          "storage",
-                          "images",
-                          "user" + request.user.Id,
-                          "collection" + request.collection.Id,
-                          "item" + response.insertId,
-                          elem.filename
-                        );
-                        itemImage[elem.filename] = res.insertId;
-                        fs.moveSync(elem.path, finalPath);
+                        itemImages.forEach((elem, index, array) => {
+                          let finalPath = path.join(
+                            __basedir,
+                            "storage",
+                            "images",
+                            "user" + request.user.Id,
+                            "collection" + collectionCheck[0].ServerId,
+                            "item" + item.insertId,
+                            elem.Image
+                          );
+                          ids[elem.Image] = res.insertId;
+                          fs.moveSync(elem.Path, finalPath);
+                        });
+
+                        response.json({
+                          status: "ok",
+                          code: 1,
+                          data: ids,
+                        });
                       }
                     });
-                  });
-
-                  response.json({
-                    status: "ok",
-                    code: 1,
-                    data: ids,
-                  });
+                  } else {
+                    response.json({
+                      status: "ok",
+                      code: 1,
+                      data: ids,
+                    });
+                  }
                 }
               });
             } else {
