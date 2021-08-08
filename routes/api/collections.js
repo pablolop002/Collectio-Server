@@ -181,7 +181,7 @@ collectionsApi.get("/", function (request, response, next) {
 
 collectionsApi.put(
   "/",
-  collectionImages.single("Image"),
+  collectionImages.single("Images"),
   function (request, response, next) {
     let collection = {
       CategoryId: request.body.CategoryId,
@@ -222,7 +222,7 @@ collectionsApi.put(
 
 collectionsApi.post(
   "/",
-  collectionImages.single("Image"),
+  collectionImages.single("Images"),
   function (request, response, next) {
     if (!request.body.ServerId) {
       response.json({

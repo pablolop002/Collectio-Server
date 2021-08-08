@@ -65,7 +65,7 @@ usersApi.get("/", function (request, response, next) {
 
 usersApi.post(
   "/",
-  profiles.single("Image"),
+  profiles.single("Images"),
   function (request, response, next) {
     let oldImage = request.user.Image;
     let user = request.user;
