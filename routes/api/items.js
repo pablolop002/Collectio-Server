@@ -412,7 +412,7 @@ itemsApi.delete(
                 } else {
                   if (itemCheck != null && itemCheck[0]) {
                     daoItems.deleteItemImage(
-                      request.params.Id,
+                      request.params.id,
                       function (err, data) {
                         if (err) {
                           next(err);
