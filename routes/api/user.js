@@ -65,8 +65,9 @@ usersApi.get("/", function (request, response, next) {
 
 usersApi.post(
   "/",
-  profiles.single("Images"),
+  profiles.single("Image"),
   function (request, response, next) {
+    let oldImage = request.user.Image;
     let user = request.user;
 
     if (request.body.Nickname) {
@@ -85,14 +86,14 @@ usersApi.post(
       if (err) {
         next(err);
       } else {
-        if (request.file != null && request.user.Image) {
+        if (request.file != null && oldImage) {
           fs.removeSync(
             path.join(
               __basedir,
               "storage",
               "images",
               "user" + request.user.Id,
-              request.user.Image
+              oldImage
             )
           );
         }
@@ -125,6 +126,7 @@ usersApi.post(
 );
 
 usersApi.delete("/image", function (request, response, next) {
+  let oldImage = request.user.Image;
   let user = request.user;
   user.Image = null;
 
@@ -132,15 +134,17 @@ usersApi.delete("/image", function (request, response, next) {
     if (err) {
       next(err);
     } else {
-      fs.removeSync(
-        path.join(
-          __basedir,
-          "storage",
-          "images",
-          "user" + request.user.Id,
-          request.user.Image
-        )
-      );
+      if (oldImage) {
+        fs.removeSync(
+          path.join(
+            __basedir,
+            "storage",
+            "images",
+            "user" + request.user.Id,
+            oldImage
+          )
+        );
+      }
 
       response.json({
         status: "ok",
