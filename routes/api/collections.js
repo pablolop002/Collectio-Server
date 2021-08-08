@@ -245,8 +245,8 @@ collectionsApi.post(
             let collection = collections[0];
             let oldImage = collection.Image;
             if (request.body.Name) collection.Name = request.body.Name;
-            if (request.body.Desription)
-              collection.Desription = request.body.Desription;
+            if (request.body.Description)
+              collection.Description = request.body.Description;
             if (request.body.Private) collection.Private = request.body.Private;
             if (request.file && oldImage !== request.file.filename) {
               collection.Image = request.file.filename;
