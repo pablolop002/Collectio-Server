@@ -181,7 +181,7 @@ collectionsApi.get("/", function (request, response, next) {
 
 collectionsApi.put(
   "/",
-  collectionImages.single("Images"),
+  collectionImages.single("Image"),
   function (request, response, next) {
     let collection = {
       CategoryId: request.body.CategoryId,
