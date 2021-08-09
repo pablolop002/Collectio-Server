@@ -128,7 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -138,7 +138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -167,7 +167,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -177,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -201,7 +201,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -211,7 +211,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -241,7 +241,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -251,7 +251,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -275,7 +275,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -285,7 +285,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -309,7 +309,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -319,7 +319,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -349,7 +349,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -359,7 +359,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -369,7 +369,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/EditApikey"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized apikey modified message"
   /user/api-keys/{token}:
     delete:
       tags:
@@ -391,7 +395,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -401,7 +405,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -411,7 +415,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteApikey"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized apikey deleted message"
   /collections:
     get:
       tags:
@@ -463,7 +471,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -473,7 +481,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -483,7 +491,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListCollections"
+                $ref: "#/components/responses/Collections"
     put:
       tags:
         - collections
@@ -503,7 +511,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -513,7 +521,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -543,7 +551,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -553,7 +561,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -586,7 +594,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -596,7 +604,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -606,7 +614,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteCollection"
+                $ref: "#/components/responses/NoData"
+              example:
+                status: "ok"
+                code: 1
+                message: "Localized collection deleted message"
   /items:
     get:
       tags:
@@ -659,7 +671,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -669,7 +681,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -699,7 +711,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -709,7 +721,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -739,7 +751,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -749,7 +761,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -782,7 +794,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -792,7 +804,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -802,7 +814,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteItem"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized item deleted message"
   /items/images:
     get:
       tags:
@@ -825,7 +841,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -835,7 +851,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -865,7 +881,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -875,7 +891,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -908,7 +924,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -918,7 +934,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -928,7 +944,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteItemImage"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized item deleted message"
 components:
   securitySchemes:
     BasicAuth:
@@ -939,8 +959,8 @@ components:
       in: header
       name: Token
   responses:
-    Error:
-      $ref: "#/components/schemas/ResponseWSError"
+    NoData:
+      $ref: "#/components/schemas/ResponseWSNoData"
     Categories:
       $ref: "#/components/schemas/ResponseWSCategories"
     Subcategories:
@@ -956,7 +976,7 @@ components:
     ItemImages:
       $ref: "#/components/schemas/ResponseWSItemImages"
   schemas:
-    ResponseWSError:
+    ResponseWSNoData:
       type: object
       properties:
         status:
