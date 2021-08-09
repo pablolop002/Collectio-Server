@@ -876,7 +876,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListItemImages"
+                $ref: "#/components/responses/ItemImages"
     put:
       tags:
         - itemImages
