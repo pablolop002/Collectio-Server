@@ -13,8 +13,8 @@ servers:
   - url: https://collectioapp.com/api/v1
   - url: https://beta.collectioapp.com/api/v1
 security:
-  - basicAuth: []
-  - apiKey: []
+  - basicAuth: [ ]
+  - apiKey: [ ]
 tags:
   - name: login
     description: Access to server
@@ -153,7 +153,7 @@ paths:
                 code: 200
                 status: "ok"
                 message: ""
-                data: [{id: 1, image: "image.png", spanish: "Categoría", english: "Category", catalan: "", basque: ""}]
+                data: [ { id: 1, image: "image.png", spanish: "Categoría", english: "Category", catalan: "", basque: "" } ]
   /subcategories:
     get:
       tags:
@@ -188,6 +188,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/responses/Subcategories"
+              example:
+                code: 200
+                status: "ok"
+                message: ""
+                data: [ { id: 1, categoryId: 1, image: "image.png", fields: "All", spanish: "Subcategoría", english: "Subcategory", catalan: "", basque: "" } ]
   /user:
     get:
       tags:
