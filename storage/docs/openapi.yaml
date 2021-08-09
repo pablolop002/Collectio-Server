@@ -706,7 +706,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListItems"
+                $ref: "#/components/responses/Items"
     put:
       tags:
         - items
