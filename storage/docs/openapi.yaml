@@ -369,6 +369,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized apikey not found error message"
         "200":
           description: api token
           content:
@@ -415,6 +425,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized apikey not found error message"
         "200":
           description: api token
           content:
@@ -576,6 +596,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized collection not found error message"
         "200":
           description: api token
           content:
@@ -624,6 +654,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized collection not found error message"
         "200":
           description: api token
           content:
@@ -741,6 +781,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized collection not found error message"
         "200":
           description: item
           content:
@@ -781,6 +831,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item not found error message"
         "200":
           description: item
           content:
@@ -824,6 +884,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item not found error message"
         "200":
           description: item
           content:
@@ -911,6 +981,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item not found error message"
         "200":
           description: item image
           content:
@@ -954,6 +1034,16 @@ paths:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item image not found error message"
         "200":
           description: item
           content:
