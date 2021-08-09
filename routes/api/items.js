@@ -68,6 +68,21 @@ itemsApi.get("/", function (request, response, next) {
           if (err) {
             next(err);
           } else {
+            data = data.reduce((accumulator, current) => {
+              accumulator.push({
+                ServerId: current.Id,
+                CollectionServerId: current.CollectionId,
+                SubcategoryId: current.SubcategoryId,
+                Name: current.NameItem,
+                Description: current.Description,
+                Private: current.Private,
+                CreatedAt: current.CreatedAt,
+                UpdatedAt: current.UpdatedAt,
+                UserServerId: current.ServerUserId,
+              });
+
+              return accumulator;
+            }, []);
             response.json({
               status: "ok",
               code: 1,
@@ -80,6 +95,49 @@ itemsApi.get("/", function (request, response, next) {
           if (err) {
             next(err);
           } else {
+            data = data.reduce((accumulator, current) => {
+              let item = accumulator.findIndex(
+                (item) => item.ServerId === current.Id
+              );
+              if (item === -1 || item === accumulator.length) {
+                let item = {
+                  ServerId: current.ServerItemId,
+                  UserServerId: current.UserServerId,
+                  CollectionServerId: current.ServerCollectionId,
+                  SubcategoryId: current.SubcategoryId,
+                  Name: current.ItemName,
+                  Description: current.ItemDescription,
+                  CreatedAt: current.ItemCreatedAt,
+                  UpdatedAt: current.ItemUpdatedAt,
+                  Private: current.ItemPrivate,
+                  Images: [],
+                };
+
+                if (current.ServerItemImageId != null) {
+                  item.Images.push({
+                    ServerId: current.ServerItemImageId,
+                    UserServerId: current.UserServerId,
+                    CollectionServerId: current.ServerCollectionId,
+                    ItemServerId: current.ServerItemId,
+                    Image: current.ItemImage,
+                  });
+                }
+
+                accumulator.push(item);
+              } else {
+                accumulator[item].Images.push({
+                  ServerId: current.ServerItemImageId,
+                  UserServerId: accumulator[col].Items[item].UserServerId,
+                  CollectionServerId:
+                    accumulator[col].Items[item].CollectionServerId,
+                  ItemServerId: current.ServerItemId,
+                  Image: current.ItemImage,
+                });
+              }
+
+              return accumulator;
+            }, []);
+
             response.json({
               status: "ok",
               code: 1,
@@ -100,6 +158,49 @@ itemsApi.get("/", function (request, response, next) {
           if (err) {
             next(err);
           } else {
+            data = data.reduce((accumulator, current) => {
+              let item = accumulator.findIndex(
+                (item) => item.ServerId === current.Id
+              );
+              if (item === -1 || item === accumulator.length) {
+                let item = {
+                  ServerId: current.ServerItemId,
+                  UserServerId: current.UserServerId,
+                  CollectionServerId: current.ServerCollectionId,
+                  SubcategoryId: current.SubcategoryId,
+                  Name: current.ItemName,
+                  Description: current.ItemDescription,
+                  CreatedAt: current.ItemCreatedAt,
+                  UpdatedAt: current.ItemUpdatedAt,
+                  Private: current.ItemPrivate,
+                  Images: [],
+                };
+
+                if (current.ServerItemImageId != null) {
+                  item.Images.push({
+                    ServerId: current.ServerItemImageId,
+                    UserServerId: current.UserServerId,
+                    CollectionServerId: current.ServerCollectionId,
+                    ItemServerId: current.ServerItemId,
+                    Image: current.ItemImage,
+                  });
+                }
+
+                accumulator.push(item);
+              } else {
+                accumulator[item].Images.push({
+                  ServerId: current.ServerItemImageId,
+                  UserServerId: accumulator[col].Items[item].UserServerId,
+                  CollectionServerId:
+                    accumulator[col].Items[item].CollectionServerId,
+                  ItemServerId: current.ServerItemId,
+                  Image: current.ItemImage,
+                });
+              }
+
+              return accumulator;
+            }, []);
+
             response.json({
               status: "ok",
               code: 1,
@@ -116,6 +217,49 @@ itemsApi.get("/", function (request, response, next) {
           if (err) {
             next(err);
           } else {
+            data = data.reduce((accumulator, current) => {
+              let item = accumulator.findIndex(
+                (item) => item.ServerId === current.Id
+              );
+              if (item === -1 || item === accumulator.length) {
+                let item = {
+                  ServerId: current.ServerItemId,
+                  UserServerId: current.UserServerId,
+                  CollectionServerId: current.ServerCollectionId,
+                  SubcategoryId: current.SubcategoryId,
+                  Name: current.ItemName,
+                  Description: current.ItemDescription,
+                  CreatedAt: current.ItemCreatedAt,
+                  UpdatedAt: current.ItemUpdatedAt,
+                  Private: current.ItemPrivate,
+                  Images: [],
+                };
+
+                if (current.ServerItemImageId != null) {
+                  item.Images.push({
+                    ServerId: current.ServerItemImageId,
+                    UserServerId: current.UserServerId,
+                    CollectionServerId: current.ServerCollectionId,
+                    ItemServerId: current.ServerItemId,
+                    Image: current.ItemImage,
+                  });
+                }
+
+                accumulator.push(item);
+              } else {
+                accumulator[item].Images.push({
+                  ServerId: current.ServerItemImageId,
+                  UserServerId: accumulator[col].Items[item].UserServerId,
+                  CollectionServerId:
+                    accumulator[col].Items[item].CollectionServerId,
+                  ItemServerId: current.ServerItemId,
+                  Image: current.ItemImage,
+                });
+              }
+
+              return accumulator;
+            }, []);
+
             response.json({
               status: "ok",
               code: 1,
