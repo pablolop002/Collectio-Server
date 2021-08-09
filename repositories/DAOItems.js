@@ -12,18 +12,23 @@ class DAOItems {
       if (err) {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
-        connection.query(
-          "SELECT i.* FROM Items i Join Collections C on i.CollectionId = C.Id WHERE i.Id = ? AND C.UserId = ?",
-          [item, userId],
-          function (err, data) {
-            connection.release();
-            if (err) {
-              callback(new Error("Error de acceso a la base de datos"));
-            } else {
-              callback(null, data);
-            }
+        let query =
+          "SELECT i.*, c.UserId as ServerUserId FROM Items i Join Collections c on i.CollectionId = c.Id WHERE i.Id = ?";
+        let values = [item];
+
+        if (userId) {
+          query += " AND c.UserId = ?";
+          values.push(userId);
+        }
+
+        connection.query(query, values, function (err, data) {
+          connection.release();
+          if (err) {
+            callback(new Error("Error de acceso a la base de datos"));
+          } else {
+            callback(null, data);
           }
-        );
+        });
       }
     });
   }
@@ -33,18 +38,26 @@ class DAOItems {
       if (err) {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
-        connection.query(
-          "SELECT i.*, ii.* FROM Items i Join Collections C on i.CollectionId = C.Id JOIN ItemImages ii on i.Id = ii.ItemId WHERE i.Id = ? AND C.UserId = ?",
-          [item, userId],
-          function (err, data) {
-            connection.release();
-            if (err) {
-              callback(new Error("Error de acceso a la base de datos"));
-            } else {
-              callback(null, data);
-            }
+        let query =
+          "SELECT c.UserId as UserServerId, i.Id as ServerItemId, i.SubcategoryId, i.CollectionId as ServerCollectionId," +
+          " i.Name as ItemName, i.Description as ItemDescription, i.CreatedAt as ItemCreatedAt," +
+          " i.UpdatedAt as ItemUpdatedAt, i.Private as ItemPrivate, ii.Id as ServerItemImageId, ii.Image as ItemImage" +
+          " FROM Items i Join Collections c on i.CollectionId = c.Id JOIN ItemImages ii on i.Id = ii.ItemId WHERE i.Id = ?";
+        let values = [item];
+
+        if (userId) {
+          query += "AND c.UserId = ?";
+          values.push(userId);
+        }
+
+        connection.query(query, values, function (err, data) {
+          connection.release();
+          if (err) {
+            callback(new Error("Error de acceso a la base de datos"));
+          } else {
+            callback(null, data);
           }
-        );
+        });
       }
     });
   }
@@ -54,18 +67,26 @@ class DAOItems {
       if (err) {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
-        connection.query(
-          "SELECT i.* FROM Items i JOIN Collections c ON i.CollectionId = c.Id WHERE CollectionId = ? AND UserId = ?",
-          [collectionId, userId],
-          function (err, data) {
-            connection.release();
-            if (err) {
-              callback(new Error("Error de acceso a la base de datos"));
-            } else {
-              callback(null, data);
-            }
+        let query =
+          "SELECT c.UserId as UserServerId, c.Id as ServerCollectionId, i.Id as ServerItemId," +
+          " i.SubcategoryId as SubcategoryId, i.Name as ItemName, i.Description as ItemDescription," +
+          " i.CreatedAt as ItemCreatedAt, i.UpdatedAt as ItemUpdatedAt, i.Private as ItemPrivate FROM" +
+          " Items i JOIN Collections c ON i.CollectionId = c.Id WHERE CollectionId = ?";
+        let values = [collectionId];
+
+        if (userId) {
+          query += " AND c.UserId = ?";
+          values.push(userId);
+        }
+
+        connection.query(query, values, function (err, data) {
+          connection.release();
+          if (err) {
+            callback(new Error("Error de acceso a la base de datos"));
+          } else {
+            callback(null, data);
           }
-        );
+        });
       }
     });
   }
@@ -75,18 +96,22 @@ class DAOItems {
       if (err) {
         callback(new Error("Error de conexión a la base de datos"));
       } else {
-        connection.query(
-          "SELECT i.*, ii.* FROM Items i JOIN Collections c on i.CollectionId = c.Id JOIN ItemImages ii ON i.Id = ii.ItemId WHERE i.CollectionId = ? AND c.UserId = ?",
-          [collectionId],
-          function (err, data) {
-            connection.release();
-            if (err) {
-              callback(new Error("Error de acceso a la base de datos"));
-            } else {
-              callback(null, data);
-            }
+        let query =
+          "SELECT c.UserId as UserServerId, i.Id as ServerItemId, i.SubcategoryId, i.CollectionId as ServerCollectionId, i.Name as ItemName, i.Description as ItemDescription, i.CreatedAt as ItemCreatedAt, i.UpdatedAt as ItemUpdatedAt, i.Private as ItemPrivate, ii.Id as ServerItemImageId, ii.Image as ItemImage FROM Items i Join Collections c on i.CollectionId = c.Id JOIN ItemImages ii on i.Id = ii.ItemId WHERE i.CollectionId = ?";
+        let values = [collectionId];
+
+        if (userId) {
+          query += " AND c.UserId = ?";
+          values.push(userId);
+        }
+        connection.query(query, values, function (err, data) {
+          connection.release();
+          if (err) {
+            callback(new Error("Error de acceso a la base de datos"));
+          } else {
+            callback(null, data);
           }
-        );
+        });
       }
     });
   }
