@@ -746,7 +746,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/NewItem"
+                $ref: "#/components/responses/Item"
     post:
       tags:
         - items
@@ -786,7 +786,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/EditItem"
+                $ref: "#/components/responses/Item"
   /items/{id}:
     delete:
       tags:
@@ -990,6 +990,8 @@ components:
       $ref: "#/components/schemas/ResponseWSCollection"
     Items:
       $ref: "#/components/schemas/ResponseWSItems"
+    Item:
+      $ref: "#/components/schemas/ResponseWSItem"
     ItemImages:
       $ref: "#/components/schemas/ResponseWSItemImages"
   schemas:
@@ -1114,6 +1116,28 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Item"
+    ResponseWSItem:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          properties:
+            item:
+              type: integer
+              format: int64
+          required:
+            - item
+          additionalProperties:
+            type: integer
+            format: int64
     ResponseWSItemImages:
       type: object
       properties:
