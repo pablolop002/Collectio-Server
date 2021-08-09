@@ -916,7 +916,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/NewItemImage"
+                $ref: "#/components/responses/ItemImage"
   /items/images/{id}:
     delete:
       tags:
@@ -994,6 +994,8 @@ components:
       $ref: "#/components/schemas/ResponseWSItem"
     ItemImages:
       $ref: "#/components/schemas/ResponseWSItemImages"
+    ItemImage:
+      $ref: "#/components/schemas/ResponseWSItemImage"
   schemas:
     ResponseWSNoData:
       type: object
@@ -1154,6 +1156,23 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ItemImage"
+    ResponseWSItemImage:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
     ResponseWS:
       type: object
       properties:
