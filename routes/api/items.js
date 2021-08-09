@@ -438,21 +438,38 @@ itemsApi.delete("/:id", itemImages.none(), function (request, response, next) {
 });
 
 itemsApi.get("/images/", function (request, response, next) {
-  if (request.body.ItemId) {
+  if (request.query.ItemServerId) {
     daoItems.getItem(
-      request.body.ItemId,
-      request.user.Id,
+      request.query.ItemServerId,
+      null,
       function (err, itemCheck) {
         if (err) {
           next(err);
         } else {
-          if (itemCheck != null && itemCheck[0]) {
+          if (
+            itemCheck != null &&
+            itemCheck[0] &&
+            (!itemCheck[0].Private ||
+              itemCheck[0].ServerUserId == request.user.Id)
+          ) {
             daoItems.getItemImagesFromItem(
               itemCheck[0].Id,
               function (err, data) {
                 if (err) {
                   next(err);
                 } else {
+                  data = data.reduce((accumulator, current) => {
+                    accumulator.push({
+                      ServerId: current.ServerId,
+                      UserServerId: itemCheck[0].ServerUserId,
+                      CollectionServerId: itemCheck[0].CollectionId,
+                      ItemServerId: current.ItemServerId,
+                      Image: current.Image,
+                    });
+
+                    return accumulator;
+                  }, []);
+
                   response.json({
                     status: "ok",
                     code: 1,
