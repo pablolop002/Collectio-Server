@@ -536,7 +536,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/NewCollection"
+                $ref: "#/components/responses/Collection"
+              example:
+                status: "ok"
+                code: 1
+                message: "Localized collection created message"
+                data: 1
     post:
       tags:
         - collections
@@ -576,7 +581,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/EditCollection"
+                $ref: "#/components/responses/Collection"
+              example:
+                status: "ok"
+                code: 1
+                message: "Localized collection modified message"
+                data: 1
   /collections/{id}:
     delete:
       tags:
@@ -976,6 +986,8 @@ components:
       $ref: "#/components/schemas/ResponseWSApiKeys"
     Collections:
       $ref: "#/components/schemas/ResponseWSCollections"
+    Collection:
+      $ref: "#/components/schemas/ResponseWSCollection"
     Items:
       $ref: "#/components/schemas/ResponseWSItems"
     ItemImages:
@@ -1071,6 +1083,21 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Collection"
+    ResponseWSCollection:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: integer
+          format: int64
     ResponseWSItems:
       type: object
       properties:
