@@ -249,7 +249,7 @@ VALUES (1, 1, NULL, '', 'Muebles antiguos', '', '', ''),
 -- Table structure for table `Users`
 --
 
-    DROP TABLE IF EXISTS `Users`;
+DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users`
 (
     `Id`          int(11)                NOT NULL,
@@ -382,7 +382,8 @@ ALTER TABLE `ItemImages`
 -- Constraints for table `Items`
 --
 ALTER TABLE `Items`
-    ADD CONSTRAINT `Items_Collections_Id_fk` FOREIGN KEY (`CollectionId`) REFERENCES `Collections` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT `Items_Collections_Id_fk` FOREIGN KEY (`CollectionId`) REFERENCES `Collections` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `Items_Subcategories_Id_fk` FOREIGN KEY (`SubcategoryId`) REFERENCES `Subcategories` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `MobileSessions`
