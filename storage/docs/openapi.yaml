@@ -13,8 +13,8 @@ servers:
   - url: https://collectioapp.com/api/v1
   - url: https://beta.collectioapp.com/api/v1
 security:
-  - basicAuth: []
-  - apiKey: []
+  - basicAuth: [ ]
+  - apiKey: [ ]
 tags:
   - name: login
     description: Access to server
@@ -128,7 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -138,7 +138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -153,7 +153,7 @@ paths:
                 code: 200
                 status: "ok"
                 message: ""
-                data: [{id: 1, image: "image.png", spanish: "Categoría", english: "Category", catalan: "", basque: ""}]
+                data: [ { id: 1, image: "image.png", spanish: "Categoría", english: "Category", catalan: "", basque: "" } ]
   /subcategories:
     get:
       tags:
@@ -167,7 +167,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -177,7 +177,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -188,6 +188,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/responses/Subcategories"
+              example:
+                code: 200
+                status: "ok"
+                message: ""
+                data: [ { id: 1, categoryId: 1, image: "image.png", fields: "All", spanish: "Subcategoría", english: "Subcategory", catalan: "", basque: "" } ]
   /user:
     get:
       tags:
@@ -201,7 +206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -211,7 +216,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -241,7 +246,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -251,7 +256,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -275,7 +280,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -285,7 +290,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -309,7 +314,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -319,7 +324,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -349,7 +354,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -359,17 +364,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized apikey not found error message"
         "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/EditApikey"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized apikey modified message"
   /user/api-keys/{token}:
     delete:
       tags:
@@ -391,7 +410,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -401,17 +420,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized apikey not found error message"
         "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteApikey"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized apikey deleted message"
   /collections:
     get:
       tags:
@@ -463,7 +496,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -473,7 +506,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -483,7 +516,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListCollections"
+                $ref: "#/components/responses/Collections"
     put:
       tags:
         - collections
@@ -503,7 +536,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -513,7 +546,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -523,7 +556,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/NewCollection"
+                $ref: "#/components/responses/Collection"
+              example:
+                status: "ok"
+                code: 1
+                message: "Localized collection created message"
+                data: 1
     post:
       tags:
         - collections
@@ -543,7 +581,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -553,17 +591,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized collection not found error message"
         "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/EditCollection"
+                $ref: "#/components/responses/Collection"
+              example:
+                status: "ok"
+                code: 1
+                message: "Localized collection modified message"
+                data: 1
   /collections/{id}:
     delete:
       tags:
@@ -586,7 +639,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -596,17 +649,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized collection not found error message"
         "200":
           description: api token
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteCollection"
+                $ref: "#/components/responses/NoData"
+              example:
+                status: "ok"
+                code: 1
+                message: "Localized collection deleted message"
   /items:
     get:
       tags:
@@ -659,7 +726,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -669,7 +736,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -679,7 +746,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListItems"
+                $ref: "#/components/responses/Items"
     put:
       tags:
         - items
@@ -699,7 +766,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -709,17 +776,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized collection not found error message"
         "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/NewItem"
+                $ref: "#/components/responses/Item"
     post:
       tags:
         - items
@@ -739,7 +816,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -749,17 +826,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item not found error message"
         "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/EditItem"
+                $ref: "#/components/responses/Item"
   /items/{id}:
     delete:
       tags:
@@ -782,7 +869,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -792,17 +879,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item not found error message"
         "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteItem"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized item deleted message"
   /items/images:
     get:
       tags:
@@ -825,7 +926,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -835,7 +936,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
@@ -845,7 +946,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/ListItemImages"
+                $ref: "#/components/responses/ItemImages"
     put:
       tags:
         - itemImages
@@ -865,7 +966,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -875,17 +976,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item not found error message"
         "200":
           description: item image
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/NewItemImage"
+                $ref: "#/components/responses/ItemImage"
   /items/images/{id}:
     delete:
       tags:
@@ -908,7 +1019,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 500
                 status: "ko"
@@ -918,17 +1029,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/Error"
+                $ref: "#/components/responses/NoData"
               example:
                 code: 403
                 status: "ko"
                 message: "Localized error message"
+#        "404":
+#          description: Internal Error
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/responses/NoData"
+#              example:
+#                code: 404
+#                status: "ko"
+#                message: "Localized item image not found error message"
         "200":
           description: item
           content:
             application/json:
               schema:
-                $ref: "#/components/responses/DeleteItemImage"
+                $ref: "#/components/responses/NoData"
+              example:
+                code: 1
+                status: "ok"
+                message: "Localized item deleted message"
 components:
   securitySchemes:
     BasicAuth:
@@ -939,8 +1064,8 @@ components:
       in: header
       name: Token
   responses:
-    Error:
-      $ref: "#/components/schemas/ResponseWSError"
+    NoData:
+      $ref: "#/components/schemas/ResponseWSNoData"
     Categories:
       $ref: "#/components/schemas/ResponseWSCategories"
     Subcategories:
@@ -951,12 +1076,18 @@ components:
       $ref: "#/components/schemas/ResponseWSApiKeys"
     Collections:
       $ref: "#/components/schemas/ResponseWSCollections"
+    Collection:
+      $ref: "#/components/schemas/ResponseWSCollection"
     Items:
       $ref: "#/components/schemas/ResponseWSItems"
+    Item:
+      $ref: "#/components/schemas/ResponseWSItem"
     ItemImages:
       $ref: "#/components/schemas/ResponseWSItemImages"
+    ItemImage:
+      $ref: "#/components/schemas/ResponseWSItemImage"
   schemas:
-    ResponseWSError:
+    ResponseWSNoData:
       type: object
       properties:
         status:
@@ -1046,6 +1177,21 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Collection"
+    ResponseWSCollection:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: integer
+          format: int64
     ResponseWSItems:
       type: object
       properties:
@@ -1062,6 +1208,28 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Item"
+    ResponseWSItem:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          properties:
+            item:
+              type: integer
+              format: int64
+          required:
+            - item
+          additionalProperties:
+            type: integer
+            format: int64
     ResponseWSItemImages:
       type: object
       properties:
@@ -1078,6 +1246,23 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ItemImage"
+    ResponseWSItemImage:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 2
+          maxLength: 2
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
     ResponseWS:
       type: object
       properties:

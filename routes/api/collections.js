@@ -111,6 +111,7 @@ collectionsApi.get("/", function (request, response, next) {
                 collection.Items.push({
                   ServerId: current.ServerItemId,
                   CollectionServerId: current.ServerCollectionId,
+                  UserServerId: collection.UserServerId,
                   SubcategoryId: current.SubcategoryId,
                   Name: current.ItemName,
                   Description: current.ItemDescription,
@@ -124,6 +125,8 @@ collectionsApi.get("/", function (request, response, next) {
                   collection.Items[0].Images.push({
                     ServerId: current.ServerItemImageId,
                     ItemServerId: current.ServerItemId,
+                    CollectionServerId: collection.ServerId,
+                    UserServerId: collection.UserServerId,
                     Image: current.ItemImage,
                   });
                 }
@@ -137,7 +140,8 @@ collectionsApi.get("/", function (request, response, next) {
               if (item === -1 || item === accumulator[col].Items.length) {
                 let item = {
                   ServerId: current.ServerItemId,
-                  CollectionId: current.ServerCollectionId,
+                  UserServerId: accumulator[col].UserServerId,
+                  CollectionServerId: current.ServerCollectionId,
                   SubcategoryId: current.SubcategoryId,
                   Name: current.ItemName,
                   Description: current.ItemDescription,
@@ -150,7 +154,9 @@ collectionsApi.get("/", function (request, response, next) {
                 if (current.ServerItemImageId != null) {
                   item.Images.push({
                     ServerId: current.ServerItemImageId,
-                    ItemId: current.ServerItemId,
+                    UserServerId: accumulator[col].UserServerId,
+                    CollectionServerId: item.CollectionServerId,
+                    ItemServerId: current.ServerItemId,
                     Image: current.ItemImage,
                   });
                 }
@@ -159,7 +165,10 @@ collectionsApi.get("/", function (request, response, next) {
               } else {
                 accumulator[col].Items[item].Images.push({
                   ServerId: current.ServerItemImageId,
-                  ItemId: current.ServerItemId,
+                  UserServerId: accumulator[col].Items[item].UserServerId,
+                  CollectionServerId:
+                    accumulator[col].Items[item].CollectionServerId,
+                  ItemServerId: current.ServerItemId,
                   Image: current.ItemImage,
                 });
               }
@@ -222,7 +231,7 @@ collectionsApi.put(
 
 collectionsApi.post(
   "/",
-  collectionImages.single("Image"),
+  collectionImages.single("Images"),
   function (request, response, next) {
     if (!request.body.ServerId) {
       response.json({
@@ -245,8 +254,8 @@ collectionsApi.post(
             let collection = collections[0];
             let oldImage = collection.Image;
             if (request.body.Name) collection.Name = request.body.Name;
-            if (request.body.Desription)
-              collection.Desription = request.body.Desription;
+            if (request.body.Description)
+              collection.Description = request.body.Description;
             if (request.body.Private) collection.Private = request.body.Private;
             if (request.file && oldImage !== request.file.filename) {
               collection.Image = request.file.filename;
