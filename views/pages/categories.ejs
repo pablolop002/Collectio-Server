@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="<%= __('lang') %>">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Collectio - <%= __('title') %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%- include('../partials/styles') %>
+    <%- include('../partials/icons') %>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<!-- Begin Header -->
+<%- include('../partials/header'); %>
+<!-- End Header -->
+
+<!-- Begin Content -->
+<div class="container">
+    <div class="section">
+        <h1 class="text-center"><%= __('categories') %></h1>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Spanish</th>
+                <th scope="col">English</th>
+                <th scope="col">Catalan</th>
+                <th scope="col">Basque</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% locals.categories.forEach(function (value, index, array) { %>
+                <tr>
+                    <th scope="row"><a href="/admin/categories/<%= value.Id %>"><%= value.Id %></a></th>
+                    <td><%= value.Spanish %></td>
+                    <td><%= value.English %></td>
+                    <td><%= value.Catalan %></td>
+                    <td><%= value.Basque %></td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- End Content -->
+
+<!-- Begin Footer -->
+<%- include('../partials/footer'); %>
+<!-- End Footer -->
+
+<!-- Begin Scripts -->
+<%- include('../partials/scripts') %>
+<!-- End Scripts -->
+</body>
+
+</html>

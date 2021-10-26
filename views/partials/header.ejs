@@ -47,6 +47,13 @@
                         </a>
                     </div>
                 </li>
+                <% if(locals.user && locals.user.IsAdmin) { %>
+                    <li class="nav-item">
+                        <a class="nav-link<% if (current === 'categories') { %> active<% } %>" href="/admin/categories">
+                            <%= __('categories') %>
+                        </a>
+                    </li>
+                <% } %>
             </ul>
             <div class="ms-md-auto navbar-text actions">
                 <% if (locals.user) { %>

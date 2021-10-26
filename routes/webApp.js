@@ -9,6 +9,7 @@ const path = require("path");
 const collections = require("./webApp/collections");
 const images = require("./webApp/images");
 const users = require("./webApp/user");
+const admin = require("./webApp/admin");
 
 // Router
 const webApp = express.Router();
@@ -66,5 +67,6 @@ webApp.get("/logout", function (request, response, next) {
 webApp.use("/collections", collections);
 webApp.use("/images", images);
 webApp.use("/profile", users);
+webApp.use("/admin", admin);
 
 module.exports = webApp;
